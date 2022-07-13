@@ -1,0 +1,11 @@
+@mixin box($width: 100%) {
+  color: white;
+  width: $width;
+  background: $global-box-background;
+  padding: $global-box-padding;
+  backdrop-filter: blur(2px);
+  border: 0;
+  border-radius: $global-box-border-radius;
+  margin: $global-box-margin;
+  box-shadow: $global-box-shadow;
+}

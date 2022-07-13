@@ -1,0 +1,21 @@
+@import "./variables/main";
+
+.main {
+  @include box();
+
+  .separator {
+    margin: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(129, 161, 204);
+  }
+
+  .title {
+    color: $global-text-quiet-less;
+    font-size: $main-title-font-size;
+  }
+
+  .amount {
+    margin: 10px 0;
+    font-size: $main-amount-font-size;
+  }
+}

@@ -1,0 +1,52 @@
+@import "./variables/hire";
+
+.hire {
+  @include box();
+
+  .wrap {
+    width: 100%;
+    display: table;
+    position: relative;
+  }
+
+  .action {
+    display: table-cell;
+    vertical-align: middle;
+    min-width: 200px;
+  }
+
+  .fund-choice {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+  }
+
+  .to-receive {
+    display: block;
+
+    .title {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin: 30px 0 10px 0;
+      font-size: $hire-to-receive-title-font-size;
+    }
+
+    .amount {
+      text-align: center;
+      font-size: $hire-to-receive-amount-font-size;
+      margin: 20px 0 30px 0;
+    }
+  }
+
+  .compound {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .pocket {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

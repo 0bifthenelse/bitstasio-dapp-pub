@@ -1,0 +1,135 @@
+@import "./variables/global";
+@import "./mixins";
+
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html,
+body {
+	height: 100%;
+	min-width: 300px;
+	color: white;
+	font-family: $global-font;
+	margin: 0;
+	padding: 0 !important;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto !important;
+}
+
+body {
+	background-color: black;
+	background-image: $global-background;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+main {
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.container {
+	max-width: $global-container-max-width;
+	padding: $global-container-padding;
+	overflow: hidden;
+}
+
+.container-fluid {
+	padding: 0;
+	overflow: hidden;
+}
+
+a {
+	color: $global-link-color !important;
+	text-decoration: none;
+	transition: $global-link-transition;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.clickable {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+table,
+th,
+td,
+thead,
+tr {
+	border: 0;
+	padding: 0;
+}
+body,
+head {
+	display: block;
+	color: transparent;
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.MuiButtonBase-root {
+	z-index: 1 !important;
+}
+
+.disabled {
+	&:hover {
+		cursor: default;
+	}
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+	z-index: 9999;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #97cdff;
+	z-index: 9999;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(17, 31, 46);
+	z-index: 9999;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(88, 170, 207);
+	z-index: 9999;
+}
+
+a {
+	transition: color .1s;
+	text-decoration: underline;
+
+	&:hover {
+		color:rgb(106, 178, 255) !important;
+		text-decoration: underline;
+	}
+}

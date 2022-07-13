@@ -1,0 +1,22 @@
+{
+	"devServer": {
+		"host": "localhost",
+		"port": "3000"
+	},
+	"html": {
+		"favicon": "src/image/favicon.ico",
+		"filename": "index.html",
+		"meta": {
+			"description": "Pepe Miner's Mining Facility delivering your daily source of passive income!"
+		},
+		"template": "src/html/index.ejs",
+		"title": "PepeMiner.finance"
+	},
+	"input": {
+		"entry": "/src/ts/index.tsx"
+	},
+	"output": {
+		"directory": "dist",
+		"file": "index.js"
+	}
+}

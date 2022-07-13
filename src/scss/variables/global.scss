@@ -1,0 +1,27 @@
+$global-font: 'Roboto';
+$global-font-big: 'Titan One';
+$global-font-alternative: 'Karla';
+$global-background: url('/img/background.png'); 
+$global-container-padding: 5px 10px;
+$global-container-max-width: 1680px;
+
+$global-link-hover-color: rgb(110, 255, 248) !important;
+
+$global-link-color: white;
+$global-link-transition: color .2s;
+
+$global-text-common: rgb(255, 255, 255);
+$global-text-quiet: rgba(255, 255, 255, 0.7);
+$global-text-quiet-less: rgba(255, 255, 255, 0.8);
+$global-text-transparent: rgba(255, 255, 255, 0.3);
+$global-text-small: 14px;
+$global-text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
+
+$global-box-background: rgba(8, 20, 27, 0.9);
+$global-box-border-radius: 12px;
+$global-box-shadow: rgb(9, 14, 19) 0px 20px 30px -10px;
+$global-box-padding: 20px 15px;
+$global-box-margin: 20px 0;
+
+$link-svg-size: 70px;
+$link-svg-shadow: drop-shadow(0 0 0.45rem rgb(0, 6, 15));

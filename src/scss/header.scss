@@ -1,0 +1,27 @@
+@import "./variables/header";
+
+.header {
+  width: 100%;
+  z-index: 9998;
+  position: fixed;
+  top: 0;
+  background: rgba(8, 20, 27, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: $header-shadow;
+
+  .menu {
+    display: flex;
+    align-items: center;
+    color: white;
+    height: $header-menu-height;
+    padding: 0 10px;
+
+    .wallet {
+      text-align: right;
+    }
+
+    .referal {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"jsx": "react",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"rootDir": "./src/ts",
+		"importHelpers": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"moduleResolution": "node",
+		"typeRoots": [
+			"./node_modules/@types/",
+			"./src/ts/typings"
+		],
+		"types": [
+			"react",
+			"react-dom",
+			"react-router-dom"
+		],
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"sourceRoot": "./src/ts",
+		"mapRoot": "./dist",
+		"baseUrl": "./dist"
+	},
+	"exclude": [
+		"dist",
+		"node_modules"
+	],
+	"include": [
+		"src/ts/**/*.ts",
+		"src/ts/**/*.tsx"
+	]
+}
