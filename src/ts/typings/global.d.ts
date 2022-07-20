@@ -1,10 +1,22 @@
 import Web3 from "web3";
+import HashMap from 'hashmap';
 
 export { };
 
 declare global {
   type Watcher = HashMap<string, Watch>;
   type Menu = DOMRect;
+  type ActivityOrigin = "compound" | "hire" | "withdraw";
+
+  interface Activity {
+    active: boolean;
+    position: number;
+    hash: string;
+    origin: ActivityOrigin;
+    from: string;
+    value: string;
+    left: number;
+  }
 
   interface Watch {
     name: string;
@@ -14,7 +26,7 @@ declare global {
     record: {
       trust: boolean;
       scam: boolean;
-    }
+    };
   }
 
   interface Social {

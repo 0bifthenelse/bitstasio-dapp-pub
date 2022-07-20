@@ -1,4 +1,5 @@
 @import "./variables/global";
+@import "./variables/activity";
 @import "./mixins";
 
 html {
@@ -30,11 +31,13 @@ body {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
+
 }
 
 main {
 	margin: 0 auto;
 	overflow: hidden;
+	padding-bottom: $activity-max-height;
 }
 
 .container {

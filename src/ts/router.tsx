@@ -6,6 +6,7 @@ import HttpNotFound from './components/pages/NotFound';
 
 import Index from './components/pages/Index';
 import Header from './components/Header';
+import Activity from './components/Activity';
 
 import { Web3ContextProvider } from "react-dapp-web3";
 
@@ -21,6 +22,7 @@ export default function Routes() {
 		<Web3ContextProvider>
 			<ThemeProvider theme={darkTheme}>
 				<Header />
+				<Activity />
 				<main>
 					<div className="container">
 						<AnimatePresence exitBeforeEnter>

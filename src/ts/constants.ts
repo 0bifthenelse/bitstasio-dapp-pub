@@ -11,8 +11,10 @@ import Web3 from 'web3';
  */
 
 export const launched = true;
-export const RPC = new Web3('https://bsc-dataseed.binance.org/');
+export const RPC = new Web3('wss://ws-nd-756-282-803.p2pify.com/b7fb2132806c3e310e126ce9d4c18bdb');
+export const RPC_SUB = new Web3('wss://ws-nd-756-282-803.p2pify.com/b7fb2132806c3e310e126ce9d4c18bdb');
 export const net = 56;
+export const notification_duration = 20;
 export const mining_contract = "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c";
 export const mining_abi = [
 	{

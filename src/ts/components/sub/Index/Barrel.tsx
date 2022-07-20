@@ -91,7 +91,7 @@ function TVL() {
 		<div className="tvl">
 			<strong>Your TVL</strong>: {tvl} BNB
 			<br />
-			<strong>Time to fill barrel</strong>: 15 minutes
+			<strong>Time to fill barrel</strong>: 12 hours
 		</div>
 	);
 }
@@ -99,7 +99,7 @@ function TVL() {
 function Holding() {
 	const inBarrel = useSelector((state: any) => state.mining.inBarrel).toFixed(6);
 	const lastSecondsUntilFull = useSelector((state: any) => state.mining.lastSecondsUntilFull);
-	const seconds = parseFloat(((lastSecondsUntilFull / (900)) * 100).toString());
+	const seconds = parseFloat(((lastSecondsUntilFull / (43200)) * 100).toString());
 	const percent = seconds >= 0 && seconds <= 100 ? 100 - seconds : seconds > 100 ? 100 : (seconds < 0 ? 100 : 0);
 	const ready = useSelector((state: any) => state.mining.ready);
 	const tvl = useSelector((state: any) => state.mining.tvl).toFixed(5);

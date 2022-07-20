@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Referal from './sub/Header/Referal';
+import Referal from './sub/Header/Referral';
 import Wallet from './sub/Header/Wallet';
 
 export default function Menu() {
