@@ -4,8 +4,13 @@ const port = 3001;
 const cors = require('cors');
 
 app.use(express.static('dist'));
-app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: __dirname });
+app.use("/*", express.static('dist'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
 });
 
 app.listen(port, () => {

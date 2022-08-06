@@ -25,7 +25,7 @@ async function deposit(currency: Currency): Promise<void> {
   const wallet = state.web3.wallet;
   const rpc = state.web3.provider;
   const value = rpc.utils.toWei(spend.toString(), "ether");
-  const ref = state.currency.ref ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
+  const ref = state.currency.referral ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
 
   if (!insufficient) {
     if (currency.coin) {

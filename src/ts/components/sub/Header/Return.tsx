@@ -9,7 +9,7 @@ export default function Return() {
 	const ref = useSelector((state: any) => state.currency.referral);
 
 	return (
-		<Link to={ref ? `/farms?ref=${ref}` : "/farms"}>
+		<Link to={ref ? `/farms/?ref=${ref}` : "/farms"}>
 			<Tooltip title={`Return to farms`} arrow>
 				<span>
 					<IconButton aria-label="return">

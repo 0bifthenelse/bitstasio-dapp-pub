@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 function Link() {
   const wallet = useSelector((state: any) => state.web3.wallet);
-  const link = `https://app.bitstasio.com/?ref=${wallet}`;
+  const link = `https://app.bitstasio.com/farms/?ref=${wallet}`;
   const short = link.substring(0, 22) + "..." + link.substring(link.length - 5, link.length);
 
   if (wallet) return (

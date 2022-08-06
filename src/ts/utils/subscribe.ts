@@ -53,24 +53,30 @@ export default async function subscribe(): Promise<void> {
   store.dispatch(update_block(blockNumber));
   setInterval(subscribe_time_since_withdraw, 1000);
 
+  subscribe_wallet();
   subscribe_time_since_withdraw();
   subscribe_activity();
   subscribe_ref();
-  subscribe_wallet();
   subscribe_network();
   subscribe_funds();
   subscribe_mining();
+  subscribe_shares();
 
   setInterval(async () => {
     const blockNumber = await RPC.eth.getBlockNumber();
+    const wallet = store.getState().web3.wallet;
 
     subscribe_wallet();
-    subscribe_network();
-    subscribe_funds();
     subscribe_contract_balance();
-    subscribe_ref();
-    subscribe_mining();
-    subscribe_miner(blockNumber);
+    subscribe_shares();
+
+    if (wallet) {
+      subscribe_network();
+      subscribe_funds();
+      subscribe_ref();
+      subscribe_mining();
+      subscribe_miner(blockNumber);
+    }
 
     store.dispatch(update_block(blockNumber));
   }, 3000);
@@ -341,7 +347,6 @@ async function subscribe_mining_coin(currency: CurrencyJSON) {
     const timestamp_withdraw = parseInt(await contract.methods.lastHatch(wallet).call({ from: wallet }));
 
     store.dispatch(set_shares({ id: id, shares: shares }));
-    store.dispatch(set_shares_value({ id: id, value: rpc.utils.fromWei(eggValue, "ether") }));
     store.dispatch(set_timestamp_withdraw({ id: id, timestamp_withdraw: timestamp_withdraw }));
 
     if (wallet) {
@@ -379,7 +384,6 @@ async function subscribe_mining_token(currency: CurrencyJSON) {
     const whitelisted = await contract.methods.whitelist(wallet).call({ from: wallet });
 
     store.dispatch(set_shares({ id: id, shares: shares }));
-    store.dispatch(set_shares_value({ id: id, value: rpc.utils.fromWei(bitValue, "ether") }));
 
     if (wallet) {
       store.dispatch(set_timestamp_withdraw({ id: id, timestamp_withdraw: timestamp_withdraw }));
@@ -402,6 +406,35 @@ async function subscribe_mining_token(currency: CurrencyJSON) {
         store.dispatch(set_withdrawable({ id: id, withdrawable: withdrawable }));
       }
     }
+  }, currency.mainnet);
+}
+
+async function subscribe_shares() {
+  currencies(async (currency: CurrencyJSON) => {
+    try {
+      if (currency.coin) await subscribe_shares_coin(currency);
+      else await subscribe_shares_token(currency);
+    } catch (error: any) { }
+  });
+}
+
+async function subscribe_shares_coin(currency: CurrencyJSON) {
+  connection(async (rpc: TRPC) => {
+    const id = currency.id;
+    const contract = new rpc.eth.Contract(coin_abi as AbiItem[], currency.contract);
+    const eggValue = await contract.methods.calculateEggSell(2592000).call();
+
+    store.dispatch(set_shares_value({ id: id, value: rpc.utils.fromWei(eggValue, "ether") }));
+  }, currency.mainnet);
+}
+
+async function subscribe_shares_token(currency: CurrencyJSON) {
+  connection(async (rpc: TRPC) => {
+    const id = currency.id;
+    const contract = new rpc.eth.Contract(token_abi as AbiItem[], currency.contract);
+    const bitValue = await contract.methods.calculateBitSell(2592000).call();
+
+    store.dispatch(set_shares_value({ id: id, value: rpc.utils.fromWei(bitValue, "ether") }));
   }, currency.mainnet);
 }
 

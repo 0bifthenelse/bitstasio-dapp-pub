@@ -85,6 +85,7 @@ module.exports = {
 	output: {
 		filename: settings.output.file,
 		path: path.join(__dirname, settings.output.directory),
+		publicPath: '/'
 	},
 	mode: dev ? 'development' : 'production',
 	plugins: dev

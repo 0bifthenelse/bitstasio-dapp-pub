@@ -10,7 +10,7 @@ export default function Referral() {
 	const ref = useSelector((state: any) => state.currency.referral);
 
 	return (
-		<Link to={ref ? `/referral?ref=${ref}` : "/referral"}>
+		<Link to={ref ? `/referral/?ref=${ref}` : "/referral"}>
 			<Tooltip title={`Get your referral link.`} arrow>
 				<span>
 					<IconButton aria-label="referral">
