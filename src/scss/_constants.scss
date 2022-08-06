@@ -1,0 +1,62 @@
+$global-font: "Noto Sans";
+$global-background: linear-gradient(132deg, #002c3f, #142241, #001529);
+$global-container-padding: 5px 10px;
+$global-container-max-width: 1680px;
+
+$global-body-padding: 5px 0 25px 0;
+
+$global-link-hover-color: rgb(110, 255, 248) !important;
+
+$global-link-color: white;
+$global-link-transition: color 0.2s;
+
+$global-text-common: rgb(255, 255, 255);
+$global-text-quiet: rgba(255, 255, 255, 0.2);
+$global-text-quiet-less: rgba(255, 255, 255, 0.8);
+$global-text-transparent: rgba(255, 255, 255, 0.3);
+$global-text-small: 14px;
+$global-text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+
+$global-box-background: rgba(8, 20, 27, 0.9);
+$global-box-border-radius: 12px;
+$global-box-shadow: rgb(9, 14, 19) 0px 20px 15px -10px;
+$global-box-padding: 0 20px;
+$global-box-margin: 20px 0 30px 0;
+
+$link-svg-size: 70px;
+$link-svg-shadow: drop-shadow(0 0 0.45rem rgb(0, 6, 15));
+
+$button-border-radius: 10px;
+$button-padding: 15px 20px;
+$button-margin: 15px 0;
+$button-background: #2c2f36;
+$button-background-inactive: rgba(48, 42, 42, 0.2);
+$button-hover-background: #3e4a64;
+
+$global-transition: all 0.1s;
+
+$global-brand-margin: 0 0 50px 0;
+$global-brand-img-width: 220px;
+$global-brand-img-height: 40px;
+
+$global-part-margin: 0 0 30px 0;
+
+$currency-icon-size: 30px;
+
+$bigamount-font-size: 42px;
+$bigamount-margin: 30px 0;
+
+$main-title-font-size: 18px;
+$main-title-margin: 0 0 20px 0;
+$main-amount-font-size: 26px;
+
+$form-background: #1e2b32;
+$form-background-hover: #283942;
+$form-height: 80px;
+$form-padding: 0 10px 0 10px;
+$form-font-size: 28px;
+
+$social-logo-size: 26px;
+$social-margin: 0 10px;
+$socials-margin: 20px;
+$socials-padding: 0 0 40px 0;

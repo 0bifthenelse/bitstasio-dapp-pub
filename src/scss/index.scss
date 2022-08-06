@@ -1,17 +1,18 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 @import "./global";
-@import "./header";
-@import "./main";
-@import "./barrel";
-@import "./hire";
-@import "./activity";
+@import "./components/header";
+@import "./components/activity";
+@import "./components/farms";
+@import "./components/referral";
+@import "./components/calculator";
 
-@import "./variables/index";
+$information-title-font-size: 24px;
+$information-p-font-size: 16px;
+
+$guide-dialog-stitle-font-size: 18px;
 
 .index {
-  margin-top: 100px;
-
   .information {
     .information-box {
       clear: left;

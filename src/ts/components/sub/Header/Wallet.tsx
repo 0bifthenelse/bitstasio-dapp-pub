@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import IconButton from '@mui/material/IconButton';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Tooltip from '@mui/material/Tooltip';
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
-import Button from '@mui/material/Button';
 
 import { update_provider } from '../../../redux/slice/web3';
 
@@ -38,9 +40,13 @@ function No_Wallet() {
 	}
 
 	return (
-		<Button onClick={() => connect()}>
-			Connect Wallet
-		</Button>
+		<Tooltip title={`Connect your wallet.`} arrow>
+			<span>
+				<IconButton aria-label="referral" className="wallet-error" onClick={() => connect()}>
+					<AccountBalanceWalletIcon style={{ fontSize: "26px" }} />
+				</IconButton>
+			</span>
+		</Tooltip>
 	);
 }
 
@@ -52,21 +58,33 @@ function Wrong_Network() {
 		if (web3) {
 			await window.ethereum.request({
 				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: Web3.utils.toHex(net) }],
+				params: [{ chainId: Web3.utils.toHex(net.mainnet) }],
 			});
 		}
 	}
 
 	return (
-		<Button onClick={() => connect()}>
-			Connect to BSC
-		</Button>
+		<Tooltip title={`Click to connect to BSC.`} arrow>
+			<span>
+				<IconButton aria-label="referral" className="wallet-error" onClick={() => connect()}>
+					<AccountBalanceWalletIcon style={{ fontSize: "26px" }} />
+				</IconButton>
+			</span>
+		</Tooltip>
 	);
 }
 
 function Manage() {
+	const wallet = useSelector((state: any) => state.web3.wallet);
+
 	return (
-		<Button>Wallet connected</Button>
+		<Tooltip title={wallet} arrow>
+			<span>
+				<IconButton aria-label="referral">
+					<AccountBalanceWalletIcon style={{ fontSize: "26px" }} />
+				</IconButton>
+			</span>
+		</Tooltip>
 	);
 }
 
@@ -75,10 +93,10 @@ export default function Wallet() {
 	const network = useSelector((state: any) => state.web3.network);
 
 	return (
-		<div className="wallet col-6">
+		<span>
 			{!wallet && <No_Wallet />}
 			{wallet && !network && <Wrong_Network />}
 			{wallet && network && <Manage />}
-		</div>
+		</span>
 	);
 }

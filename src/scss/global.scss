@@ -1,5 +1,4 @@
-@import "./variables/global";
-@import "./variables/activity";
+@import "./_constants";
 @import "./mixins";
 
 html {
@@ -26,18 +25,15 @@ body {
 }
 
 body {
-	background-color: black;
-	background-image: $global-background;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
-
+	background: $global-background;
+	background-size: 400% 400%;
+	animation: Gradient 15s ease infinite;
 }
 
 main {
 	margin: 0 auto;
 	overflow: hidden;
-	padding-bottom: $activity-max-height;
+	padding: $global-body-padding;
 }
 
 .container {
@@ -103,36 +99,198 @@ head {
 	}
 }
 
+.brand {
+	width: 100%;
+	text-align: center;
+	margin: $global-brand-margin;
+
+	img {
+		max-width: $global-brand-img-width;
+		max-height: $global-brand-img-height;
+	}
+}
+
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 	z-index: 9999;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #97cdff;
+	background: #97cdff;
 	z-index: 9999;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(17, 31, 46);
+	background: rgb(17, 31, 46);
 	z-index: 9999;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(88, 170, 207);
+	background: rgb(88, 170, 207);
 	z-index: 9999;
 }
 
 a {
-	transition: color .1s;
+	transition: color 0.1s;
 	text-decoration: underline;
 
 	&:hover {
-		color:rgb(106, 178, 255) !important;
+		color: rgb(106, 178, 255) !important;
 		text-decoration: underline;
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.inactive * {
+	color: $global-text-quiet !important;
+}
+
+.loading-circular {
+	position: absolute;
+	left: 20px;
+	bottom: 6px;
+}
+
+.button {
+	position: relative;
+	width: 100%;
+	margin: $button-margin;
+	padding: $button-padding;
+	border-radius: $button-border-radius;
+	background: $button-background !important;
+	text-align: center;
+	font-weight: bold;
+	transition: $global-transition;
+	color: white;
+
+	&:hover {
+		background: $button-hover-background !important;
+		cursor: pointer;
+	}
+}
+
+.currency-icon {
+	img {
+		min-width: $currency-icon-size;
+		min-height: $currency-icon-size;
+		max-width: $currency-icon-size;
+		max-height: $currency-icon-size;
+	}
+}
+
+.button-inactive {
+	background: $button-background-inactive !important;
+	color: $global-text-quiet !important;
+
+	&:hover {
+		background: $button-background-inactive !important;
+		cursor: default;
+	}
+}
+
+.bigamount {
+	text-align: center;
+	font-size: $bigamount-font-size;
+	font-weight: bold;
+	margin: $bigamount-margin;
+}
+
+.part {
+	display: table-row;
+	min-width: 100%;
+
+	.line {
+		display: table-cell;
+		color: $global-text-quiet-less;
+		min-width: 50%;
+	}
+
+	.content {
+		display: table-cell;
+		text-align: right;
+		min-width: 50%;
+	}
+}
+
+.header-img {
+	width: 100%;
+	text-align: center;
+}
+
+.index {
+	@include box();
+
+	.separator {
+		margin: 30px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid rgb(129, 161, 204);
+	}
+
+	.title {
+		color: white;
+		margin: $main-title-margin;
+		font-size: $main-title-font-size;
+		font-weight: 400;
+	}
+
+	.amount {
+		margin: 10px 0;
+		font-size: $main-amount-font-size;
+	}
+}
+
+.form {
+	width: 100%;
+	height: $form-height;
+	background: $form-background;
+	border: 0;
+	border-radius: $button-border-radius;
+	color: white;
+	padding: $form-padding;
+	font-size: $form-font-size;
+	transition: all 0.15s;
+
+	&:focus {
+		border: 0 !important;
+		outline: none !important;
+		background: $form-background-hover;
+	}
+
+	&:hover {
+		border: 0 !important;
+		background: $form-background-hover;
+	}
+}
+
+.socials {
+	margin: 0 auto;
+	margin-top: $socials-margin;
+	width: 300px;
+
+	.social {
+		display: inline-block;
+		margin: $social-margin;
+
+		img {
+			min-width: $social-logo-size;
+			min-height: $social-logo-size;
+			max-width: $social-logo-size;
+			max-height: $social-logo-size;
+		}
 	}
 }

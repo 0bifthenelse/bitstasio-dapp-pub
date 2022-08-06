@@ -1,62 +1,24 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import LinkIcon from '@mui/icons-material/Link';
+import Tooltip from '@mui/material/Tooltip';
 
-import store from '../../../redux/store';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-	props,
-	ref,
-) {
-	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-export default function Referal() {
-	const [open, setOpen] = React.useState(false);
-
-	const handleClick = () => {
-		setOpen(true);
-	};
-
-	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-		if (reason === 'clickaway') {
-			return;
-		}
-
-		setOpen(false);
-	};
-
-	function copy() {
-		handleClick();
-
-		const state = store.getState();
-		const referal = `https://pepeminer.finance/?ref=${state.web3.wallet}`;
-
-		navigator.clipboard.writeText(referal);
-	}
-
-	const wallet = useSelector((state: any) => state.web3.wallet);
+export default function Referral() {
+	const ref = useSelector((state: any) => state.currency.referral);
 
 	return (
-		<div className="referal col-6">
-			{wallet &&
-				<Button onClick={() => copy()}>Copy my referral link</Button>
-			}
-			<Snackbar
-				open={open}
-				autoHideDuration={3000}
-				onClose={handleClose}
-			>
-				<Alert
-					onClose={handleClose}
-					severity="success"
-					sx={{ position: "fixed", top: "90px", left: "50%", transform: "translate(-50%, -50%) !important", width: '320px' }}
-				>
-					Link copied into your clipboard!
-				</Alert>
-			</Snackbar>
-		</div >
+		<Link to={ref ? `/referral?ref=${ref}` : "/referral"}>
+			<Tooltip title={`Get your referral link.`} arrow>
+				<span>
+					<IconButton aria-label="referral">
+						<LinkIcon style={{ fontSize: "26px" }} />
+					</IconButton>
+				</span>
+			</Tooltip>
+		</Link>
 	);
 }
+

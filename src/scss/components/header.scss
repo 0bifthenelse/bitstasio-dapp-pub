@@ -1,0 +1,46 @@
+$header-padding: 20px 0;
+$header-margin: 0 0 20px 0;
+$header-border: 1px solid rgba(71, 94, 104, 0.7);
+$header-testnet-font-size: 11px;
+$header-testnet-color: rgb(17, 255, 77);
+
+.header {
+  display: table;
+  width: 100%;
+  margin: $header-margin;
+  padding: $header-padding;
+  border-bottom: $header-border;
+
+  .settings {
+    position: relative;
+    display: table-cell;
+    width: 50%;
+    text-align: right;
+  }
+
+  .navigate {
+    display: table-cell;
+    width: 50%;
+    text-align: left;
+  }
+}
+
+.testnet-indicator {
+  position: absolute;
+  font-size: $header-testnet-font-size;
+  color: $header-testnet-color;
+  right: 0;
+  top: 45px;
+}
+
+.wallet-error {
+  color: red;
+
+  animation: wallet-blink-error 0.5s step-start 0s infinite;
+}
+
+@keyframes wallet-blink-error {
+  50% {
+    color: rgb(255, 57, 57);
+  }
+}

@@ -1,0 +1,203 @@
+$invest-width: 100%;
+$invest-margin: 30px;
+
+$invest-currency-logo-size: 40px;
+
+$invest-error-funds-font-size: 11px;
+$invest-error-funds-color: rgb(201, 0, 0);
+
+$select-margin: 0 0 40px 0;
+$select-selector-width: 300px;
+$select-selector-name-font-size: 22px;
+$select-wrap-padding: 15px 15px 20px 15px;
+$select-item-padding: 10px 10px;
+$select-list-padding: 10px 0;
+
+$deposit-margin: 0 0 20px 0;
+
+$details-side-margin: 0 0 20px 0;
+
+$whitelist-note-margin: 0 0 60px 0;
+$whitelist-note-title-font-size: 38px;
+$whitelist-note-countdown-margin: 40px 0 0 0;
+$whitelist-note-countdown-number-font-size: 42px;
+$whitelist-note-countdown-text-font-size: 14px;
+
+.farms {
+  position: relative;
+  margin-bottom: $invest-margin;
+
+  .farms-wrap {
+    position: relative;
+    margin: 0 auto;
+    width: $invest-width;
+
+    .logo {
+      position: absolute;
+      top: 21px;
+      left: 10px;
+      img {
+        min-width: $invest-currency-logo-size;
+        min-height: $invest-currency-logo-size;
+        max-width: $invest-currency-logo-size;
+        max-height: $invest-currency-logo-size;
+      }
+    }
+  }
+
+  .error-funds {
+    position: absolute;
+    top: 28px;
+    left: 10px;
+    font-size: $invest-error-funds-font-size;
+    color: $invest-error-funds-color;
+    font-weight: bold;
+  }
+}
+.deposit {
+  position: relative;
+  margin: $deposit-margin;
+}
+
+.receive {
+  .details {
+    display: table;
+    width: 100%;
+
+    .waiting {
+      text-align: center;
+    }
+  }
+}
+
+.select {
+  margin: $select-margin;
+
+  .title {
+    text-align: center;
+  }
+  .wrap-sel {
+    height: 100px;
+    margin: 0 auto;
+    width: $select-selector-width;
+    z-index: 9999;
+
+    .selector {
+      position: relative;
+      z-index: 9999;
+      margin: 0 auto;
+      width: $select-selector-width;
+      overflow: hidden;
+
+      .currency-list {
+        z-index: 9999;
+        transform-origin: top;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        max-height: 200px;
+        transition: all 0.15s;
+        background: $button-background;
+
+        .item {
+          z-index: 999;
+          position: relative;
+          display: block;
+          transition: all 0.2s;
+          padding: $select-item-padding;
+          width: 100%;
+          background: $button-background;
+
+          &:hover {
+            background: $button-hover-background;
+          }
+
+          .currency-name {
+            position: relative;
+            left: 10px;
+            top: 2px;
+          }
+
+          .currency-detail {
+            color: $global-text-quiet-less;
+            position: absolute;
+            right: 10px;
+            top: 14px;
+          }
+        }
+      }
+
+      .move {
+        position: absolute;
+        right: 10px;
+        top: 20px;
+      }
+
+      .btn-currency {
+        @include button-selector("red");
+
+        background: none;
+        color: white;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+        z-index: 9999;
+
+        .selector-wrap {
+          padding: $select-wrap-padding;
+          background: $button-background;
+          transition: $global-transition;
+          z-index: 9999;
+
+          &:hover {
+            background: $button-hover-background;
+          }
+        }
+
+        .name {
+          position: relative;
+          top: 4px;
+          left: 10px;
+          font-size: $select-selector-name-font-size;
+        }
+      }
+    }
+  }
+}
+
+.details {
+  display: table;
+  min-width: 100%;
+
+  .details-side {
+    display: table;
+    width: 100%;
+    min-width: 100%;
+    margin: $details-side-margin;
+  }
+}
+.line {
+  position: relative;
+}
+
+.whitelist-note {
+  margin: $whitelist-note-margin;
+
+  .title {
+    text-align: center;
+    font-size: $whitelist-note-title-font-size;
+  }
+
+  .block-countdown {
+    margin: $whitelist-note-countdown-margin;
+
+    .countdown-number {
+      text-align: center;
+      font-size: $whitelist-note-countdown-number-font-size;
+    }
+    .countdown-text {
+      text-align: center;
+      color: $global-text-quiet-less;
+      font-size: $whitelist-note-countdown-text-font-size;
+    }
+  }
+}

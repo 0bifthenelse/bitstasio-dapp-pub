@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
@@ -17,7 +16,7 @@ import {
 import {
 	RPC,
 	mining_contract,
-	mining_abi
+	coin_abi
 } from '../../../constants';
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number; }) {
@@ -47,7 +46,7 @@ function Compound() {
 				try {
 					const timer = setTimeout(() => resolve(), 45000);
 					const state: MiningState = store.getState();
-					const contract = new state.web3.provider.eth.Contract(mining_abi as AbiItem[], mining_contract);
+					const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], mining_contract);
 					const ref = state.mining.ref ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
 
 					await contract.methods.hatchEggs(ref).send({ from: state.web3.wallet });

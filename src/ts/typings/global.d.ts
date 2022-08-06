@@ -6,7 +6,45 @@ export { };
 declare global {
   type Watcher = HashMap<string, Watch>;
   type Menu = DOMRect;
-  type ActivityOrigin = "compound" | "hire" | "withdraw";
+  type ActivityOrigin = "compound" | "deposit" | "claim";
+  type TRPC = Web3;
+
+  interface Currency {
+    id: number;
+    name: string;
+    amount: number;
+    mainnet: boolean;
+    investment: string;
+    tvl: number;
+    apr: number;
+    shares: number;
+    daily: string;
+    coin: boolean;
+    allowance: string;
+    shares_value: string;
+    shares_to_receive: number;
+    token_contract: string;
+    contract: string;
+    contract_balance: string;
+    withdrawable: number;
+    whitelisted: boolean;
+    timestamp_withdraw: number;
+    time_since_withdraw: string;
+    launch_block: number;
+  }
+
+  interface CurrencyJSON {
+    id: number;
+    name: string;
+    mainnet: boolean;
+    apr: string;
+    daily: string;
+    coin: boolean;
+    contract: string;
+    token_contract: string;
+    whitelist: boolean;
+    launch_block: number;
+  }
 
   interface Activity {
     active: boolean;

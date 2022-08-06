@@ -41,7 +41,7 @@ async function notify(hash: string, from: string, origin: ActivityOrigin, value?
 
 function notify_position(queue: Array<Activity>, origin: ActivityOrigin): number {
   if (queue.length > 0) {
-    const long = !(origin == "hire" || origin == "withdraw");
+    const long = !(origin == "deposit" || origin == "claim");
     const index_last = queue.length - 1;
     const position_last = Math.max(queue[index_last].left, 0);
 
@@ -55,10 +55,10 @@ export async function compound(hash: string, from: string): Promise<void> {
   notify(hash, from, "compound");
 }
 
-export async function hire(hash: string, from: string, value: string): Promise<void> {
-  notify(hash, from, "hire", value);
+export async function deposit(hash: string, from: string, value: string): Promise<void> {
+  notify(hash, from, "deposit", value);
 }
 
-export async function withdraw(hash: string, from: string, value: string): Promise<void> {
-  notify(hash, from, "withdraw", value);
+export async function claim(hash: string, from: string, value: string): Promise<void> {
+  notify(hash, from, "claim", value);
 }

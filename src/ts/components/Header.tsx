@@ -1,22 +1,28 @@
-import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import Referal from './sub/Header/Referral';
+import React from 'react';
+import { useLocation } from 'react-router-dom'
+import Return from './sub/Header/Return';
+import Referral from './sub/Header/Referral';
 import Wallet from './sub/Header/Wallet';
+import Calculator from './sub/Header/Calculator';
+import Testnet from './sub/Header/Testnet';
 
-export default function Menu() {
-	return (
-		<div className="header">
-			<div className="row">
-				<div className="col-xxl-4 col-xl-3 col-md-2 d-none d-md-block"></div>
-				<div className="col-xxl-4 col-xl-6 col-md-8 col-sm-12">
-					<div className="menu row">
-						<Referal />
-						<Wallet />
-					</div>
-				</div>
-				<div className="col-xxl-4 col-xl-3 col-md-2 d-none d-md-block"></div>
-			</div>
-		</div>
-	);
+export default function Header() {
+  const location = useLocation().pathname;
+  const is_farm = location.startsWith("/farms")
+
+  return (
+    <div className="header">
+      <div className="navigate">
+        {!is_farm &&
+          <Return />
+        }
+      </div>
+      <div className="settings">
+        <Calculator />
+        <Referral />
+        <Wallet />
+        <Testnet />
+      </div>
+    </div>
+  );
 }

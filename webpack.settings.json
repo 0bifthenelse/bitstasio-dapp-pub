@@ -7,10 +7,10 @@
 		"favicon": "src/image/favicon.ico",
 		"filename": "index.html",
 		"meta": {
-			"description": "Pepe Miner's Mining Facility delivering your daily source of passive income!"
+			"description": ""
 		},
 		"template": "src/html/index.ejs",
-		"title": "PepeMiner.finance"
+		"title": "Bitstasio"
 	},
 	"input": {
 		"entry": "/src/ts/index.tsx"

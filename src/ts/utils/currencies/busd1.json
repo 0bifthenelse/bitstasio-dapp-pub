@@ -1,0 +1,11 @@
+{
+  "name": "BUSD",
+  "apr": "1095",
+  "daily": "3",
+  "coin": false,
+  "mainnet": false,
+  "contract": "0x62Fb02f44E891930A589ED488CdD5b1B173C1cA1",
+  "token_contract": "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
+  "whitelist": true,
+  "launch_block": 21764194
+}

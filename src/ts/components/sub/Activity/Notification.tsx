@@ -12,13 +12,13 @@ function text(origin: ActivityOrigin, value: string) {
 
 	switch (origin) {
 		case "compound": {
-			return ` hired more miners.`;
+			return ` compounded.`;
 		}
-		case "hire": {
-			return ` hired miners.`;
+		case "deposit": {
+			return ` deposited funds.`;
 		}
-		case "withdraw": {
-			return ` collected rewards.`;
+		case "claim": {
+			return ` claimed rewards.`;
 		}
 	}
 }

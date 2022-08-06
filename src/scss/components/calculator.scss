@@ -1,0 +1,24 @@
+$note-margin: 10px 0;
+
+.calculator {
+  .investment {
+    margin: $global-part-margin;
+  }
+
+  .apr {
+    margin: $global-part-margin;
+  }
+
+  .days {
+    margin: $global-part-margin;
+  }
+
+  .result-part {
+    margin: $global-part-margin;
+  }
+
+  .note {
+    color: $global-text-quiet-less;
+    margin: $note-margin;
+  }
+}

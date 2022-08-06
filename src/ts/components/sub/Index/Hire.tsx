@@ -20,7 +20,7 @@ import {
 import {
 	RPC,
 	mining_contract,
-	mining_abi
+	coin_abi
 } from '../../../constants';
 
 function Receive() {
@@ -53,7 +53,7 @@ function Pocket() {
 					const state = store.getState();
 					const timer = setTimeout(() => resolve(), 45000);
 
-					const contract = new state.web3.provider.eth.Contract(mining_abi as AbiItem[], mining_contract);
+					const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], mining_contract);
 
 					await contract.methods.sellEggs().send({ from: state.web3.wallet });
 
@@ -98,7 +98,7 @@ function Spend() {
 
 		if (value > 0) {
 			const wei = RPC.utils.toWei(value.toString(), "ether");
-			const contract = new RPC.eth.Contract(mining_abi as AbiItem[], mining_contract);
+			const contract = new RPC.eth.Contract(coin_abi as AbiItem[], mining_contract);
 			const to_receive = ((await contract.methods.calculateEggBuySimple(wei).call()) / 2592000).toFixed(0);
 
 			store.dispatch(update_miners_to_receive(to_receive));
@@ -151,7 +151,7 @@ export default function Hire() {
 					const wei = RPC.utils.toWei(to_hire.toString(), "ether");
 					const wallet = state.web3.wallet;
 					const ref = state.mining.ref ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
-					const contract = new state.web3.provider.eth.Contract(mining_abi as AbiItem[], mining_contract);
+					const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], mining_contract);
 
 					await contract.methods.buyEggs(ref).send({ from: wallet, value: wei });
 

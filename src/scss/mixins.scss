@@ -3,9 +3,18 @@
   width: $width;
   background: $global-box-background;
   padding: $global-box-padding;
-  backdrop-filter: blur(2px);
   border: 0;
   border-radius: $global-box-border-radius;
   margin: $global-box-margin;
   box-shadow: $global-box-shadow;
+  overflow: hidden;
+}
+
+@mixin button-selector($background) {
+  border: 0;
+  padding: $button-padding;
+
+  .selector-wrap {
+    border-radius: $button-border-radius;
+  }
 }
