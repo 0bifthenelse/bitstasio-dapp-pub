@@ -6,8 +6,9 @@ $invest-currency-logo-size: 40px;
 $invest-error-funds-font-size: 11px;
 $invest-error-funds-color: rgb(201, 0, 0);
 
-$select-margin: 0 0 40px 0;
-$select-selector-width: 300px;
+$select-margin: 30px 0 50px 0;
+$select-selector-min-width: 250px;
+$select-selector-max-width: 420px;
 $select-selector-name-font-size: 22px;
 $select-wrap-padding: 15px 15px 20px 15px;
 $select-item-padding: 10px 10px;
@@ -22,6 +23,8 @@ $whitelist-note-title-font-size: 38px;
 $whitelist-note-countdown-margin: 40px 0 0 0;
 $whitelist-note-countdown-number-font-size: 42px;
 $whitelist-note-countdown-text-font-size: 14px;
+
+$mask-margin: 0 0 0 0;
 
 .farms {
   position: relative;
@@ -53,151 +56,181 @@ $whitelist-note-countdown-text-font-size: 14px;
     color: $invest-error-funds-color;
     font-weight: bold;
   }
-}
-.deposit {
-  position: relative;
-  margin: $deposit-margin;
-}
 
-.receive {
-  .details {
-    display: table;
-    width: 100%;
+  .deposit {
+    position: relative;
+    margin: $deposit-margin;
+  }
 
-    .waiting {
-      text-align: center;
+  .receive {
+    .details {
+      display: table;
+      width: 100%;
+
+      .waiting {
+        text-align: center;
+      }
     }
   }
-}
 
-.select {
-  margin: $select-margin;
+  .select {
+    margin: $select-margin;
 
-  .title {
-    text-align: center;
-  }
-  .wrap-sel {
-    height: 100px;
-    margin: 0 auto;
-    width: $select-selector-width;
-    z-index: 9999;
-
-    .selector {
-      position: relative;
-      z-index: 9999;
+    .wrap-sel {
+      height: 100px;
       margin: 0 auto;
-      width: $select-selector-width;
-      overflow: hidden;
+      min-width: $select-selector-min-width;
+      max-width: $select-selector-max-width;
+      z-index: 9999;
 
-      .currency-list {
+      .selector {
+        position: relative;
         z-index: 9999;
-        transform-origin: top;
-        overflow-y: hidden;
-        overflow-x: hidden;
-        max-height: 200px;
-        transition: all 0.15s;
-        background: $button-background;
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
 
-        .item {
-          z-index: 999;
-          position: relative;
-          display: block;
-          transition: all 0.2s;
-          padding: $select-item-padding;
-          width: 100%;
+        .currency-list {
+          z-index: 9999;
+          transform-origin: top;
+          overflow-y: hidden;
+          overflow-x: hidden;
+          max-height: 200px;
+          transition: all 0.15s;
           background: $button-background;
 
-          &:hover {
-            background: $button-hover-background;
-          }
-
-          .currency-name {
+          .item {
+            z-index: 999;
             position: relative;
-            left: 10px;
-            top: 2px;
-          }
+            display: block;
+            transition: all 0.2s;
+            padding: $select-item-padding;
+            width: 100%;
+            background: $button-background;
 
-          .currency-detail {
-            color: $global-text-quiet-less;
-            position: absolute;
-            right: 10px;
-            top: 14px;
+            &:hover {
+              background: $button-hover-background;
+            }
+
+            .currency-name {
+              position: relative;
+              left: 10px;
+              top: 2px;
+            }
+
+            .currency-detail {
+              color: $global-text-quiet-less;
+              position: absolute;
+              right: 10px;
+              top: 14px;
+            }
           }
         }
-      }
 
-      .move {
-        position: absolute;
-        right: 10px;
-        top: 20px;
-      }
+        .move {
+          position: absolute;
+          right: 10px;
+          top: 20px;
+        }
 
-      .btn-currency {
-        @include button-selector("red");
+        .btn-currency {
+          @include button-selector("red");
 
-        background: none;
-        color: white;
-        width: 100%;
-        text-align: left;
-        padding: 0;
-        z-index: 9999;
-
-        .selector-wrap {
-          padding: $select-wrap-padding;
-          background: $button-background;
-          transition: $global-transition;
+          background: none;
+          color: white;
+          width: 100%;
+          text-align: left;
+          padding: 0;
           z-index: 9999;
 
-          &:hover {
-            background: $button-hover-background;
-          }
-        }
+          .selector-wrap {
+            padding: $select-wrap-padding;
+            background: $button-background;
+            transition: $global-transition;
+            z-index: 9999;
 
-        .name {
-          position: relative;
-          top: 4px;
-          left: 10px;
-          font-size: $select-selector-name-font-size;
+            &:hover {
+              background: $button-hover-background;
+            }
+          }
+
+          .name {
+            position: relative;
+            top: 4px;
+            left: 10px;
+            font-size: $select-selector-name-font-size;
+          }
         }
       }
     }
   }
-}
 
-.details {
-  display: table;
-  min-width: 100%;
-
-  .details-side {
+  .details {
     display: table;
-    width: 100%;
     min-width: 100%;
-    margin: $details-side-margin;
+
+    .details-side {
+      display: table;
+      width: 100%;
+      min-width: 100%;
+      margin: $details-side-margin;
+    }
   }
-}
-.line {
-  position: relative;
-}
+  .line {
+    position: relative;
+  }
 
-.whitelist-note {
-  margin: $whitelist-note-margin;
+  .whitelist-note {
+    margin: $whitelist-note-margin;
 
-  .title {
+    .title {
+      text-align: center;
+      font-size: $whitelist-note-title-font-size;
+    }
+
+    .block-countdown {
+      margin: $whitelist-note-countdown-margin;
+
+      .countdown-number {
+        text-align: center;
+        font-size: $whitelist-note-countdown-number-font-size;
+      }
+      .countdown-text {
+        text-align: center;
+        color: $global-text-quiet-less;
+        font-size: $whitelist-note-countdown-text-font-size;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .wrong-network {
     text-align: center;
-    font-size: $whitelist-note-title-font-size;
+
+    margin: 60px 0;
+    font-size: 20px;
   }
 
-  .block-countdown {
-    margin: $whitelist-note-countdown-margin;
+  .mask {
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+  }
 
-    .countdown-number {
-      text-align: center;
-      font-size: $whitelist-note-countdown-number-font-size;
-    }
-    .countdown-text {
-      text-align: center;
-      color: $global-text-quiet-less;
-      font-size: $whitelist-note-countdown-text-font-size;
-    }
+  .mask-loading {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 99992;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 }

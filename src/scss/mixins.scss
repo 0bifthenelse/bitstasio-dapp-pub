@@ -18,3 +18,15 @@
     border-radius: $button-border-radius;
   }
 }
+
+@mixin shadow() {
+  text-shadow: $global-text-shadow;
+}
+
+@mixin menu-text-hover() {
+  color: $global-link-hover-color;
+}
+
+@mixin menu-text-transition() {
+  transition: color 0.15s;
+}

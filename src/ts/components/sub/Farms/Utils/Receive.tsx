@@ -2,9 +2,13 @@ import React from 'react';
 import fetch_abi from 'human-standard-token-abi';
 import BN from 'bn.js';
 import numberSeparator from 'number-separator';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AbiItem } from 'web3-utils';
 import store from "../../../../redux/store";
+
+import {
+  get_referrer
+} from '../../../../utils/referral';
 
 import {
   coin_abi,
@@ -25,11 +29,11 @@ async function deposit(currency: Currency): Promise<void> {
   const wallet = state.web3.wallet;
   const rpc = state.web3.provider;
   const value = rpc.utils.toWei(spend.toString(), "ether");
-  const ref = state.currency.referral ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
 
   if (!insufficient) {
     if (currency.coin) {
       const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], currency.contract);
+      const ref = get_referrer(true);
 
       return new Promise(async (resolve: Function): Promise<void> => {
         try {
@@ -51,6 +55,7 @@ async function deposit(currency: Currency): Promise<void> {
 
     else {
       const contract = new state.web3.provider.eth.Contract(token_abi as AbiItem[], currency.contract);
+      const ref = get_referrer(false);
 
       return new Promise(async (resolve: Function): Promise<void> => {
         try {
@@ -97,16 +102,25 @@ async function approve(currency: Currency, investment_wei: string): Promise<void
 }
 
 function Details(props: { currency: Currency; }) {
-  const investment = parseFloat(props.currency.investment);
-  const shares_value_raw = parseFloat(props.currency.shares_value);
-  const shares_to_receive_raw = investment / shares_value_raw;
-  const shares_to_receive = numberSeparator(shares_to_receive_raw.toFixed(2), ",");
+  const referral: string = useSelector((state: any) => state.currency.referral);
+  const shares_to_receive = props.currency.shares_to_receive;
 
   return (
     <div className="details">
       <div className="part">
         <div className="line">Shares you will receive</div>
-        <div className="content">{!investment || !shares_value_raw ? "---" : shares_to_receive}</div>
+        <div className="content">{shares_to_receive == 0 ? "---" : numberSeparator(shares_to_receive, ",")}</div>
+      </div>
+      <div className="part">
+        <div className="line">Your referral</div>
+        <div className="content">
+          {referral != "" &&
+            <a href={`https://bscscan.com/address/${referral}`}>{referral?.substring(0, 6)}</a>
+          }
+          {referral == "" &&
+            "---"
+          }
+        </div>
       </div>
     </div>
   );

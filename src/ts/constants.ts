@@ -16,6 +16,30 @@ export const net = {
 	mainnet: 56,
 	testnet: 97
 };
+export const menu_routine = 150;
+export const menu_dimensions = [
+  {
+    menu: "wallet",
+    dimensions: {
+      width: 360,
+      height: 300
+    }
+  },
+  {
+    menu: "products",
+    dimensions: {
+      width: 860,
+      height: 350
+    }
+  },
+  {
+    menu: "socials",
+    dimensions: {
+      width: 400,
+      height: 500
+    }
+  }
+];
 export const notification_duration = 20;
 export const coin_abi = [
 	{

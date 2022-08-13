@@ -18,6 +18,9 @@ import {
 function No_Wallet() {
 	async function connect(): Promise<void> {
 		const providerOptions = {
+			bitkeep: {
+				package: true
+			},
 			walletconnect: {
 				package: WalletConnectProvider,
 				options: {
@@ -91,11 +94,12 @@ function Manage() {
 export default function Wallet() {
 	const wallet = useSelector((state: any) => state.web3.wallet);
 	const network = useSelector((state: any) => state.web3.network);
+	const is_correct_network = network == net.mainnet || network == net.testnet;
 
 	return (
 		<span>
 			{!wallet && <No_Wallet />}
-			{wallet && !network && <Wrong_Network />}
+			{wallet && !is_correct_network && <Wrong_Network />}
 			{wallet && network && <Manage />}
 		</span>
 	);

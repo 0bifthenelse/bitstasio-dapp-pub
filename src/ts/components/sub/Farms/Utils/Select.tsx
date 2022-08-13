@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import store from "../../../../redux/store";
 import {
-  toggle_opened,
-  set_selected
+  toggle_opened
 } from '../../../../redux/slice/currency';
 import CurrencyIcon from "../../Utils/CurrencyIcon";
 
@@ -13,11 +12,9 @@ import {
 } from '../../../../utils/data';
 import { net } from '../../../../constants';
 
-function Currency(props: { name: string; }) {
-  return (
-    <img src={`/img/currencies/${props.name.toLowerCase()}.png`} alt="Logo" />
-  );
-}
+import {
+  farm_currency_select
+} from '../../../../utils/event';
 
 function Item(props: { id: number, name: string, apr: string, }) {
   function select(id: number): void {
@@ -25,10 +22,7 @@ function Item(props: { id: number, name: string, apr: string, }) {
     // @ts-ignore
     const current_id = state.currency.selected;
 
-    if (current_id != id) {
-      store.dispatch(toggle_opened());
-      store.dispatch(set_selected(id));
-    }
+    if (current_id != id) return farm_currency_select(id);
   }
 
   return (
@@ -124,7 +118,6 @@ function Selector() {
 export default function SelectCurrency() {
   return (
     <div className="select">
-      <div className="title">Select cryptocurrency</div>
       <Selector />
     </div>
   );

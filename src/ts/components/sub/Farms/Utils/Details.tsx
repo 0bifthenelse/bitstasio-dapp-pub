@@ -11,6 +11,7 @@ function FarmDetails(props: { currency: Currency; }) {
   const time_since_withdraw = currency.time_since_withdraw;
   const daily = currency.daily;
   const daily_rewards = ((parseFloat(daily) / 100) * (currency.shares * parseFloat(currency.shares_value))).toFixed(6);
+  const compound_reward = currency.coin ? 1 : useSelector((state: any) => state.referral.level) >= 3 ? 2 : 1;
   const apr = numberSeparator(currency.apr, ",");
 
   return (
@@ -21,6 +22,10 @@ function FarmDetails(props: { currency: Currency; }) {
         <div className="content">{time_since_withdraw ? `${time_since_withdraw}` : "---"}</div>
       </div>
       <div className="part">
+        <div className="line">Compound reward</div>
+        <div className="content">{compound_reward}x</div>
+      </div>
+      <div className="part">
         <div className="line">Approximate daily reward</div>
         <div className="content">{daily_rewards ? `${daily_rewards} ${name}` : "---"}</div>
       </div>
@@ -29,11 +34,7 @@ function FarmDetails(props: { currency: Currency; }) {
         <div className="content">{apr ? `${apr} %` : "---"}</div>
       </div>
       <div className="part">
-        <div className="line">Daily periodic interest</div>
-        <div className="content">{daily ? `${daily} %` : "---"}</div>
-      </div>
-      <div className="part">
-        <div className="line">Contract balance <a href={`https://bscscan.com/address/${currency.contract}`} target="_blank"><OpenInNewIcon style={{ position: "absolute", fontSize: "14px", top: "10px", left: "130px" }} /></a></div>
+        <div className="line">Total Value Locked <a href={`https://bscscan.com/address/${currency.contract}`} target="_blank"><OpenInNewIcon style={{ position: "absolute", fontSize: "14px", top: "10px", left: "145px" }} /></a></div>
         <div className="content">{parseFloat(contract_balance_raw) > 0 ? `${contract_balance} ${name}` : "---"}</div>
       </div>
     </div>
@@ -46,10 +47,12 @@ function ShareDetails(props: { currency: Currency; }) {
   const shares_value = shares_value_raw.toFixed(8);
   const shares_value_unit_raw = Math.round(1 / shares_value_raw);
   const shares_value_unit = numberSeparator(shares_value_unit_raw, ',');
+  const referral_level = useSelector((state: any) => state.referral.level);
+  const referral_uses = useSelector((state: any) => state.referral.uses);
 
   return (
     <div className="details-side">
-      <div className="title">Shares information</div>
+      <div className="title">Shares & referral information</div>
       <div className="part">
         <div className="line">Share value</div>
         <div className="content">{shares_value_raw == 0 ? "---" : shares_value}</div>
@@ -58,6 +61,18 @@ function ShareDetails(props: { currency: Currency; }) {
         <div className="line">Shares for 1 {props.currency.name}</div>
         <div className="content">{shares_value_unit_raw == Infinity ? "---" : shares_value_unit}</div>
       </div>
+      {!currency.coin &&
+        <>
+          <div className="part">
+            <div className="line">Referral level</div>
+            <div className="content">{shares_value_raw == 0 ? "---" : referral_level}</div>
+          </div>
+          <div className="part">
+            <div className="line">Referral uses</div>
+            <div className="content">{shares_value_raw == 0 ? "---" : referral_uses}</div>
+          </div>
+        </>
+      }
     </div>
   );
 }

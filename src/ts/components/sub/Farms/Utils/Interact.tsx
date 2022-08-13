@@ -13,6 +13,10 @@ import {
   set_claim
 } from '../../../../redux/slice/loading';
 
+import {
+  get_referrer
+} from '../../../../utils/referral';
+
 async function claim(currency: Currency) {
   store.dispatch(set_claim(true));
 
@@ -59,8 +63,7 @@ async function compound(currency: Currency) {
       else await compound_token(currency);
 
       clearTimeout(timer);
-      resolve();
-      return;
+      return resolve();
     } catch (error: any) {
       store.dispatch(set_compound(false));
     }
@@ -72,8 +75,7 @@ async function compound(currency: Currency) {
 async function compound_coin(currency: Currency) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], currency.contract);
-  // @ts-ignore
-  const ref = state.currency.referral ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
+  const ref = get_referrer(true);
 
   await contract.methods.hatchEggs(ref).send({ from: state.web3.wallet });
 }
@@ -81,8 +83,7 @@ async function compound_coin(currency: Currency) {
 async function compound_token(currency: Currency) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(token_abi as AbiItem[], currency.contract);
-  // @ts-ignore
-  const ref = state.currency.referral ?? "0x9C9e373C794aE23b0e7a0EB95e8390F80C121E7E";
+  const ref = get_referrer(false);
 
   await contract.methods.compoundBits(ref).send({ from: state.web3.wallet });
 }

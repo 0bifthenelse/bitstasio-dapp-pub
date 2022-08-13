@@ -1,0 +1,456 @@
+$menu-width: 100%;
+$menu-padding: 20px 0;
+$menu-logo-width: 200px;
+$menu-logo-height: 50px;
+
+$menu-link-padding: 10px 30px;
+
+$menu-box-arrow-size: 20px;
+$menu-box-arrow-border-radius: 5px;
+
+$menu-content-padding: 0;
+$menu-content-background: #1f2029;
+$menu-content-box-shadow: rgb(10, 14, 19) 0px 20px 30px -10px;
+
+$menu-content-social-margin: 5px 0;
+$menu-content-social-padding: 10px 0;
+$menu-content-social-icon-size: 50px;
+$menu-content-social-wrapper-padding: 5px 10px 5px 20px;
+$menu-content-social-title-padding: 5px 0 10px 0;
+$menu-content-social-detail-font-size: $global-text-small;
+$menu-content-social-detail-font-color: $global-text-quiet-less;
+
+$menu-content-socials-wrapper-padding: 10px 20px;
+
+$menu-content-products-side-width: 620px;
+
+$menu-content-resources-title-padding: 10px 20px;
+$menu-content-resources-links-small-lin-padding: 5px 10px;
+
+$menu-content-resources-link-padding: 5px 5px;
+$menu-content-resources-link-margin: 5px 0;
+
+$menu-content-resources-side-width: 250px;
+$menu-content-resources-side-background: #21222c;
+$menu-content-resources-links-small-padding: 20px 30px 20px 20px;
+
+$menu-content-products-wrapper-padding: 15px 5px 0 5px;
+$menu-content-products-margin: 10px;
+$menu-content-products-width: 275px;
+$menu-content-products-wrap-width: 260px;
+$menu-content-products-icon-size: 25px;
+$menu-content-products-icon-padding: 0 10px;
+$menu-content-products-icon-text-shadow: 0px 11px 10px rgba(0, 0, 0, 0.8);
+$menu-content-products-wrap-padding: 0 10px;
+
+$menu-content-products-wrap-title-font-size: 16px;
+$menu-content-products-wrap-description-padding: 5px;
+$menu-content-products-wrap-description-font-size: 14px;
+
+$menu-content-products-note-font-size: 10px;
+$menu-content-products-note-margin: 10px;
+
+$menu-content-wallet-msg-margin: 20px;
+$menu-content-wallet-icon-size: 30px;
+$menu-content-wallet-address-border-radius: 20px;
+$menu-content-wallet-funds-font-size: 24px;
+
+$menu-content-wallet-ref-link-margin: 70px 0 0 0;
+
+$menu-title-mobile-font-size: 32px;
+$menu-title-mobile-margin: 20px 10px;
+
+.menu {
+  position: relative;
+  width: $menu-width;
+  min-height: 70px;
+  padding: $menu-padding;
+  margin: 0 auto;
+  color: white;
+
+  text-align: center;
+
+  .link {
+    display: inline;
+    text-transform: uppercase;
+    padding: $menu-link-padding;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+
+    img {
+      width: $menu-logo-width;
+      height: $menu-logo-height;
+    }
+  }
+}
+
+.menu-box {
+  position: relative;
+  transition: transform 0.2s;
+  z-index: 99992;
+
+  .content {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform-origin: 0 0;
+    transition: all 0.2s;
+    transform: translateX(-50%);
+    z-index: 999;
+    background: $menu-content-background;
+    box-shadow: $menu-content-box-shadow;
+    border-radius: 16px;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    background: $menu-content-background;
+    transform: rotate(45deg);
+    transition: all 0.2s;
+    width: $menu-box-arrow-size;
+    height: $menu-box-arrow-size;
+    border-radius: $menu-box-arrow-border-radius;
+  }
+}
+
+.menu-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: all 0.35s;
+  padding: $menu-content-padding;
+  overflow: hidden;
+}
+
+.wallet {
+  display: flex;
+  height: 100%;
+
+  .err {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+
+    .wrap {
+      width: 100%;
+      text-align: center;
+
+      .msg {
+        display: block;
+        min-width: 100%;
+        color: $global-text-quiet-less;
+        margin-bottom: $menu-content-wallet-msg-margin;
+      }
+
+      .act {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .wallet-wrap {
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px;
+
+    .address {
+      @include shadow();
+
+      width: 200px;
+      padding: 5px 10px;
+      margin: 0 auto;
+      text-align: center;
+      background: $menu-content-resources-side-background;
+      border-radius: $menu-content-wallet-address-border-radius;
+      font-size: $global-text-small;
+      margin-bottom: 20px;
+
+      &:hover {
+        cursor: default;
+      }
+    }
+
+    .funds {
+      margin: 20px 0;
+
+      .bnb img {
+        width: $menu-content-wallet-icon-size;
+      }
+
+      .amount {
+        @include shadow();
+
+        position: relative;
+        top: 4px;
+        margin-left: 15px;
+        font-size: $menu-content-wallet-funds-font-size;
+      }
+    }
+
+    .holdings {
+      margin: 30px 0 20px 0;
+    }
+
+    .own {
+      @include shadow();
+
+      margin-top: 30px;
+      text-align: center;
+      font-size: $global-text-small;
+      color: $global-text-quiet;
+    }
+  }
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+  margin: $menu-content-social-margin;
+  padding: $menu-content-social-padding;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  transition: border-color 0.15s;
+
+  &:hover {
+    border-color: $global-link-hover-color;
+  }
+
+  .icon {
+    min-width: $menu-content-social-icon-size;
+    min-height: $menu-content-social-icon-size;
+
+    img {
+      min-width: $menu-content-social-icon-size;
+      min-height: $menu-content-social-icon-size;
+      max-width: $menu-content-social-icon-size;
+      max-height: $menu-content-social-icon-size;
+    }
+  }
+
+  .social-wrapper {
+    padding: $menu-content-social-wrapper-padding;
+    min-height: 100%;
+    width: 100%;
+    display: inline-block;
+    z-index: 9999;
+
+    &:hover > * {
+      color: $global-link-hover-color;
+    }
+
+    .title {
+      @include shadow();
+      padding: $menu-content-social-title-padding;
+    }
+
+    .detail {
+      @include shadow();
+      font-size: $menu-content-social-detail-font-size;
+      //color: $menu-content-social-detail-font-color;
+    }
+  }
+}
+
+.socials-wrapper {
+  padding: $menu-content-socials-wrapper-padding;
+
+  a {
+    &:hover > * {
+      color: $global-link-hover-color;
+    }
+  }
+}
+
+.products-wrapper {
+  display: table;
+  height: 100%;
+  min-height: 100%;
+
+  .products-side {
+    display: table-cell;
+    min-height: 100%;
+    height: 100%;
+    padding: $menu-content-products-wrapper-padding;
+    min-width: $menu-content-products-side-width;
+    width: $menu-content-products-side-width;
+  }
+
+  .resources-side {
+    display: table-cell;
+    background: $menu-content-resources-side-background;
+    vertical-align: top;
+    min-height: 100%;
+    height: 100%;
+    min-width: $menu-content-resources-side-width;
+    width: $menu-content-resources-side-width;
+
+    a:hover {
+      color: $global-link-hover-color;
+    }
+
+    .title {
+      @include shadow();
+      text-transform: uppercase;
+      color: $global-text-quiet-less;
+
+      padding: $menu-content-resources-title-padding;
+    }
+
+    .link {
+      @include shadow();
+
+      display: block;
+      text-transform: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0);
+      transition: border-color 0.15s;
+      width: 100%;
+      font-size: $global-text-small;
+      padding: $menu-content-resources-link-padding;
+      margin: $menu-content-resources-link-margin;
+
+      &:hover {
+        cursor: pointer;
+        border-color: $global-link-hover-color;
+      }
+    }
+
+    .links-small {
+      width: 100%;
+      padding: $menu-content-resources-links-small-padding;
+
+      .lin {
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+        transition: all 0.15s;
+        padding: $menu-content-resources-links-small-lin-padding;
+
+        &:hover {
+          border-color: $global-link-hover-color;
+        }
+      }
+      a {
+        @include shadow();
+        font-size: $global-text-small;
+        color: $global-text-quiet !important;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+    }
+  }
+
+  .product {
+    display: inline-block;
+    width: $menu-content-products-width;
+    margin: $menu-content-products-margin;
+
+    &:hover .description {
+      @include menu-text-hover();
+    }
+    &:hover .product-wrap {
+      @include menu-text-hover();
+    }
+
+    .product-wrap {
+      display: flex;
+      @include menu-text-transition();
+
+      .icon {
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        height: $menu-content-products-icon-size;
+
+        .bi {
+          @include shadow();
+
+          text-align: center;
+          position: relative;
+          top: 5px;
+          font-size: $menu-content-products-icon-size;
+          padding: $menu-content-products-icon-padding;
+        }
+      }
+
+      .content-wrap {
+        display: inline-block;
+        min-width: $menu-content-products-wrap-width;
+        padding: $menu-content-products-wrap-padding;
+
+        .title {
+          @include shadow();
+          font-size: $menu-content-products-wrap-title-font-size;
+
+          .note {
+            position: relative;
+            bottom: 2px;
+            margin-left: $menu-content-products-note-margin;
+            font-size: $menu-content-products-note-font-size;
+            color: $global-text-quiet;
+          }
+        }
+
+        .description {
+          @include menu-text-transition();
+          @include shadow();
+
+          padding-top: $menu-content-products-wrap-description-padding;
+          font-size: $menu-content-products-wrap-description-font-size;
+          color: $global-text-quiet-less;
+        }
+      }
+    }
+  }
+}
+
+.ref-link {
+  text-align: center;
+  margin: $menu-content-wallet-ref-link-margin;
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.close-mobile {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title-mobile {
+  text-align: center;
+  font-size: $menu-title-mobile-font-size;
+  margin: $menu-title-mobile-margin;
+}

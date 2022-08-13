@@ -3,12 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 export const slice_loading: any = createSlice({
   name: 'slice_loading',
   initialState: {
+    farm: false,
     deposit: false,
     compound: false,
     claim: false,
     approve: false
   },
   reducers: {
+    set_farm: (state, action) => {
+      state.farm = action.payload;
+    },
     set_deposit: (state, action) => {
       state.deposit = action.payload;
     },
@@ -25,6 +29,7 @@ export const slice_loading: any = createSlice({
 });
 
 export const {
+  set_farm,
   set_deposit,
   set_compound,
   set_claim,

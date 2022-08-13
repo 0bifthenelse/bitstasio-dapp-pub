@@ -2,11 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import numberSeparator from 'number-separator';
 
+import Loading from './Utils/Loading';
 import Manage from './Utils/Manage';
 import Select from "./Utils/Select";
 import Deposit from "./Utils/Deposit";
 import Receive from "./Utils/Receive";
 import Details from "./Utils/Details";
+
+import {
+	net
+} from '../../../constants';
 
 function WhitelistNote(props: { current_block: number, launch_block: number; }) {
 	const current_block = props.current_block;
@@ -34,6 +39,7 @@ function Content() {
 	const map = useSelector((state: any) => state.currency.map);
 	const block = useSelector((state: any) => state.web3.block);
 	const exists: boolean = map.has(selected);
+	const is_loading = useSelector((state: any) => state.loading.farm);
 
 	if (exists) {
 		const currency: Currency = map.get(selected);
@@ -44,16 +50,21 @@ function Content() {
 
 
 		if (is_launched || is_whitelisted) return (
-			<div className="row">
-				<div className="col-xxl-6 col-sm-12">
-					<Deposit />
-					<Receive />
+			<>
+				{is_loading &&
+					<Loading />
+				}
+				<div className={is_loading ? "row mask" : "row"}>
+					<div className="col-xxl-6 col-sm-12">
+						<Deposit />
+						<Receive />
+					</div>
+					<div className="col-xxl-6 col-sm-12">
+						<Manage />
+					</div>
+					<Details />
 				</div>
-				<div className="col-xxl-6 col-sm-12">
-					<Manage />
-				</div>
-				<Details />
-			</div>
+			</>
 		); else return (
 			<WhitelistNote current_block={block} launch_block={launch_block} />
 		);
@@ -64,10 +75,20 @@ function Content() {
 }
 
 export default function Farms() {
-	return (
+	const network = useSelector((state: any) => state.web3.network);
+
+	const is_correct_network = network == net.mainnet || network == net.testnet;
+
+	if (is_correct_network) return (
 		<div className="farms">
 			<Select />
 			<Content />
+		</div>
+	);
+
+	else return (
+		<div className="wrong-network">
+			Connect to BNB Smart Chain to access our farms.
 		</div>
 	);
 }

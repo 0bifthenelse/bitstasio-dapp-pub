@@ -8,6 +8,37 @@ declare global {
   type Menu = DOMRect;
   type ActivityOrigin = "compound" | "deposit" | "claim";
   type TRPC = Web3;
+  type Anchor = 'top' | 'left' | 'bottom' | 'right';
+
+  interface ProductProps {
+    data: {
+      name: string;
+      url: string;
+      active: boolean;
+      description: string;
+      icon: string;
+      close?: Function;
+    };
+  }
+
+  interface ToolProps {
+    data: {
+      name: string;
+      url: string;
+      active: boolean;
+      external: boolean;
+      close?: Function;
+    };
+  }
+
+  interface SocialProps {
+    data: {
+      name: string;
+      description: string;
+      url: string;
+      close?: Function;
+    };
+  }
 
   interface Currency {
     id: number;

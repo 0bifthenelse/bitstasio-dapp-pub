@@ -1,11 +1,54 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import store from "../../../../redux/store";
 import CurrencyIcon from "../../Utils/CurrencyIcon";
-
+import { AbiItem } from 'web3-utils';
 import {
-  set_investment
+  set_investment,
+  set_shares_to_receive
 } from "../../../../redux/slice/currency";
+import {
+  coin_abi,
+  token_abi
+} from '../../../../constants';
+
+async function to_receive(currency: Currency, investment: number) {
+  if (currency.coin) await to_receive_coin(currency, investment);
+  else await to_receive_token(currency, investment);
+}
+
+async function to_receive_coin(currency: Currency, investment: number | string) {
+  let shares_to_receive = 0;
+
+  if (investment > 0 && investment != "") {
+    const state: any = store.getState();
+    const web3 = state.web3.provider;
+    const contract = new web3.eth.Contract(coin_abi as AbiItem[], currency.contract);
+    const wei = web3.utils.toWei(investment.toString(), "ether");
+    const to_hatch = web3.utils.toBN(await contract.methods.EGGS_TO_HATCH_1MINERS().call());
+    const calculate = await contract.methods.calculateEggBuySimple(wei).call();
+
+    shares_to_receive = (web3.utils.toBN(calculate.toString()).div(to_hatch)).toNumber();
+  }
+
+  store.dispatch(set_shares_to_receive({ id: currency.id, to_receive: shares_to_receive }));
+}
+
+async function to_receive_token(currency: Currency, investment: number | string) {
+  let shares_to_receive: number = 0;
+
+  if (investment > 0 && investment != "") {
+    const state: any = store.getState();
+    const web3 = state.web3.provider;
+    const contract = new web3.eth.Contract(token_abi as AbiItem[], currency.contract);
+    const wei = web3.utils.toWei(investment.toString(), "ether");
+    const calculate = await contract.methods.calculateShareBuySimple(wei).call();
+
+    shares_to_receive = (web3.utils.toBN(calculate.toString())).toNumber();
+  }
+
+  store.dispatch(set_shares_to_receive({ id: currency.id, to_receive: shares_to_receive }));
+}
 
 function Form() {
   const selected = useSelector((state: any) => state.currency.selected);
@@ -19,6 +62,8 @@ function Form() {
     };
 
     store.dispatch(set_investment(data));
+
+    await to_receive(currency, data.investment);
   }
 
   if (exists) {

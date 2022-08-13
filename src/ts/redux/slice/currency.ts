@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import HashMap from "hashmap";
-import { coin_abi } from '../../constants';
 
 export const slice_currency: any = createSlice({
   name: 'slice_currency',
@@ -102,7 +101,7 @@ export const slice_currency: any = createSlice({
       const map = state.map;
       const currency = state.map.get(id);
 
-      if (currency && to_receive >= 0) {
+      if (currency) {
         currency.shares_to_receive = to_receive;
 
         state.map = map.clone();

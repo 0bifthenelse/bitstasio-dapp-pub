@@ -1,0 +1,51 @@
+{
+  "wallet": [
+    {
+      "name": "Wallet"
+    }
+  ],
+  "products": [
+    {
+      "name": "Yield farms",
+      "url": "/farms",
+      "icon": "bi-sign-yield",
+      "active": true,
+      "description": "Earn passive income with a selection of assets & high APR."
+    }
+  ],
+  "tools": [
+    {
+      "name": "Calculator",
+      "url": "/calculator",
+      "external": false,
+      "active": true
+    }
+  ],
+  "socials": [
+    {
+      "name": "Medium",
+      "description": "Read the latest announcements & guides.",
+      "url": "https://medium.com/@Bitstasio"
+    },
+    {
+      "name": "Twitter",
+      "description": "Get the latest news from the team.",
+      "url": "https://twitter.com/Bitstasio"
+    },
+    {
+      "name": "Discord",
+      "description": "Join our community on Discord.",
+      "url": "https://discord.com/invite/2DsfdS9us8"
+    },
+    {
+      "name": "Telegram",
+      "description": "Chat with our community on Telegram.",
+      "url": "https://t.me/bitstasioportal"
+    },
+    {
+      "name": "Reddit",
+      "description": "Subscribe & see what's new on Reddit.",
+      "url": "https://www.reddit.com/r/Bitstasio"
+    }
+  ]
+}
