@@ -14,10 +14,10 @@ import {
 function Product(props: ProductProps) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const here: boolean = location.pathname.startsWith(props.data.name);
+  const ref = useSelector((state: any) => state.currency.referral);
 
   return (
-    <Link to={props.data.active ? props.data.url : "/"} className={props.data.active ? "" : "disabled"} onClick={() => props.data.active ? dispatch(reset_box_active()) : null}>
+    <Link to={props.data.active ? ref ? props.data.url + `/?ref=${ref}` : (props.data.url) : "/"} className={props.data.active ? "" : "disabled"} onClick={() => props.data.active ? dispatch(reset_box_active()) : null}>
       <div className="product">
         <div className="product-wrap">
           <div className="icon"><i className={`bi ${props.data.icon}`}></i></div>
@@ -32,8 +32,13 @@ function Product(props: ProductProps) {
 }
 
 function Tool(props: ToolProps) {
-  return (
-    <Link className="link-tool" to={props.data.url} onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></Link>
+  const ref = useSelector((state: any) => state.currency.referral);
+
+  if (props.data.external) return (
+    <a href={props.data.url} target="_blank" onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></a>
+  );
+  else return (
+    <Link className="link-tool" to={ref ? props.data.url + `/?ref=${ref}` : props.data.url} onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></Link>
   );
 }
 
@@ -58,7 +63,7 @@ function Tools() {
 
   return (
     <>
-      <div className="title">Tools</div>
+      <div className="title">More</div>
       {list()}
     </>
   );

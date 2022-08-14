@@ -8,8 +8,11 @@ $link-border-radius: 16px;
 
 $notes-margin: 20px 0;
 $note-margin: 10px 0;
+$margin: 20px 0;
 
 .referral {
+  margin: $margin;
+
   .title {
     text-align: center;
     font-size: $title-font-size;

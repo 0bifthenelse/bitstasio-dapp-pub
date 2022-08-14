@@ -1,6 +1,9 @@
 $note-margin: 10px 0;
+$margin: 20px 0;
 
 .calculator {
+  margin: $margin;
+
   .investment {
     margin: $global-part-margin;
   }

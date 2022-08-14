@@ -116,6 +116,7 @@ function Funds(props: { close?: Function; }) {
 
   const dispatch = useDispatch();
   const wallet = useSelector((state: any) => state.web3.wallet);
+  const ref = useSelector((state: any) => state.currency.referral);
   const wallet_shown = 6;
   const wallet_read = wallet.substring(0, wallet_shown) + '...' + wallet.substring(wallet.length - wallet_shown, wallet.length);
   const close_mobile = props.close ? props.close() : null;
@@ -135,7 +136,7 @@ function Funds(props: { close?: Function; }) {
       </div>
 
       <div className="ref-link">
-        <Link to="/referral"><Button variant="outlined" onClick={() => {
+        <Link to={ref ? "/referral" + `/?ref=${ref}` : "/referral"}><Button variant="outlined" onClick={() => {
           dispatch(reset_box_active());
           props.close ? dispatch(close_mobile) : null;
         }}>My referral link</Button></Link>

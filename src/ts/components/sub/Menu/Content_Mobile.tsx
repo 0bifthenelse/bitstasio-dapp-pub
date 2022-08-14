@@ -21,10 +21,11 @@ interface PropsContent {
 function Product(props: ProductProps) {
   const dispatch = useDispatch();
   const close = props.data.close ? props.data.close() : null;
+  const ref = useSelector((state: any) => state.currency.referral);
 
   return (
     <Link
-      to={props.data.active ? props.data.url : "/"}
+      to={ref ? props.data.url + `/?ref=${ref}` : props.data.url}
       className={props.data.active ? "" : "disabled"}
       onClick={() => dispatch(close)}>
       <ListItem key={0} disablePadding>
@@ -68,11 +69,27 @@ function Products(props: { close: Function; }) {
 
 function Tool(props: ToolProps) {
   const dispatch = useDispatch();
+  const ref = useSelector((state: any) => state.currency.referral);
   const close = props.data.close ? props.data.close() : null;
 
-  return (
+  if (props.data.external) return (
+    <a
+      href={props.data.url}
+      className={props.data.active ? "" : "disabled"}
+      onClick={() => dispatch(close)}>
+      <ListItem key={0} disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            {props.data.name}
+          </ListItemIcon>
+        </ListItemButton>
+      </ListItem>
+    </a>
+  );
+
+  else return (
     <Link
-      to={props.data.active ? props.data.url : "/"}
+      to={ref ? props.data.url + `/?ref=${ref}` : props.data.url}
       className={props.data.active ? "" : "disabled"}
       onClick={() => dispatch(close)}>
       <ListItem key={0} disablePadding>
