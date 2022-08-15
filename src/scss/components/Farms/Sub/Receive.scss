@@ -1,0 +1,22 @@
+$button-deposit-background: #0f6e2f;
+$button-deposit-background-hover: #139e41;
+
+.receive {
+  .details {
+    display: table;
+    width: 100%;
+
+    .waiting {
+      text-align: center;
+    }
+  }
+
+  .button-deposit {
+    background: $button-deposit-background !important;
+    transition: $global-transition;
+
+    &:hover {
+      background: $button-deposit-background-hover !important;
+    }
+  }
+}

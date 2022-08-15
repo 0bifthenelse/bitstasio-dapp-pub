@@ -1,0 +1,11 @@
+{
+  "name": "BTC",
+  "apr": "1095",
+  "daily": "3",
+  "coin": false,
+  "mainnet": true,
+  "contract": "0x15ECb90Cb04b719513A7d6771F80Cf5BECdd684D",
+  "token_contract": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D52",
+  "whitelist": false,
+  "launch_block": 0
+}

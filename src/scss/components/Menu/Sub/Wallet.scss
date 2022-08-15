@@ -1,0 +1,97 @@
+$msg-margin: 20px;
+$icon-size: 30px;
+$address-border-radius: 20px;
+$funds-font-size: 24px;
+$ref-link-margin: 70px 0 0 0;
+$address-background: #21222c;
+
+.wallet {
+  display: flex;
+  height: 100%;
+
+  .err {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+
+    .err-wrap {
+      width: 100%;
+      text-align: center;
+
+      .msg {
+        display: block;
+        min-width: 100%;
+        color: $global-text-quiet-less;
+        margin-bottom: $msg-margin;
+      }
+
+      .act {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .wallet-wrap {
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px;
+
+    .address {
+      @include shadow();
+
+      width: 200px;
+      padding: 5px 10px;
+      margin: 0 auto;
+      text-align: center;
+      background: $address-background;
+      border-radius: $address-border-radius;
+      font-size: $global-text-small;
+      margin-bottom: 20px;
+
+      &:hover {
+        cursor: default;
+      }
+    }
+
+    .funds {
+      margin: 20px 0;
+
+      .bnb img {
+        width: $icon-size;
+      }
+
+      .amount {
+        @include shadow();
+
+        position: relative;
+        top: 4px;
+        margin-left: 15px;
+        font-size: $funds-font-size;
+      }
+    }
+
+    .holdings {
+      margin: 30px 0 20px 0;
+    }
+
+    .own {
+      @include shadow();
+
+      margin-top: 30px;
+      text-align: center;
+      font-size: $global-text-small;
+      color: $global-text-quiet;
+    }
+  }
+
+  .ref-link {
+    text-align: center;
+    margin: $ref-link-margin;
+
+    a {
+      text-decoration: none !important;
+    }
+  }
+}

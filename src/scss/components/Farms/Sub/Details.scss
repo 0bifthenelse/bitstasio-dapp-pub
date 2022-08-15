@@ -1,0 +1,18 @@
+$side-margin: 0 0 20px 0;
+
+.details {
+  display: table;
+  min-width: 100%;
+
+  .side {
+    display: table;
+    width: 100%;
+    min-width: 100%;
+    margin: $side-margin;
+
+    //.part {}
+    .line {
+      position: relative;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+$whitelist-note-margin: 0 0 60px 0;
+$whitelist-note-title-font-size: 38px;
+$whitelist-note-countdown-margin: 40px 0 0 0;
+$whitelist-note-countdown-number-font-size: 42px;
+$whitelist-note-countdown-text-font-size: 14px;
+
+$margin: 30px;
+$mask-margin: 0 0 0 0;
+
+.farms {
+  position: relative;
+  margin-bottom: $margin;
+
+  @import "./Calculator/Calculator";
+
+  @import "./Sub/Deposit";
+  @import "./Sub/Details";
+  @import "./Sub/Loading";
+  @import "./Sub/Manage";
+  @import "./Sub/Receive";
+  @import "./Sub/Select";
+
+  .whitelist-note {
+    margin: $whitelist-note-margin;
+
+    .title {
+      text-align: center;
+      font-size: $whitelist-note-title-font-size;
+    }
+
+    .block-countdown {
+      margin: $whitelist-note-countdown-margin;
+
+      .countdown-number {
+        text-align: center;
+        font-size: $whitelist-note-countdown-number-font-size;
+      }
+      .countdown-text {
+        text-align: center;
+        color: $global-text-quiet-less;
+        font-size: $whitelist-note-countdown-text-font-size;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .wrong-network {
+    text-align: center;
+
+    margin: 60px 0;
+    font-size: 20px;
+  }
+
+  .mask {
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+  }
+}

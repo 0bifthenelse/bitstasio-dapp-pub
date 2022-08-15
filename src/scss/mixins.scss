@@ -10,6 +10,28 @@
   overflow: hidden;
 }
 
+@mixin box-farm() {
+  @include box();
+
+  .separator {
+    margin: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(129, 161, 204);
+  }
+
+  .title {
+    color: white;
+    margin: $main-title-margin;
+    font-size: $main-title-font-size;
+    font-weight: 400;
+  }
+
+  .amount {
+    margin: 10px 0;
+    font-size: $main-amount-font-size;
+  }
+}
+
 @mixin button-selector($background) {
   border: 0;
   padding: $button-padding;

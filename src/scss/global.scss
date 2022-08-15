@@ -37,6 +37,10 @@ main {
 	padding: $global-body-padding;
 }
 
+.farms {
+	@include box-farm();
+}
+
 .container {
 	max-width: $global-container-max-width;
 	padding: $global-container-padding;
@@ -234,28 +238,6 @@ a {
 	text-align: center;
 }
 
-.index {
-	@include box();
-
-	.separator {
-		margin: 30px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid rgb(129, 161, 204);
-	}
-
-	.title {
-		color: white;
-		margin: $main-title-margin;
-		font-size: $main-title-font-size;
-		font-weight: 400;
-	}
-
-	.amount {
-		margin: 10px 0;
-		font-size: $main-amount-font-size;
-	}
-}
-
 .form {
 	width: 100%;
 	height: $form-height;
@@ -276,23 +258,5 @@ a {
 	&:hover {
 		border: 0 !important;
 		background: $form-background-hover;
-	}
-}
-
-.socials {
-	margin: 0 auto;
-	margin-top: $socials-margin;
-	width: 300px;
-
-	.social {
-		display: inline-block;
-		margin: $social-margin;
-
-		img {
-			min-width: $social-logo-size;
-			min-height: $social-logo-size;
-			max-width: $social-logo-size;
-			max-height: $social-logo-size;
-		}
 	}
 }

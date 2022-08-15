@@ -1,0 +1,44 @@
+$title-font-size: 28px;
+
+$link-width: 300px;
+$link-padding: 20px 15px;
+$link-font-size: 18px;
+$link-background: rgba(150, 150, 150, 0.2);
+$link-border-radius: 16px;
+
+$notes-margin: 20px 0;
+$note-margin: 10px 0;
+$padding: 20px;
+
+.referral {
+  padding: $padding;
+
+  .title {
+    text-align: center;
+    font-size: $title-font-size;
+  }
+
+  .link {
+    width: $link-width;
+    padding: $link-padding;
+    font-size: $link-font-size;
+    text-align: center;
+    background: $link-background;
+    margin: 0 auto;
+    text-decoration: none !important;
+    border-radius: $link-border-radius;
+  }
+
+  a {
+    color: white;
+    text-decoration: none !important;
+  }
+
+  .notes {
+    margin: $notes-margin;
+
+    li.note {
+      margin: $note-margin;
+    }
+  }
+}

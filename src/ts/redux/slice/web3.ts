@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import Web3 from 'web3';
 import {
   RPC
-} from '../../constants'
+} from 'constant'
 
 export const slice_web3 = createSlice({
   name: 'slice_web3',

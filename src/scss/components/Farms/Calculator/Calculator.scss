@@ -1,0 +1,16 @@
+$padding: 20px;
+$note-margin: 10px 0;
+
+.calculator {
+  padding: $padding;
+
+  @import "./Sub/APR";
+  @import "./Sub/Days";
+  @import "./Sub/Investment";
+  @import "./Sub/Result";
+
+  .note {
+    color: $global-text-quiet-less;
+    margin: $note-margin;
+  }
+}

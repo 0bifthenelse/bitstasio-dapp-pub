@@ -1,0 +1,168 @@
+$wrapper-padding: 15px 5px 0 5px;
+$margin: 10px;
+$width: 275px;
+$wrap-width: 260px;
+$icon-size: 25px;
+$icon-padding: 0 10px;
+$icon-text-shadow: 0px 11px 10px rgba(0, 0, 0, 0.8);
+$wrap-padding: 0 10px;
+$wrap-title-font-size: 16px;
+$wrap-description-padding: 5px;
+$wrap-description-font-size: 14px;
+$note-font-size: 10px;
+$note-margin: 10px;
+$left-width: 620px;
+$right-width: 250px;
+
+$right-title-padding: 10px 20px;
+$right-links-small-lin-padding: 5px 10px;
+$right-link-padding: 5px 5px;
+$right-link-margin: 5px 0;
+$right-side-background: #21222c;
+$right-links-small-padding: 20px 30px 20px 20px;
+
+.products {
+  display: table;
+  height: 100%;
+  min-height: 100%;
+
+  .left {
+    display: table-cell;
+    min-height: 100%;
+    height: 100%;
+    padding: $wrapper-padding;
+    min-width: $left-width;
+    width: $left-width;
+  }
+
+  .right {
+    display: table-cell;
+    background: $right-side-background;
+    vertical-align: top;
+    min-height: 100%;
+    height: 100%;
+    min-width: $right-width;
+    width: $right-width;
+
+    a:hover {
+      color: $global-link-hover-color;
+    }
+
+    .title {
+      @include shadow();
+      text-transform: uppercase;
+      color: $global-text-quiet-less;
+
+      padding: $right-title-padding;
+    }
+
+    .link {
+      @include shadow();
+
+      display: block;
+      text-transform: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0);
+      transition: border-color 0.15s;
+      width: 100%;
+      font-size: $global-text-small;
+      padding: $right-link-padding;
+      margin: $right-link-margin;
+
+      &:hover {
+        cursor: pointer;
+        border-color: $global-link-hover-color;
+      }
+    }
+
+    .links-small {
+      width: 100%;
+      padding: $right-links-small-padding;
+
+      .lin {
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+        transition: all 0.15s;
+        padding: $right-links-small-lin-padding;
+
+        &:hover {
+          border-color: $global-link-hover-color;
+        }
+      }
+      a {
+        @include shadow();
+        font-size: $global-text-small;
+        color: $global-text-quiet !important;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+    }
+  }
+
+  .product {
+    display: inline-block;
+    width: $width;
+    margin: $margin;
+
+    &:hover .description {
+      @include menu-text-hover();
+    }
+    &:hover .product-wrap {
+      @include menu-text-hover();
+    }
+
+    .product-wrap {
+      display: flex;
+      @include menu-text-transition();
+
+      .icon {
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        height: $icon-size;
+
+        .bi {
+          @include shadow();
+
+          text-align: center;
+          position: relative;
+          top: 5px;
+          font-size: $icon-size;
+          padding: $icon-padding;
+        }
+      }
+
+      .content-wrap {
+        display: inline-block;
+        min-width: $wrap-width;
+        padding: $wrap-padding;
+
+        .title {
+          @include shadow();
+          font-size: $wrap-title-font-size;
+
+          .note {
+            position: relative;
+            bottom: 2px;
+            margin-left: $note-margin;
+            font-size: $note-font-size;
+            color: $global-text-quiet;
+          }
+        }
+
+        .description {
+          @include menu-text-transition();
+          @include shadow();
+
+          padding-top: $wrap-description-padding;
+          font-size: $wrap-description-font-size;
+          color: $global-text-quiet-less;
+        }
+      }
+    }
+  }
+}

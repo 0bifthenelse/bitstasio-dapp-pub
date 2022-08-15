@@ -1,0 +1,100 @@
+$margin: 30px 0 50px 0;
+$selector-min-width: 250px;
+$selector-max-width: 420px;
+$selector-name-font-size: 22px;
+$wrap-padding: 15px 15px 20px 15px;
+$item-padding: 10px 10px;
+$list-padding: 10px 0;
+
+.select {
+  margin: $margin;
+
+  .wrap {
+    height: 100px;
+    margin: 0 auto;
+    min-width: $selector-min-width;
+    max-width: $selector-max-width;
+    z-index: 9999;
+
+    .selector {
+      position: relative;
+      z-index: 9999;
+      margin: 0 auto;
+      width: 100%;
+      overflow: hidden;
+
+      .currency-list {
+        z-index: 9999;
+        transform-origin: top;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        max-height: 200px;
+        transition: all 0.15s;
+        background: $button-background;
+        overflow-y: auto;
+
+        .item {
+          z-index: 999;
+          position: relative;
+          display: block;
+          transition: all 0.2s;
+          padding: $item-padding;
+          width: 100%;
+          background: $button-background;
+
+          &:hover {
+            background: $button-hover-background;
+          }
+
+          .currency-name {
+            position: relative;
+            left: 10px;
+            top: 2px;
+          }
+
+          .currency-detail {
+            color: $global-text-quiet-less;
+            position: absolute;
+            right: 10px;
+            top: 14px;
+          }
+        }
+      }
+
+      .move {
+        position: absolute;
+        right: 10px;
+        top: 20px;
+      }
+
+      .btn-currency {
+        @include button-selector("red");
+
+        background: none;
+        color: white;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+        z-index: 9999;
+
+        .selector-wrap {
+          padding: $wrap-padding;
+          background: $button-background;
+          transition: $global-transition;
+          z-index: 9999;
+
+          &:hover {
+            background: $button-hover-background;
+          }
+        }
+
+        .name {
+          position: relative;
+          top: 4px;
+          left: 10px;
+          font-size: $selector-name-font-size;
+        }
+      }
+    }
+  }
+}

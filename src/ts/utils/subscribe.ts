@@ -3,7 +3,7 @@ import {
   coin_abi,
   token_abi,
   net
-} from '../constants';
+} from 'constant';
 
 import connection from "./rpc";
 
@@ -11,12 +11,12 @@ import {
   update_wallet,
   update_network,
   update_block
-} from '../redux/slice/web3';
+} from 'slice/web3';
 
 import {
   currencies,
   selected_currency
-} from '../utils/data';
+} from 'utils/data';
 
 import {
   reset,
@@ -33,11 +33,11 @@ import {
   set_time_since_withdraw,
   set_contract_balance,
   set_referral
-} from '../redux/slice/currency';
+} from 'slice/currency';
 
 import {
   update_left
-} from '../redux/slice/activity';
+} from 'slice/activity';
 
 
 import {
@@ -46,13 +46,13 @@ import {
   set_bitsReceived,
   set_tokensReceived,
   set_level
-} from '../redux/slice/referral';
+} from 'slice/referral';
 
 import {
   new_block
 } from './event';
 
-import store from '../redux/store';
+import store from 'store';
 import { AbiItem } from 'web3-utils';
 
 export default async function subscribe(): Promise<void> {

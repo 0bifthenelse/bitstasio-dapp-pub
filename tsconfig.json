@@ -31,7 +31,13 @@
 		"esModuleInterop": true,
 		"sourceRoot": "./src/ts",
 		"mapRoot": "./dist",
-		"baseUrl": "./dist"
+		"baseUrl": "src/ts",
+		"paths": {
+			"utils/*": ["utils/*"],
+			"slice/*": ["redux/slice/*"],
+			"store": ["redux/store"],
+			"constant": ["constant"],
+		}
 	},
 	"exclude": [
 		"dist",

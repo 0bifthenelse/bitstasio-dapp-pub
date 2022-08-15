@@ -8,15 +8,28 @@
     {
       "name": "Yield farms",
       "url": "/farms",
-      "icon": "bi-sign-yield",
+      "icon": "bi-sign-yield-fill",
       "active": true,
       "description": "Earn passive income with a selection of assets & high APR."
+    },
+    {
+      "name": "Gambling",
+      "url": "/gambling",
+      "icon": "bi-suit-diamond-fill",
+      "active": false,
+      "description": "Access a selection of gambling products to try and get more profits."
     }
   ],
   "tools": [
     {
       "name": "Whitepaper",
       "url": "https://gateway.pinata.cloud/ipfs/Qmdz5qqJpoL2UpMaPZkvivaUzqiL7FqoKrLQJFgjmhkZrs",
+      "external": true,
+      "active": true
+    },
+    {
+      "name": "PancakeSwap",
+      "url": "https://pancakeswap.finance/swap",
       "external": true,
       "active": true
     },

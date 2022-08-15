@@ -1,0 +1,28 @@
+$button-compound-background: #14608b;
+$button-compound-background-hover: #1289ad;
+$button-claim-background: #8a1711;
+$button-claim-background-hover: #b31d15;
+
+.manage {
+  //.position {}
+  //.unclaimed {}
+  .interact {
+    .button-compound {
+      background: $button-compound-background !important;
+      transition: $global-transition;
+
+      &:hover {
+        background-color: $button-compound-background-hover !important;
+      }
+    }
+
+    .button-claim {
+      background: $button-claim-background !important;
+      transition: $global-transition;
+
+      &:hover {
+        background: $button-claim-background-hover !important;
+      }
+    }
+  }
+}

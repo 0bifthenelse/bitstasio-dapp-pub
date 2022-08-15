@@ -1,10 +1,10 @@
-import { net } from '../constants';
-import store from '../redux/store';
+import { net } from 'constant';
+import store from 'store';
 
 import {
   RPC,
   RPC_TESTNET
-} from '../constants';
+} from 'constant';
 
 export default (action: Function, mainnet: boolean) => {
   const state = store.getState();

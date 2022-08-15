@@ -1,14 +1,14 @@
-import store from "../redux/store";
+import store from "store";
 import {
   update_block
-} from '../redux/slice/web3';
+} from 'slice/web3';
 import {
   toggle_opened,
   set_selected
-} from '../redux/slice/currency';
+} from 'slice/currency';
 import {
   set_farm
-} from '../redux/slice/loading';
+} from 'slice/loading';
 
 export function new_block(block: number): boolean {
   const last_block = store.getState().web3.block;

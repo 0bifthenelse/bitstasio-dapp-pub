@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   menu_dimensions
-} from '../../constants';
-import store from '../store';
+} from 'constant';
+import store from 'store';
 
 export const slice_menu = createSlice({
   name: 'slice_menu',

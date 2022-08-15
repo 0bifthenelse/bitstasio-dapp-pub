@@ -77,6 +77,12 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
+		alias: {
+			utils: path.resolve(__dirname, 'src/ts/utils'),
+			slice: path.resolve(__dirname, 'src/ts/redux/slice'),
+			store: path.resolve(__dirname, 'src/ts/redux/store'),
+			constant: path.resolve(__dirname, 'src/ts/constant'),
+		}
 	},
 	node: {
 		fs: 'empty',

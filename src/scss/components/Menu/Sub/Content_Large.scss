@@ -1,0 +1,38 @@
+$background: #1f2029;
+
+$box-shadow: rgb(10, 14, 19) 0px 20px 30px -10px;
+$box-arrow-size: 20px;
+$box-arrow-border-radius: 5px;
+
+.content-large {
+  position: relative;
+  transition: transform 0.2s;
+  z-index: 99992;
+
+  .wrap {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform-origin: 0 0;
+    transition: all 0.2s;
+    transform: translateX(-50%);
+    z-index: 999;
+    background: $background;
+    box-shadow: $box-shadow;
+    border-radius: 16px;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    background: $background;
+    transform: rotate(45deg);
+    transition: all 0.2s;
+    width: $box-arrow-size;
+    height: $box-arrow-size;
+    border-radius: $box-arrow-border-radius;
+  }
+}

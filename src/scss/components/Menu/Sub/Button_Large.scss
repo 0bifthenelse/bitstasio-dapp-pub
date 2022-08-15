@@ -1,0 +1,11 @@
+$padding: 10px 30px;
+
+.button-large {
+  display: inline;
+  text-transform: uppercase;
+  padding: $padding;
+
+  &:hover {
+    cursor: default;
+  }
+}
