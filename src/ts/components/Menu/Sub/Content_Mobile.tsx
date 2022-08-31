@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -7,7 +7,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import menu_data from 'utils/menu/menu.json';
-import { get_url } from 'utils/referral';
 
 import Wallet from './Wallet';
 
@@ -21,7 +20,7 @@ function Product(props: ProductProps) {
 
   return (
     <Link
-      to={get_url(props.data.url)}
+      to={props.data.url}
       className={props.data.active ? "" : "disabled"}
       onClick={() => dispatch(close)}>
       <ListItem key={0} disablePadding>
@@ -65,7 +64,6 @@ function Products(props: { close: Function; }) {
 
 function Tool(props: ToolProps) {
   const dispatch = useDispatch();
-  const ref = useSelector((state: any) => state.currency.referral);
   const close = props.data.close ? props.data.close() : null;
 
   if (props.data.external) return (
@@ -85,7 +83,7 @@ function Tool(props: ToolProps) {
 
   else return (
     <Link
-      to={get_url(props.data.url)}
+      to={props.data.url}
       className={props.data.active ? "" : "disabled"}
       onClick={() => dispatch(close)}>
       <ListItem key={0} disablePadding>

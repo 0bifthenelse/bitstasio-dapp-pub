@@ -1,0 +1,81 @@
+$button-deposit-background: #098062;
+$button-deposit-background-hover: #0db195;
+$button-victory-background: #e4620b;
+$button-victory-background-hover: #ff8b1e;
+$button-collect-background: #a30000;
+$button-collect-background-hover: #e60404;
+$button-margin: 10px;
+
+$details-margin: 10px 0;
+
+.deposit {
+  position: relative;
+  display: table;
+  color: white;
+  width: $width;
+  background: $global-box-background;
+  padding: 20px 10px;
+  border: 0;
+  border-radius: $global-box-border-radius;
+  margin: $global-box-margin;
+  box-shadow: $global-box-shadow;
+  overflow: hidden;
+
+  .error {
+    position: absolute;
+    top: 105px;
+    left: 10px;
+    font-size: 14px;
+    color: rgb(201, 0, 0);
+    font-weight: bold;
+  }
+
+  .details {
+    display: table;
+    margin: $details-margin;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .button-deposit {
+    display: block;
+    background: $button-deposit-background !important;
+    transition: $global-transition;
+    color: white !important;
+    width: 100%;
+    margin-top: $button-margin;
+
+    &:hover {
+      color: white !important;
+      background: $button-deposit-background-hover !important;
+    }
+  }
+
+  .button-victory {
+    display: block;
+    background: $button-victory-background !important;
+    transition: $global-transition;
+    color: white !important;
+    width: 100%;
+    margin-top: $button-margin;
+
+    &:hover {
+      color: white !important;
+      background: $button-victory-background-hover !important;
+    }
+  }
+
+  .button-collect {
+    display: block;
+    background: $button-collect-background !important;
+    transition: $global-transition;
+    color: white !important;
+    width: 100%;
+    margin-top: $button-margin;
+
+    &:hover {
+      color: white !important;
+      background: $button-collect-background-hover !important;
+    }
+  }
+}

@@ -40,18 +40,19 @@ declare global {
     };
   }
 
-  interface Currency {
+  interface Farm {
     id: number;
     name: string;
-    amount: number;
-    mainnet: boolean;
+    chain_id: number;
     investment: string;
+    fees: number;
     tvl: number;
     apr: number;
     shares: number;
     daily: string;
     coin: boolean;
     allowance: string;
+    bits_per_share: number;
     shares_value: string;
     shares_to_receive: number;
     token_contract: string;
@@ -64,9 +65,11 @@ declare global {
     launch_block: number;
   }
 
-  interface CurrencyJSON {
+  interface FarmJSON {
     id: number;
+    active: boolean;
     name: string;
+    chain_id: number;
     mainnet: boolean;
     apr: string;
     daily: string;
@@ -76,6 +79,22 @@ declare global {
     whitelist: boolean;
     launch_block: number;
   }
+
+  interface Balance {
+    name: string;
+    coin: boolean;
+    chain_id: number;
+    amount: number;
+    address?: string;
+  }
+
+interface BalanceJSON {
+    name: string;
+    chain_id: number;
+    coin: boolean;
+    address?: string;
+  }
+
 
   interface Activity {
     active: boolean;
@@ -125,5 +144,18 @@ declare global {
     token_address: string;
     nature: string;
     abi: any;
+  }
+
+  interface Jackpot {
+    active: boolean;
+    round: number;
+    last_deposit: string;
+    remaining_blocks: number;
+  }
+
+  interface JackpotHistory {
+    wallet: string;
+    block_number: string;
+    prize: number;
   }
 }

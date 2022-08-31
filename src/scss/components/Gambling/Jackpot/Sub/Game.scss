@@ -1,0 +1,45 @@
+.game {
+  color: white;
+  width: $width;
+  background: $global-box-background;
+  border: 0;
+  border-radius: $global-box-border-radius;
+  margin: $global-box-margin;
+  box-shadow: $global-box-shadow;
+  overflow: hidden;
+
+  .wrap {
+    padding: 15px;
+  }
+
+  .header {
+    height: 42px;
+
+    .state {
+      float: left;
+    }
+
+    .round {
+      float: right;
+    }
+  }
+
+  .potential-winner {
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .winner {
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+
+  .details {
+    display: table;
+    margin-top: 40px;
+    width: 100%;
+  }
+}

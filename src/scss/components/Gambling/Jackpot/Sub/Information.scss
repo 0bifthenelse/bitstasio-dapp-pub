@@ -1,0 +1,15 @@
+
+
+.information {
+  position: relative;
+  display: table;
+  color: white;
+  width: $width;
+  background: $global-box-background;
+  padding: 15px;
+  border: 0;
+  border-radius: $global-box-border-radius;
+  margin: $global-box-margin;
+  box-shadow: $global-box-shadow;
+  overflow: hidden;
+}

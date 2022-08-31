@@ -15,17 +15,13 @@ import {
   set_claim
 } from 'slice/loading';
 
-import {
-  get_referrer
-} from 'utils/referral';
-
 export default function Manage() {
   const selected = useSelector((state: any) => state.currency.selected);
-  const map = useSelector((state: any) => state.currency.map);
+  const map = useSelector((state: any) => state.currency.farms);
   const exists: boolean = map.has(selected);
 
   if (exists) {
-    const currency: Currency = map.get(selected);
+    const currency: Farm = map.get(selected);
 
     return (
       <div className="manage">
@@ -41,7 +37,7 @@ export default function Manage() {
   );
 }
 
-function Position(props: { currency: Currency; }) {
+function Position(props: { currency: Farm; }) {
   const currency = props.currency;
   const name = currency.name;
   const share_value = currency.shares_value;
@@ -58,14 +54,15 @@ function Position(props: { currency: Currency; }) {
   );
 }
 
-function Unclaimed(props: { currency: Currency; }) {
+function Unclaimed(props: { currency: Farm; }) {
   const currency = props.currency;
   const name = currency.name == "BTC" ? "Sats" : currency.name;
-  const unclaimed = name == "BTC" ? currency.withdrawable * 1e8 : currency.withdrawable.toFixed(6);
+  const unclaimed = currency.name == "BTC" ? numberSeparator(Math.round(currency.withdrawable * 1e8), ",") : currency.withdrawable.toFixed(3);
+  const text = currency.name == "BTC" ? "1 BTC = 100 000 000 Sats. This is the number of Sats you would reinvest by compounding, or immediately receive by claiming." : `This is the number of ${currency.name} you would reinvest by compounding, or immediately receive by claiming.`;
 
   return (
     <div className="unclaimed">
-      <div className="title">Your unclaimed {name} <InfoBubble text="Funds you would reinvest by compounding, or immediately receive by claiming." /></div>
+      <div className="title">Your unclaimed {name} <InfoBubble text={text} /></div>
       <div className="bigamount">
         {unclaimed}
       </div>
@@ -73,7 +70,7 @@ function Unclaimed(props: { currency: Currency; }) {
   );
 }
 
-async function claim(currency: Currency) {
+async function claim(currency: Farm) {
   store.dispatch(set_claim(true));
 
   await new Promise(async (resolve: Function) => {
@@ -94,21 +91,21 @@ async function claim(currency: Currency) {
   store.dispatch(set_claim(false));
 }
 
-async function claim_coin(currency: Currency) {
+async function claim_coin(currency: Farm) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], currency.contract);
 
   await contract.methods.sellEggs().send({ from: state.web3.wallet });
 }
 
-async function claim_token(currency: Currency) {
+async function claim_token(currency: Farm) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(token_abi as AbiItem[], currency.contract);
 
   await contract.methods.sellBits().send({ from: state.web3.wallet });
 }
 
-async function compound(currency: Currency) {
+async function compound(currency: Farm) {
   store.dispatch(set_compound(true));
 
   await new Promise(async (resolve: Function) => {
@@ -128,32 +125,33 @@ async function compound(currency: Currency) {
   store.dispatch(set_compound(false));
 }
 
-async function compound_coin(currency: Currency) {
+async function compound_coin(currency: Farm) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(coin_abi as AbiItem[], currency.contract);
-  const ref = get_referrer(true);
+  const ref = "0x000000000000000000000000000000000000dEaD";
 
   await contract.methods.hatchEggs(ref).send({ from: state.web3.wallet });
 }
 
-async function compound_token(currency: Currency) {
+async function compound_token(currency: Farm) {
   const state = store.getState();
   const contract = new state.web3.provider.eth.Contract(token_abi as AbiItem[], currency.contract);
-  const ref = get_referrer(false);
+  const ref = "0x000000000000000000000000000000000000dEaD";
 
   await contract.methods.compoundBits(ref).send({ from: state.web3.wallet });
 }
 
-function Interact(props: { currency: Currency; }) {
+function Interact(props: { currency: Farm; }) {
   const compounding = useSelector((state: any) => state.loading.compound);
   const claiming = useSelector((state: any) => state.loading.claim);
   const currency = props.currency;
-  const name = currency.name;
+  const name = currency.name == "BTC" ? "Sats" : currency.name;
   const withdrawable = currency.withdrawable;
-  const active = withdrawable > 0;
+  const active = withdrawable > 0 && currency.shares > 0;
 
   return (
     <div className="interact">
+      <div className="separator" />
       <Button
         addedClass="button-compound"
         text={`Compound ${name}`}
@@ -162,6 +160,7 @@ function Interact(props: { currency: Currency; }) {
         loading={compounding}
         onClick={() => compound(currency)}
       />
+      <div className="separator" />
       <Button
         addedClass="button-claim"
         text={`Claim ${name}`}
@@ -170,6 +169,7 @@ function Interact(props: { currency: Currency; }) {
         loading={claiming}
         onClick={() => claim(currency)}
       />
+      <div className="separator" />
     </div>
   );
 }

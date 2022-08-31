@@ -1,6 +1,8 @@
 $button-deposit-background: #0f6e2f;
 $button-deposit-background-hover: #139e41;
 
+$links-margin: 15px 0;
+
 .receive {
   .details {
     display: table;
@@ -8,6 +10,15 @@ $button-deposit-background-hover: #139e41;
 
     .waiting {
       text-align: center;
+    }
+  }
+
+  .links {
+    text-align: center;
+    margin: $links-margin;
+
+    a {
+      color: white !important;
     }
   }
 

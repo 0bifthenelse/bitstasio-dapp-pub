@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Web3 from 'web3';
-import {
-  RPC
-} from 'constant'
 
 export const slice_web3 = createSlice({
   name: 'slice_web3',
   initialState: {
-    provider: new Web3(Web3.givenProvider || RPC),
+    provider: new Web3(Web3.givenProvider),
     wallet: '',
     network: null,
     funds: 0,

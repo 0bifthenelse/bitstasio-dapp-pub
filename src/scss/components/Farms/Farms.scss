@@ -4,10 +4,15 @@ $whitelist-note-countdown-margin: 40px 0 0 0;
 $whitelist-note-countdown-number-font-size: 42px;
 $whitelist-note-countdown-text-font-size: 14px;
 
+$button-buy-background: #0f7a7e;
+$button-buy-background-hover: #12b4ac;
+
 $margin: 30px;
 $mask-margin: 0 0 0 0;
 
 .farms {
+  @include box-farm();
+
   position: relative;
   margin-bottom: $margin;
 
@@ -57,5 +62,18 @@ $mask-margin: 0 0 0 0;
   .mask {
     filter: blur(15px);
     -webkit-filter: blur(15px);
+  }
+}
+
+.button-buy {
+  display: block;
+  background: $button-buy-background !important;
+  transition: $global-transition;
+  color: white !important;
+  width: 100%;
+
+  &:hover {
+    color: white !important;
+    background: $button-buy-background-hover !important;
   }
 }

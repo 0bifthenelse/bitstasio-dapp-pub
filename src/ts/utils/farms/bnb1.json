@@ -1,0 +1,13 @@
+{
+  "name": "BNB",
+  "chain_id": 56,
+  "active": true,
+  "apr": "1095",
+  "daily": "3",
+  "coin": true,
+  "mainnet": true,
+  "contract": "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c",
+  "token_contract": "",
+  "whitelist": false,
+  "launch_block": 0
+}

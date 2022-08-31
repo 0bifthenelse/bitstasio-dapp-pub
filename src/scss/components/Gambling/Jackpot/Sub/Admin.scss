@@ -1,0 +1,31 @@
+$button-start-background: #0dc506;
+$button-start-background-hover: #009614;
+$button-margin: 30px;
+
+.admin {
+  position: relative;
+  display: table;
+  color: white;
+  width: $width;
+  background: $global-box-background;
+  padding: 20px 10px;
+  border: 0;
+  border-radius: $global-box-border-radius;
+  margin: $global-box-margin;
+  box-shadow: $global-box-shadow;
+  overflow: hidden;
+
+  .button-start {
+    display: block;
+    background: $button-start-background !important;
+    transition: $global-transition;
+    color: white !important;
+    width: 100%;
+    margin-top: $button-margin;
+
+    &:hover {
+      color: white !important;
+      background: $button-start-background-hover !important;
+    }
+  }
+}

@@ -7,13 +7,12 @@ import store from 'store';
 import {
   reset_box_active
 } from 'slice/menu';
-import { get_url } from 'utils/referral';
 
 function Product(props: ProductProps) {
   const dispatch = useDispatch();
 
   return (
-    <Link to={props.data.active ? get_url(props.data.url) : "/"} className={props.data.active ? "" : "disabled"} onClick={() => props.data.active ? dispatch(reset_box_active()) : null}>
+    <Link to="/" className={props.data.active ? "" : "disabled"} onClick={() => props.data.active ? dispatch(reset_box_active()) : null}>
       <div className="product">
         <div className="product-wrap">
           <div className="icon"><i className={`bi ${props.data.icon}`}></i></div>
@@ -32,7 +31,7 @@ function Tool(props: ToolProps) {
     <a href={props.data.url} target="_blank" onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></a>
   );
   else return (
-    <Link className="link-tool" to={get_url(props.data.url)} onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></Link>
+    <Link className="link-tool" to={props.data.url} onClick={() => store.dispatch(reset_box_active())}><div className="link"><ArrowRightIcon /> {props.data.name}</div></Link>
   );
 }
 

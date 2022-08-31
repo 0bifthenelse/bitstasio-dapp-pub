@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
@@ -11,12 +10,10 @@ import {
 } from 'slice/menu';
 import store from 'store';
 import {
-  net
-} from 'constant';
-import {
-  currency_find
+  get_token_balance,
+  get_coin_balance,
+  balances
 } from 'utils/data';
-import { get_url } from 'utils/referral';
 
 function No_Wallet() {
   async function connect(): Promise<void> {
@@ -69,7 +66,7 @@ function Wrong_Network() {
     if (web3) {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: Web3.utils.toHex(net.mainnet) }],
+        params: [{ chainId: Web3.utils.toHex(56) }],
       });
     }
   }
@@ -86,58 +83,39 @@ function Wrong_Network() {
   );
 }
 
-function Funds(props: { close?: Function; }) {
-  function get_bnb(): { balance: string, name: string; } {
-    const index = currency_find(true).id;
-    const data = useSelector((state: any) => state.currency.map.get(index));
-    const balance = data ? parseFloat(data.amount).toFixed(4) : "0";
-    const name = data ? data.name : "pending..";
+function Funds() {
+  function balance_list(map: HashMap<string, Balance>): Array<JSX.Element> {
+    const list: Array<JSX.Element> = [];
+    const chain_id = useSelector((state: any) => state.web3.network);
 
-    return {
-      balance: balance,
-      name: name
-    };
+    balances((balance: BalanceJSON) => {
+      if (balance.chain_id == chain_id && map) {
+        const name = balance.name;
+        const address = balance.address ?? "";
+        const amount = balance.coin ? get_coin_balance(map, chain_id) : get_token_balance(map, chain_id, address);
+
+        list.push(
+          <div key={name} className="funds">
+            <span className="bnb"><img src={`/img/currencies/${name.toLowerCase()}.png`} alt={name} /></span>
+            <span className="amount">{amount.toFixed(4)} {name}</span>
+          </div>
+        );
+      }
+    });
+
+    return list;
   }
 
-  function get_busd(): { balance: string, name: string; } {
-    const index = currency_find(false, "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56").id;
-    const data = useSelector((state: any) => state.currency.map.get(index));
-    const balance = data ? parseFloat(data.amount).toFixed(2) : "0";
-    const name = data ? data.name : "pending..";
-
-    return {
-      balance: balance,
-      name: name
-    };
-  }
-
-  const dispatch = useDispatch();
   const wallet = useSelector((state: any) => state.web3.wallet);
-  const ref = useSelector((state: any) => state.currency.referral);
   const wallet_shown = 6;
   const wallet_read = wallet.substring(0, wallet_shown) + '...' + wallet.substring(wallet.length - wallet_shown, wallet.length);
-  const close_mobile = props.close ? props.close() : null;
-  const bnb = get_bnb();
-  const busd = get_busd();
+  const map = useSelector((state: any) => state.currency.balance);
 
   return (
     <div className="wallet-wrap">
       <div className="address">{wallet_read}</div>
-      <div className="funds">
-        <span className="bnb"><img src={`/img/currencies/${bnb.name.toLowerCase()}.png`} alt="BNB" /></span>
-        <span className="amount">{bnb.balance} {bnb.name}</span>
-      </div>
-      <div className="funds">
-        <span className="bnb"><img src={`/img/currencies/${busd.name.toLowerCase()}.png`} alt="BUSD" /></span>
-        <span className="amount">{busd.balance} {busd.name}</span>
-      </div>
 
-      <div className="ref-link">
-        <Link to={get_url("/referral")}><Button variant="outlined" onClick={() => {
-          dispatch(reset_box_active());
-          props.close ? dispatch(close_mobile) : null;
-        }}>My referral link</Button></Link>
-      </div>
+      {balance_list(map)}
     </div>
   );
 }
@@ -158,7 +136,7 @@ export default function Wallet(props: { mobile?: boolean; close?: Function; }) {
       <div className="wallet">
         {!wallet && <No_Wallet />}
         {wallet && !network && <Wrong_Network />}
-        {wallet && network && <Funds close={props.close} />}
+        {wallet && network && <Funds />}
       </div>
     </div>
   );

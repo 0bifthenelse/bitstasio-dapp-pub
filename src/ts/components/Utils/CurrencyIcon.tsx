@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CurrencyIcon(props: { name: string; style?: {}; }) {
+export default function FarmIcon(props: { name: string; style?: {}; }) {
   return (
     <span
       className="currency-icon"

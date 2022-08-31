@@ -1,9 +1,12 @@
 {
 	"dependencies": {
+		"autoprefixer": "^10.4.8",
 		"ethereum-input-data-decoder": "^0.4.2",
+		"postcss": "^8.4.16",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"react-router-dom": "^5.1.2"
+		"react-router-dom": "^5.1.2",
+		"tailwindcss": "^3.1.8"
 	},
 	"description": "bitstasio dapp",
 	"devDependencies": {

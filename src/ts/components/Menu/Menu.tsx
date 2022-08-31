@@ -31,7 +31,7 @@ function MenuMobile() {
 	});
 
 	const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-		if (
+			if (
 			event.type === 'keydown' &&
 			((event as React.KeyboardEvent).key === 'Tab' ||
 				(event as React.KeyboardEvent).key === 'Shift')
