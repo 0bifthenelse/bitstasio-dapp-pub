@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import numberSeparator from "number-separator";
+import React from 'react';
 import CurrencyIcon from '../../../Utils/CurrencyIcon';
 import InfoBubble from '../../../Utils/InfoBubble';
 import IconBubble from '../../../Utils/IconBubble';

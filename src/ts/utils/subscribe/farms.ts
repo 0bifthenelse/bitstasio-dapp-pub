@@ -1,14 +1,7 @@
-import * as constants from 'constant';
 import * as data from 'utils/data';
-import fetch_abi from 'human-standard-token-abi';
-import { matchPath } from 'react-router';
-
-import connection from "../rpc";
-import store from 'store';
-import Farm from 'utils/arbitrator/farms';
-import { AbiItem } from 'web3-utils';
-
 import * as factory from 'slice/factory';
+import store from 'store';
+import FarmArbitrator from 'utils/arbitrator/farm';
 
 export default async function init(): Promise<void> {
   await Promise.all([
@@ -94,12 +87,14 @@ async function init_farms_token(farm: FarmJSON): Promise<void> {
 }
 
 async function external(): Promise<void> {
-  data.farms(async (farm: FarmJSON) => await external_data(farm));
+  data.farms(async (farm: FarmJSON) => {
+    if (farm) return external_data(farm);
+  });
 }
 
 async function external_data(farm: FarmJSON): Promise<void> {
-  const balance = await Farm.get_contract_balance(farm.contract, farm.chain_id);
-  const initialized = await Farm.get_initialized(farm.contract, farm.chain_id);
+  const balance = await FarmArbitrator.get_contract_balance(farm.contract, farm.chain_id);
+  const initialized = await FarmArbitrator.get_initialized(farm.contract, farm.chain_id);
 
   store.dispatch(factory.set_contract_balance({ contract: farm.contract, contract_balance: balance }));
   store.dispatch(factory.set_initialized({ contract: farm.contract, initialized: initialized }));
@@ -112,20 +107,22 @@ async function internal(): Promise<void> {
   if (active && wallet) {
     const farm = (store.getState() as any).currency.farms.get(address);
 
-    return internal_data(farm);
+    if (farm) return internal_data(farm);
   }
 }
 
 async function internal_data(farm: FarmJSON): Promise<void> {
   const state = store.getState();
   const wallet = state.web3.wallet;
-  const admin = await Farm.get_admin(farm.contract);
-  const bit_value = await Farm.get_bit_value(farm.contract);
-  const bits = await Farm.get_bits(farm.contract);
-  const bits_per_share = await Farm.get_bits_per_share(farm.contract);
-  const shares = await Farm.get_shares(farm.contract);
-  const timestamp_withdraw = await Farm.get_timestamp_last_withdraw(farm.contract);
-  const [fee_deposit, fee_withdraw] = await Farm.get_fees(farm.contract);
+
+  const admin = await FarmArbitrator.get_admin(farm.contract);
+  const bit_value = await FarmArbitrator.get_bit_value(farm.contract);
+  const bits = await FarmArbitrator.get_bits(farm.contract);
+  const bits_per_share = await FarmArbitrator.get_bits_per_share(farm.contract);
+  const allowance = await FarmArbitrator.get_allowance(farm.coin, farm.contract, farm.token_contract);
+  const shares = await FarmArbitrator.get_shares(farm.contract);
+  const timestamp_withdraw = await FarmArbitrator.get_timestamp_last_withdraw(farm.contract);
+  const [fee_deposit, fee_withdraw] = await FarmArbitrator.get_fees(farm.contract);
 
   store.dispatch(factory.set_admin({ contract: farm.contract, admin: admin }));
   store.dispatch(factory.set_fees({ contract: farm.contract, fees: { deposit: fee_deposit, withdraw: fee_withdraw } }));
@@ -135,11 +132,12 @@ async function internal_data(farm: FarmJSON): Promise<void> {
   store.dispatch(factory.set_shares_value({ contract: farm.contract, value: bit_value }));
 
   if (wallet) {
-    const tvl = await Farm.get_tvl(shares, bit_value);
-    const bits_withdraw_value = await Farm.get_bits_withdraw_value(farm.contract, bits);
+    const tvl = await FarmArbitrator.get_tvl(shares, bit_value);
+    const bits_withdraw_value = await FarmArbitrator.get_bits_withdraw_value(farm.contract, bits);
     const withdrawable = shares > 0 ? bits_withdraw_value * (1 - (fee_withdraw / 100)) : 0;
 
     store.dispatch(factory.set_tvl({ contract: farm.contract, tvl: tvl }));
     store.dispatch(factory.set_withdrawable({ contract: farm.contract, withdrawable: withdrawable }));
+    store.dispatch(factory.set_allowance({ contract: farm.contract, allowance: allowance }));
   }
 }

@@ -11,7 +11,7 @@ import * as factory from "slice/factory";
 import * as loading from "slice/loading";
 import * as data from 'utils/data';
 
-const REF = "0x000000000000000000000000000000000000dEaD";
+import FarmArbitrator from 'utils/arbitrator/farm';
 
 interface Props {
   farm: Farm;
@@ -42,14 +42,17 @@ function Buttons(props: Props) {
 
 function Form(props: Props) {
   async function on_change(value: number, farm: Farm) {
-    const data = {
-      contract: farm.contract,
-      investment: value
-    };
+    const state = store.getState() as any;
+    const is_loading = state.loading.deposit || state.loading.approve;
 
-    store.dispatch(factory.set_investment(data));
+    if (!is_loading) {
+      const data = {
+        contract: farm.contract,
+        investment: value
+      };
 
-    await to_receive(farm, data.investment);
+      store.dispatch(factory.set_investment(data));
+    }
   }
 
   return (
@@ -95,7 +98,6 @@ function Error(props: Props) {
     }
   }
 
-
   return (
     <div
       className="error"
@@ -124,7 +126,7 @@ function Deposit(props: Props) {
   const allowance_wei = farm.allowance;
   const insufficient = investment > balance;
   const approved = new BN(allowance_wei).gte(new BN(investment_wei)) || coin;
-  const active = !insufficient && investment > 0 && approved;
+  const active = !insufficient && investment > 0;
 
   if (approved) return (
     <Button
@@ -140,9 +142,9 @@ function Deposit(props: Props) {
       addedClass={active ? "button-deposit" : "button-inactive"}
       text={`Approve ${investment > 0 ? investment : "---"} ${farm.name}`}
       textLoading={`Approving ${investment} ${props.farm.name}..`}
-      active={!approved && !insufficient}
+      active={active && !approved}
       loading={approving}
-      onClick={() => approve(farm, investment_wei)}
+      onClick={() => active && approve(farm, investment_wei)}
     />
   );
 }
@@ -180,188 +182,18 @@ function Compound(props: Props) {
   );
 }
 
-async function to_receive(currency: Farm, investment: number) {
-  if (currency.coin) await to_receive_coin(currency, investment);
-  else await to_receive_token(currency, investment);
-}
-
-async function to_receive_coin(farm: Farm, investment: number | string) {
-  let shares_to_receive = 0;
-
-  if (investment > 0 && investment != "") {
-    const state: any = store.getState();
-    const web3 = state.web3.provider;
-    const contract = new web3.eth.Contract(data.get_abi(farm.contract), farm.contract);
-    const wei = web3.utils.toWei(investment.toString(), "ether");
-    const to_hatch = web3.utils.toBN(await contract.methods.EGGS_TO_HATCH_1MINERS().call());
-    const calculate = await contract.methods.calculateEggBuySimple(wei).call();
-
-    shares_to_receive = (web3.utils.toBN(calculate.toString()).div(to_hatch)).toNumber();
-  }
-
-  store.dispatch(factory.set_shares_to_receive({ contract: farm.contract, to_receive: shares_to_receive }));
-}
-
-async function to_receive_token(farm: Farm, investment: number | string) {
-  let shares_to_receive: number = 0;
-
-  if (investment > 0 && investment != "") {
-    const state: any = store.getState();
-    const web3 = state.web3.provider;
-    const contract = new web3.eth.Contract(data.get_abi(farm.contract), farm.contract);
-    const wei = web3.utils.toWei(investment.toString(), "ether");
-    const calculate = await contract.methods.calculateShareBuySimple(wei).call();
-
-    shares_to_receive = (web3.utils.toBN(calculate.toString())).toNumber();
-  }
-
-  store.dispatch(factory.set_shares_to_receive({ contract: farm.contract, to_receive: shares_to_receive }));
-}
-
 async function deposit(farm: Farm): Promise<void> {
-  const spend = farm.investment;
-  const state: any = store.getState();
-  const balances = state.currency.balance;
-  const balance = farm.coin ? data.get_coin_balance(balances, state.web3.network) : data.get_token_balance(balances, state.web3.network, farm.token_contract);
-  const insufficient = parseFloat(spend) > balance;
-  const wallet = state.web3.wallet;
-  const rpc = state.web3.provider;
-  const value = rpc.utils.toWei(spend.toString(), "ether");
-
-  if (!insufficient) {
-    if (farm.coin) {
-      const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-      return new Promise(async (resolve: Function): Promise<void> => {
-        try {
-          store.dispatch(loading.set_deposit(true));
-          const timer = setTimeout(() => resolve(), 30000);
-
-          await contract.methods.buyEggs(REF).send({ from: wallet, value: value });
-
-          clearTimeout(timer);
-
-          store.dispatch(loading.set_deposit(false));
-
-          return resolve();
-        } catch (error: any) {
-          store.dispatch(loading.set_deposit(false));
-        }
-      });
-    }
-
-    else {
-      const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-      return new Promise(async (resolve: Function): Promise<void> => {
-        try {
-          store.dispatch(loading.set_deposit(true));
-          const timer = setTimeout(() => resolve(), 30000);
-
-          await contract.methods.buyBits(REF, value).send({ from: wallet });
-
-          clearTimeout(timer);
-
-          store.dispatch(loading.set_deposit(false));
-
-          return resolve();
-        } catch (error: any) {
-          console.error(error);
-          store.dispatch(loading.set_deposit(false));
-        }
-      });
-    }
-  }
+  return FarmArbitrator.send_deposit(farm.coin, farm.investment, farm.contract, (is_loading: boolean) => store.dispatch(loading.set_deposit(is_loading)));
 }
 
-async function approve(currency: Farm, investment_wei: string): Promise<void> {
-  const state: any = store.getState();
-  const wallet = state.web3.wallet;
-  const contract = new state.web3.provider.eth.Contract(fetch_abi as AbiItem[], currency.token_contract);
-
-  await new Promise(async (resolve: Function): Promise<void> => {
-    try {
-      store.dispatch(loading.set_approve(true));
-      const timer = setTimeout(() => resolve(), 30000);
-
-      await contract.methods.approve(currency.contract, investment_wei).send({ from: wallet });
-
-      clearTimeout(timer);
-
-      store.dispatch(loading.set_approve(false));
-
-      return;
-    } catch (error: any) {
-      store.dispatch(loading.set_approve(false));
-    }
-  });
+async function approve(farm: Farm, value: string): Promise<void> {
+  return FarmArbitrator.send_approve(farm.contract, farm.token_contract, value, (is_loading: boolean) => store.dispatch(loading.set_approve(is_loading)));
 }
 
-async function claim(currency: Farm) {
-  store.dispatch(loading.set_claim(true));
-
-  await new Promise(async (resolve: Function) => {
-    try {
-      const timer = setTimeout(() => resolve(), 45000);
-
-      if (currency.coin) await claim_coin(currency);
-      else await claim_token(currency);
-
-      clearTimeout(timer);
-      resolve();
-      return;
-    } catch (error: any) {
-      store.dispatch(loading.set_claim(false));
-    }
-  });
-
-  store.dispatch(loading.set_claim(false));
+async function claim(farm: Farm) {
+  return FarmArbitrator.send_withdraw(farm.contract, (is_loading: boolean) => store.dispatch(loading.set_claim(is_loading)));
 }
 
-async function claim_coin(farm: Farm) {
-  const state = store.getState();
-  const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-  await contract.methods.sellEggs().send({ from: state.web3.wallet });
-}
-
-async function claim_token(farm: Farm) {
-  const state = store.getState();
-  const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-  await contract.methods.sellBits().send({ from: state.web3.wallet });
-}
-
-async function compound(currency: Farm) {
-  store.dispatch(loading.set_compound(true));
-
-  await new Promise(async (resolve: Function) => {
-    try {
-      const timer = setTimeout(() => resolve(), 45000);
-
-      if (currency.coin) await compound_coin(currency);
-      else await compound_token(currency);
-
-      clearTimeout(timer);
-      return resolve();
-    } catch (error: any) {
-      store.dispatch(loading.set_compound(false));
-    }
-  });
-
-  store.dispatch(loading.set_compound(false));
-}
-
-async function compound_coin(farm: Farm) {
-  const state = store.getState();
-  const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-  await contract.methods.hatchEggs(REF).send({ from: state.web3.wallet });
-}
-
-async function compound_token(farm: Farm) {
-  const state = store.getState();
-  const contract = new state.web3.provider.eth.Contract(data.get_abi(farm.contract), farm.contract);
-
-  await contract.methods.compoundBits(REF).send({ from: state.web3.wallet });
+async function compound(farm: Farm) {
+  return FarmArbitrator.send_compound(farm.contract, (is_loading: boolean) => store.dispatch(loading.set_compound(is_loading)));
 }

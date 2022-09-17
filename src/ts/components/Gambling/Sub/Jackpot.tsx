@@ -15,7 +15,7 @@ import store from "store";
 
 import * as loading from 'slice/loading';
 import * as data from 'utils/data';
-import Jackpot from 'utils/arbitrator/jackpot';
+import JackpotArbitrator from 'utils/arbitrator/jackpot';
 
 import {
   get_wallet_explorer,
@@ -275,7 +275,7 @@ function Ribbon() {
 }
 
 function Interaction() {
-  const jackpot = Jackpot.get_json();
+  const jackpot = JackpotArbitrator.get_json();
   const is_active = useSelector((state: any) => state.jackpot.active);
   const is_victory = useSelector((state: any) => state.jackpot.victory);
   const chain_id = useSelector((state: any) => state.web3.network);
@@ -467,16 +467,16 @@ async function deposit(address: string) {
   const min = state.jackpot.min;
   const error_funds = min > balance_coin;
 
-  if (!error_funds) return Jackpot.send_deposit(address, min, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "deposit", value: is_loading })));
+  if (!error_funds) return JackpotArbitrator.send_deposit(address, min, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "deposit", value: is_loading })));
 }
 
 async function claim(address: string) {
   const state: any = store.getState();
   const victory = state.jackpot.victory;
 
-  if (victory) return Jackpot.send_claim(address, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "claim", value: is_loading })));
+  if (victory) return JackpotArbitrator.send_claim(address, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "claim", value: is_loading })));
 }
 
 async function start(address: string) {
-  return Jackpot.send_start(address, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "start", value: is_loading })));
+  return JackpotArbitrator.send_start(address, (is_loading: boolean) => store.dispatch(loading.set_jackpot({ type: "start", value: is_loading })));
 }
