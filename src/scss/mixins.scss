@@ -1,43 +1,18 @@
-@mixin box($width: 100%) {
+@mixin box() {
+  position: relative;
   color: white;
-  width: $width;
-  background: $global-box-background;
-  padding: $global-box-padding;
-  border: 0;
-  border-radius: $global-box-border-radius;
-  margin: $global-box-margin;
-  box-shadow: $global-box-shadow;
-  overflow: hidden;
+  padding: 12px;
+  border-radius: 4px;
+  background: $box-background;
+  box-shadow: rgba(5, 5, 5, 0.25) 0px 25px 20px -20px;
 }
 
-@mixin box-farm() {
-  @include box();
+@mixin button($background, $background-hover) {
+  background: $background !important;
+  transition: $global-transition;
 
-  .separator {
-    margin: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(129, 161, 204);
-  }
-
-  .title {
-    color: white;
-    margin: $main-title-margin;
-    font-size: $main-title-font-size;
-    font-weight: 400;
-  }
-
-  .amount {
-    margin: 10px 0;
-    font-size: $main-amount-font-size;
-  }
-}
-
-@mixin button-selector($background) {
-  border: 0;
-  padding: $button-padding;
-
-  .selector-wrap {
-    border-radius: $button-border-radius;
+  &:hover {
+    background: $background-hover !important;
   }
 }
 
@@ -51,4 +26,14 @@
 
 @mixin menu-text-transition() {
   transition: color 0.15s;
+}
+
+@mixin ribbon-colors($background, $darker-background) {
+  .wrap {
+    background-color: $background;
+  }
+  &::before,
+  &::after {
+    border-color: $darker-background;
+  }
 }

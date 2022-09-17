@@ -6,69 +6,82 @@
   ],
   "products": [
     {
+      "order": 0,
       "name": "Token transfer",
       "url": "/transfer",
       "icon": "bi-shield-fill",
+      "svg": false,
       "active": false,
       "description": "Securely send tokens to another wallet, while improving your privacy."
     },
     {
+      "order": 1,
       "name": "Yield farms",
       "url": "/farms",
-      "icon": "bi-sign-yield-fill",
+      "icon": "bi-minecart",
+      "svg": false,
       "active": true,
-      "description": "Earn passive income with a selection of assets & high APR."
+      "description": "Earn day-to-day interest in a gambling product that rewards the earliest depositors the most."
     },
     {
-      "name": "Gambling",
-      "url": "/gambling",
+      "order": 2,
+      "name": "Jackpot",
+      "url": "/jackpot",
       "icon": "bi-suit-diamond-fill",
-      "active": false,
-      "description": "Access a selection of gambling products to try and get more profits."
+      "svg": false,
+      "active": true,
+      "description": "The last player to deposit in 12 hours may claim victory & earn the prize pool."
     }
   ],
-  "tools": [
+  "more": [
     {
+      "order": 0,
       "name": "Whitepaper",
+      "icon": "bi-filetype-pdf",
+      "svg": false,
+      "description": "Learn the fundamentals of Bitstasio: its vision & long term goals.",
       "url": "https://gateway.pinata.cloud/ipfs/Qmdz5qqJpoL2UpMaPZkvivaUzqiL7FqoKrLQJFgjmhkZrs",
       "external": true,
       "active": true
     },
     {
+      "order": 1,
       "name": "PancakeSwap",
+      "icon": "bi-suit-diamond-fill",
+      "svg": true,
+      "description": "The biggest BNB Smart Chain decentralized exchange.",
       "url": "https://pancakeswap.finance/swap",
       "external": true,
-      "active": true
-    },
-    {
-      "name": "Calculator",
-      "url": "/calculator",
-      "external": false,
       "active": true
     }
   ],
   "socials": [
     {
+      "order": 0,
       "name": "Medium",
       "description": "Read the latest announcements & guides.",
       "url": "https://medium.com/@Bitstasio"
     },
     {
+      "order": 1,
       "name": "Twitter",
       "description": "Get the latest news from the team.",
       "url": "https://twitter.com/Bitstasio"
     },
     {
+      "order": 2,
       "name": "Discord",
       "description": "Join our community on Discord.",
       "url": "https://discord.com/invite/2DsfdS9us8"
     },
     {
+      "order": 3,
       "name": "Telegram",
       "description": "Chat with our community on Telegram.",
       "url": "https://t.me/bitstasiocommunity"
     },
     {
+      "order": 4,
       "name": "Reddit",
       "description": "Subscribe & see what's new on Reddit.",
       "url": "https://www.reddit.com/r/Bitstasio"

@@ -1,0 +1,17 @@
+{
+  "order": 0,
+  "upgrade": true,
+  "audit": "",
+  "name": "MATIC",
+  "chain_id": 80001,
+  "active": true,
+  "apr": "1095",
+  "daily": "3",
+  "coin": true,
+  "mainnet": false,
+  "contract": "0x62Fb02f44E891930A589ED488CdD5b1B173C1cA1",
+  "token_contract": "",
+  "launch_block": 0,
+  "status": 0,
+  "burn": 6
+}

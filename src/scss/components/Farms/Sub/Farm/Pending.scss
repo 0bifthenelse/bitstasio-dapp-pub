@@ -1,0 +1,19 @@
+.pending {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  margin: 0 auto;
+
+  .wrap {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .admin {
+    width: 260px;
+  }
+}

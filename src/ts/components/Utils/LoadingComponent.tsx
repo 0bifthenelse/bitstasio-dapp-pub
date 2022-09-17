@@ -46,14 +46,6 @@ export default function LoadingComponent(props: Props) {
             size={80}
           />
         }
-        {error &&
-          <ReportIcon
-            sx={{
-              color: "white",
-              fontSize: "69px"
-            }}
-          />
-        }
       </div>
 
       <div className="loading-component-message">

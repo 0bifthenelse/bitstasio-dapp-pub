@@ -1,0 +1,61 @@
+.interaction {
+  .wrap {
+    @include box();
+    height: auto;
+  }
+
+  .deposit {
+    position: relative;
+    margin-bottom: 10px;
+
+    .form {
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+      transition: $global-transition;
+      margin: 0;
+      padding: 0;
+      height: 0;
+    }
+
+    .left,
+    .right {
+      padding: 0 10px;
+    }
+
+    @media (min-width: 768px) {
+      .left {
+        padding-left: 0;
+      }
+
+      .right {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .left,
+      .right {
+        padding: 0;
+      }
+    }
+
+    .button {
+      margin: 10px 0;
+    }
+
+    .button-deposit {
+      @include button(#8d1000, #b81500);
+    }
+
+    .button-withdraw {
+      @include button(#007550, #009767);
+    }
+
+    .button-compound {
+      @include button(#004492, #0057b9);
+    }
+  }
+}

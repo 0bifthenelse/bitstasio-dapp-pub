@@ -31,13 +31,13 @@ module.exports = {
 		contentBase: path.join(__dirname, settings.output.directory),
 		host: settings.devServer.host,
 		port: settings.devServer.port,
-		hot: true,
+		hot: false,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
 		historyApiFallback: true,
 	},
-	entry: dev ? ['react-hot-loader/patch', indexPath] : [indexPath],
+	entry: [indexPath],
 	module: {
 		rules: [
 			{

@@ -5,12 +5,11 @@ import {
   update_wallet
 } from 'slice/web3';
 
-import {
-  reset
-} from 'slice/currency';
+import * as factory from 'slice/factory';
 
 import {
-  get_default_chain_id
+  get_default_chain_id,
+  is_network_supported
 } from 'utils/rpc';
 
 export default async function init(): Promise<void> {
@@ -18,14 +17,17 @@ export default async function init(): Promise<void> {
 }
 
 async function change() {
-  store.dispatch(reset());
+  store.dispatch(factory.reset());
 }
 
 async function network() {
   try {
     const state = store.getState();
     const provider = state.web3.provider;
-    const network = provider.currentProvider ? await state.web3.provider.eth.net.getId() : get_default_chain_id();
+    let network = provider.currentProvider ? await state.web3.provider.eth.net.getId() : get_default_chain_id();
+    const is_supported = is_network_supported(network);
+
+    if (!is_supported) network = get_default_chain_id();
 
     if (network != state.web3.network) {
       store.dispatch(update_network(network));

@@ -34,7 +34,7 @@ export default function Button(props: Props) {
       onClick={() => onClick()}
     >
       {props.loading &&
-        <CircularProgress disableShrink sx={{ animationDuration: "1000ms" }} className="loading-circular" />
+        <CircularProgress disableShrink size={17.5} sx={{ color: "white", animationDuration: "1250ms" }} className="loading-circular" />
       }
       {props.loading ? props.textLoading : props.text}
     </div>

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const slice_subscription: any = createSlice({
   name: 'slice_subscription',
   initialState: {
-    farms: false,
+    farms: [false, ""],
     balance: false,
     transfer: false,
     jackpot: false

@@ -1,0 +1,56 @@
+$border-radius: 4px;
+
+.computer {
+  padding: 0 10px;
+
+  .category {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 15px 25px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 51px;
+      background: $box-background;
+      z-index: 9999;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+
+      &:hover {
+        cursor: default;
+      }
+
+      .wrap {
+        padding: 10px 15px;
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      transition: $global-transition;
+      top: 26px;
+      right: -12.5px;
+      transform: translate(-50%, -50%);
+
+      .arrow-icon {
+        transition: $global-transition;
+      }
+    }
+  }
+
+  .products {
+  }
+
+  .tools {
+  }
+
+  .more {
+  }
+}

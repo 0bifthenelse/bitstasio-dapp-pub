@@ -1,0 +1,8 @@
+$margin: 15px 0;
+
+.farm-list {
+  margin: $margin;
+  padding: 0 15px;
+
+  @import "./Sub/Index/Card";
+}

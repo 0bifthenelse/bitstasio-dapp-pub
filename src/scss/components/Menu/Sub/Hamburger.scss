@@ -1,0 +1,15 @@
+.button-mobile {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+}
+
+.close-mobile {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

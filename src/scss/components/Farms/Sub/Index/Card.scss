@@ -1,0 +1,198 @@
+$farm-height: 340px;
+
+$details-font-size: 20px;
+$icon-size: 25px;
+$asset-icon-size: 80px;
+$asset-hidden: -20px;
+$padding-sides: 5px;
+
+$ribbon-width: 70px;
+
+.farm-card {
+  position: relative;
+  margin: $margin;
+  background: $button-background;
+  border-radius: $button-border-radius;
+  height: $farm-height;
+  color: white;
+  padding: 0;
+
+  .card-wrap {
+    border-top-right-radius: $button-border-radius;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: $button-hover-background;
+  }
+
+  .asset {
+    position: absolute;
+    top: $asset-hidden;
+    right: $asset-hidden;
+    .currency-icon {
+      img {
+        min-width: $asset-icon-size;
+        max-width: $asset-icon-size;
+        min-height: $asset-icon-size;
+        max-height: $asset-icon-size;
+      }
+    }
+  }
+
+  .address {
+    padding: 10px $padding-sides;
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .details {
+    margin-top: 0;
+
+    .details-row {
+      width: 100%;
+      display: table;
+      padding: 0 $padding-sides;
+      margin: 10px 0;
+
+      .category {
+        display: table-cell;
+        text-align: left;
+        font-size: $details-font-size;
+        min-width: 50%;
+      }
+
+      .value {
+        display: table-cell;
+        text-align: right;
+        font-size: $details-font-size;
+        min-width: 50%;
+      }
+    }
+  }
+
+  .blockchain {
+    position: absolute;
+    bottom: 0;
+    padding: 10px 0;
+    font-size: 16px;
+
+    .name {
+      position: relative;
+      left: 3px;
+      top: 1px;
+    }
+
+    .icon {
+      img {
+        min-width: $icon-size;
+        max-width: $icon-size;
+        min-height: $icon-size;
+        max-height: $icon-size;
+      }
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    right: $padding-sides;
+    bottom: 0;
+
+    .arrow-icon {
+      transition: $global-transition;
+    }
+  }
+
+  .ribbon {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: $ribbon-width;
+    height: $ribbon-width;
+    transition: 0;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      display: block;
+      border: 5px solid;
+    }
+
+    &::before {
+      top: 0;
+      right: 0.5px;
+    }
+    &::after {
+      bottom: 0;
+      left: 0;
+    }
+
+    .wrap {
+      position: absolute;
+      display: block;
+      width: $ribbon-width * 1.4;
+      padding: 5px 10px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      transform: rotate(-45deg);
+      text-transform: uppercase;
+      text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(255, 255, 255, 0.3);
+      right: -4px;
+      top: 11px;
+
+      &::before,
+      &::after {
+        border-top-color: transparent;
+        border-left-color: transparent;
+      }
+    }
+  }
+
+  .ribbon-genesis {
+    $background: #00b5d4;
+    $darker-background: #008197;
+
+    @include ribbon-colors($background, $darker-background);
+  }
+
+  .ribbon-hot {
+    $background: radial-gradient(circle farthest-corner at 10% 20%, rgba(247, 87, 0, 1) 0%, rgba(249, 0, 0, 1) 90.1%);
+    $darker-background: rgba(200, 0, 0, 1);
+
+    @include ribbon-colors($background, $darker-background);
+  }
+
+  .ribbon-early {
+    $background: #ca0003;
+    $darker-background: #920002;
+
+    @include ribbon-colors($background, $darker-background);
+  }
+
+  .ribbon-active {
+    $background: radial-gradient(circle farthest-corner at 10% 20%, rgba(247, 87, 0, 1) 0%, rgba(249, 0, 0, 1) 90.1%);
+    $darker-background: rgba(200, 0, 0, 1);
+
+    @include ribbon-colors($background, $darker-background);
+  }
+
+  .ribbon-dead {
+    $background: radial-gradient(circle farthest-corner at 10% 20%, rgba(247, 87, 0, 1) 0%, rgba(249, 0, 0, 1) 90.1%);
+    $darker-background: rgba(200, 0, 0, 1);
+
+    @include ribbon-colors($background, $darker-background);
+  }
+}

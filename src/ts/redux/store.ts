@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import reducer_web3 from 'slice/web3';
-import reducer_currency from 'slice/currency';
+import reducer_currency from 'slice/factory';
 import reducer_loading from 'slice/loading';
 import reducer_calculator from 'slice/calculator';
 import reducer_transfer from 'slice/transfer';

@@ -1,0 +1,17 @@
+{
+  "order": 0,
+  "upgrade": true,
+  "audit": "",
+  "name": "BUSD",
+  "chain_id": 97,
+  "active": true,
+  "apr": "1095",
+  "daily": "3",
+  "coin": false,
+  "mainnet": false,
+  "contract": "0x846B7a97Ab18ce1bd536A8C2BEC9Bd293ABB229F",
+  "token_contract": "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
+  "launch_block": 0,
+  "status": 2,
+  "burn": 6
+}

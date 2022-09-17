@@ -4,6 +4,7 @@ export const slice_loading: any = createSlice({
   name: 'slice_loading',
   initialState: {
     farm: false,
+    farm_init: false,
     deposit: false,
     compound: false,
     claim: false,
@@ -17,6 +18,9 @@ export const slice_loading: any = createSlice({
   reducers: {
     set_farm: (state, action) => {
       state.farm = action.payload;
+    },
+    set_farm_init: (state, action) => {
+      state.farm_init = action.payload;
     },
     set_deposit: (state, action) => {
       state.deposit = action.payload;
@@ -56,6 +60,7 @@ export const slice_loading: any = createSlice({
 
 export const {
   set_farm,
+  set_farm_init,
   set_deposit,
   set_compound,
   set_claim,

@@ -1,4 +1,7 @@
 {
+  "order": 0,
+  "upgrade": false,
+  "audit": "https://georgestamp.xyz/2022/09/bitstasio",
   "name": "BNB",
   "chain_id": 56,
   "active": true,
@@ -8,6 +11,7 @@
   "mainnet": true,
   "contract": "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c",
   "token_contract": "",
-  "whitelist": false,
-  "launch_block": 0
+  "launch_block": 0,
+  "status": 0,
+  "burn": 0
 }

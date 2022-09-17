@@ -1,0 +1,59 @@
+
+$icon-size: 28px;
+$icon-dist-size: 35px;
+$width: 350px;
+$icon-position-top: 50%;
+$icon-position-left: 30px;
+
+.menu-button {
+  position: relative;
+  width: $width;
+  background: rgba(0, 0, 0, 0.0);
+  transition: $global-transition;
+  border-radius: $button-border-radius;
+
+  &:hover {
+    background: $button-hover-background;
+    cursor: pointer;
+    color: white;
+  }
+
+  i.icon {
+    position: absolute;
+    top: $icon-position-top;
+    left: $icon-position-left;
+    transform: translate(-50%, -50%);
+    font-size: $icon-size;
+  }
+
+  .icon-dist {
+    position: absolute;
+    top: $icon-position-top;
+    left: $icon-position-left;
+    transform: translate(-50%, -50%);
+
+    img {
+      min-width: $icon-dist-size;
+      max-width: $icon-dist-size;
+      min-height: $icon-dist-size;
+      max-height: $icon-dist-size;
+    }
+  }
+
+  .content {
+    position: relative;
+    padding: 10px 10px;
+    padding-left: 60px;
+  }
+
+  .title {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 5px;
+  }
+
+  .description {
+    font-size: 12px;
+    color: $global-text-quiet-less;
+  }
+}

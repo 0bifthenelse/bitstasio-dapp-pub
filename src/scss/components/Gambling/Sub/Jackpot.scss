@@ -1,0 +1,358 @@
+$margin: 15px 0;
+$background-ribbon: rgb(209, 0, 0);
+$background-ribbon-below: rgb(141, 0, 0);
+$background-ribbon-inactive: rgb(0, 163, 122);
+$background-ribbon-below-inactive: rgb(0, 114, 85);
+$ribbon-text-shadow: 2px 3px 1px rgba(0, 0, 0, 0.1), 0px -4px 10px rgba(255, 255, 255, 0.3);
+
+$details-font-size: 20px;
+
+$form-icon-size: 30px;
+
+.game {
+  position: relative;
+  margin: $margin;
+
+  .header {
+    position: relative;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: $global-text-quiet-less;
+    }
+  }
+
+  .links {
+    padding: 0 5px;
+
+    .button-external {
+      margin: 10px 0;
+    }
+
+    @media (min-width: 576px) {
+      .left {
+        padding-left: 0;
+      }
+
+      .right {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .left,
+      .right {
+        padding: 0;
+      }
+    }
+  }
+
+  .ribbon-active {
+    background: $background-ribbon;
+
+    &::before,
+    &::after {
+      border-color: $background-ribbon-below !important;
+    }
+  }
+
+  .ribbon-inactive {
+    background: $background-ribbon-inactive;
+
+    &::before,
+    &::after {
+      border-color: $background-ribbon-below-inactive !important;
+    }
+  }
+
+  .ribbon {
+    position: absolute;
+    width: 100%;
+    top: 110px;
+    left: 0;
+    color: white;
+    z-index: 99;
+    clear: auto;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    text-shadow: $ribbon-text-shadow;
+
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      display: block;
+    }
+
+    &::before {
+      bottom: -17px;
+      right: 0;
+      border-left: 17px solid;
+      border-bottom: 17px solid transparent !important;
+    }
+    &::after {
+      bottom: -17px;
+      left: 0;
+      border-right: 17px solid;
+      border-bottom: 17px solid transparent !important;
+    }
+
+    .status {
+      text-align: left;
+      font-weight: bold;
+
+      span {
+        position: relative;
+        left: 20px;
+      }
+    }
+
+    .round {
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+
+  .prize-ribbon {
+    position: absolute;
+    width: auto;
+    left: 50%;
+    top: 155px;
+    border-bottom-left-radius: $button-border-radius;
+    border-bottom-right-radius: $button-border-radius;
+    padding: 5px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: $ribbon-text-shadow;
+    color: white;
+    z-index: 99;
+    transform: translate(-50%, -50%);
+  }
+
+  .jackpot {
+    position: relative;
+    padding: 0 5px;
+    margin-bottom: 10px;
+
+    .wrap {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      background: $button-background;
+      border-top-left-radius: $button-border-radius;
+      border-top-right-radius: $button-border-radius;
+      padding-top: 80px;
+      color: white;
+    }
+
+    .pending {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 150px;
+      margin-top: 20px;
+      color: white;
+      font-size: 22px;
+
+      p {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .details {
+      margin-top: 35px;
+
+      .details-row {
+        width: 100%;
+        display: table;
+        padding: 0 15px;
+        margin: 10px 0;
+
+        .category {
+          display: table-cell;
+          text-align: left;
+          font-size: $details-font-size;
+          min-width: 50%;
+        }
+
+        .value {
+          display: table-cell;
+          text-align: right;
+          font-size: $details-font-size;
+          min-width: 50%;
+        }
+      }
+    }
+
+    .prize-amount {
+      margin: 20px 0 10px 0;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .history {
+      color: white;
+      background: $button-background;
+      position: relative;
+      transition: $global-transition;
+      text-align: center;
+      padding: 10px 0;
+
+      .arrow-icon {
+        transition: $global-transition;
+      }
+
+      &:hover {
+        background: $button-hover-background;
+        cursor: pointer;
+      }
+
+      &::selection {
+        background: none;
+      }
+    }
+
+    .round {
+      border-bottom-left-radius: $button-border-radius;
+      border-bottom-right-radius: $button-border-radius;
+      box-shadow: $box-shadow;
+    }
+
+    .history-winners {
+      overflow: hidden;
+      background: rgba(29, 29, 29, 0.8);
+      box-shadow: $box-shadow;
+      border-top: 1px solid rgb(20, 20, 20);
+      transform-origin: top left;
+      transition: $global-transition !important;
+      border-bottom-left-radius: $button-border-radius;
+      border-bottom-right-radius: $button-border-radius;
+      width: 100%;
+
+      .history-winners-wrap {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .winner {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        border-radius: $button-border-radius;
+        background: $button-background;
+        padding: 5px 10px;
+        transition: $global-transition;
+
+        &:hover {
+          background: $button-hover-background;
+        }
+
+        .category {
+          margin: 15px 0;
+
+          .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+          }
+
+          .value {
+            margin: 5px 0;
+            text-align: center;
+            font-size: 16px;
+          }
+        }
+      }
+
+      a {
+        margin: 10px 0;
+
+        &:hover {
+          color: white !important;
+        }
+      }
+
+      .winner-list {
+        text-align: center;
+      }
+
+      .no-winner {
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        color: white;
+        padding: 40px 0;
+      }
+    }
+
+    .interaction {
+      position: relative;
+      padding: 0 15px 10px 15px;
+
+      .deposit-form {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+
+        img {
+          min-width: $form-icon-size;
+          min-height: $form-icon-size;
+          max-width: $form-icon-size;
+          max-height: $form-icon-size;
+        }
+
+        .form {
+          transition: $global-transition;
+          height: 54px;
+          font-size: 24px;
+        }
+      }
+
+      @media (min-width: 576px) {
+        .left {
+          padding-right: 10px;
+        }
+
+        .right {
+          padding-left: 10px;
+        }
+      }
+
+      .error {
+        position: absolute;
+        bottom: -2px;
+        left: 15px;
+        color: rgb(255, 0, 0);
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.button-deposit {
+  @include button(#ac1400, #c91700);
+}
+
+.button-victory {
+  @include button(#009675, #00b18a);
+}
+
+.button-admin {
+  @include button(#003392, #0043c0);
+}

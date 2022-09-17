@@ -1,0 +1,74 @@
+$padding: 10px;
+$borders: rgba(255, 255, 255, 0.1);
+
+.headings {
+  display: block;
+  margin: 30px 0 0 0;
+
+  .above {
+    color: white;
+    padding-bottom: 10px;
+
+    .left {
+      padding: 0;
+      text-align: left;
+    }
+
+    .right {
+      padding: 0;
+      position: relative;
+      top: 5px;
+      text-align: right;
+      text-transform: uppercase;
+    }
+  }
+
+  .wrap {
+    position: relative;
+    display: table;
+    width: 100%;
+    border: 1px solid $borders;
+    color: white;
+
+    .balance {
+      display: table-cell;
+      width: 50%;
+      border-right: 1px solid $borders;
+      padding: $padding;
+    }
+
+    .apr {
+      display: table-cell;
+      width: 50%;
+      padding: $padding;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .amount {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .orb {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      .icon {
+        img {
+          min-width: $currency-icon-size * 1.5;
+          min-height: $currency-icon-size * 1.5;
+          max-width: $currency-icon-size * 1.5;
+          max-height: $currency-icon-size * 1.5;
+        }
+      }
+    }
+  }
+}

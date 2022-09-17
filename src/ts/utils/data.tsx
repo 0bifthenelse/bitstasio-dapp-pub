@@ -1,7 +1,9 @@
 import React from 'react';
 import store from "../redux/store";
-import { fromWei } from 'web3-utils';
-
+import { AbiItem, toWei, fromWei } from 'web3-utils';
+import {
+  get_wallet_explorer
+} from 'utils/rpc';
 import {
   jackpot_data
 } from 'constant';
@@ -16,55 +18,14 @@ const farms_dir = importAll(require.context('./farms', true, /\.(json)$/));
 // @ts-ignore
 const currencies_dir = importAll(require.context('./currencies', true, /\.(json)$/));
 
-export function currency(id: number) {
+// @ts-ignore
+const gambling_dir = importAll(require.context('./gambling', true, /\.(json)$/));
+
+export function farms(action: Function) {
   for (const index in farms_dir) {
-    const currency = farms_dir[index];
+    const farm = farms_dir[index];
 
-    if (currency.id == id) return currency;
-  }
-
-  return undefined;
-}
-
-
-
-export function currency_find(coin: boolean, address?: string): FarmJSON {
-  if (coin) return currency_find_coin();
-  else if (address) return currency_find_token(address);
-
-  return null as unknown as FarmJSON;
-}
-
-function currency_find_coin(): FarmJSON {
-  for (const index in farms_dir) {
-    const currency = farms_dir[index];
-
-    currency.id = parseInt(index);
-
-    if (currency.coin == true) return currency;
-  }
-
-  return null as unknown as FarmJSON;
-}
-
-function currency_find_token(address: string): FarmJSON {
-  for (const index in farms_dir) {
-    const currency = farms_dir[index];
-
-    currency.id = parseInt(index);
-
-    if (currency.coin == false && currency.token_contract == address) return currency;
-  }
-
-  return null as unknown as FarmJSON;
-}
-
-export function currencies(action: Function) {
-  for (const index in farms_dir) {
-    const currency = farms_dir[index];
-    currency.id = parseInt(index);
-
-    action(currency);
+    action(farm);
   }
 }
 
@@ -72,13 +33,20 @@ export function balances(action: Function) {
   for (const index in currencies_dir) action(currencies_dir[index]);
 }
 
-export function selected_currency(action: Function) {
-  const state: any = store.getState();
-  const map = state.currency.farms;
-  const selected = state.currency.selected;
+export function get_farm(contract: string): FarmJSON {
+  for (const index in farms_dir) {
+    const farm = farms_dir[index];
 
-  if (map.has(selected)) return action(map.get(selected));
-  else return;
+
+    if (farm.contract === contract) return farm;
+  }
+
+  return null as unknown as FarmJSON;
+}
+
+export function get_abi(contract: string): AbiItem[] {
+// @ts-ignore
+  return require('./abi/' + contract + '.json');
 }
 
 export function get_coin_balance(map: HashMap<string, Balance>, chain_id: number): number {
@@ -105,21 +73,24 @@ export function get_token_balance(map: HashMap<string, Balance>, chain_id: numbe
   return 0;
 }
 
-export function get_wallet_link(address: string, short: boolean = true): JSX.Element {
+export function get_wallet_link(address: string, short: boolean = true, chain_id: number = 56): JSX.Element {
   const address_str = short ? address.substring(0, 6) + "..." + address.substring(address.length - 4, address.length) : address;
+  const link = get_wallet_explorer(chain_id);
 
   return (
-    <a href={`https://bscscan.com/address/${address}`} target="_blank" >{address_str}</a>
+    <a href={`${link}${address}`} target="_blank" >{address_str}</a>
   );
 }
 
-export function get_jackpot_address(): string {
+export function get_jackpot(): JackpotJSON {
   const state: any = store.getState();
   const chain_id = state.web3.network;
 
-  for (const jackpot of jackpot_data) {
-    if (jackpot.chain_id == chain_id) return jackpot.address;
+  for (const index in gambling_dir) {
+    const gambling = gambling_dir[index];
+
+    if (gambling.name == "Jackpot" && gambling.chain_id == chain_id) return gambling;
   }
 
-  return "";
+  return null as unknown as any;
 }

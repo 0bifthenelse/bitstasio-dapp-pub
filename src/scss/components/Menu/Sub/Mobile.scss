@@ -1,0 +1,10 @@
+$title-font-size: 32px;
+$title-margin: 20px 10px;
+
+.mobile {
+  .title {
+    text-align: center;
+    font-size: $title-font-size;
+    margin: $title-margin;
+  }
+}

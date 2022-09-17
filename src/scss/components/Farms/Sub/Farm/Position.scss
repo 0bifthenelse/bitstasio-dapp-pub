@@ -1,0 +1,43 @@
+.position {
+  .wrap {
+    margin: 10px 0;
+  }
+
+  .data-wrap {
+    margin: 10px 0;
+  }
+
+  @media (min-width: 768px) {
+    .left {
+      padding-left: 0;
+    }
+
+    .right {
+      padding-right: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .data-wrap {
+      padding: 0;
+    }
+  }
+
+  .data-box {
+    @include box();
+  }
+
+  .heading {
+    font-size: 15px;
+    color: rgb(200, 200, 200);
+
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  .amount {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+  }
+}

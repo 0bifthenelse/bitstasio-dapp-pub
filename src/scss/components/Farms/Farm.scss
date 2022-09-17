@@ -1,0 +1,9 @@
+.farm {
+  position: relative;
+  
+  @import "./Sub/Farm/Headings";
+  @import "./Sub/Farm/Links";
+  @import "./Sub/Farm/Position";
+  @import "./Sub/Farm/Interaction";
+  @import "./Sub/Farm/Pending";
+}

@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import BN from 'bn.js';
 import HashMap from 'hashmap';
 
 export { };
@@ -9,6 +10,7 @@ declare global {
   type ActivityOrigin = "compound" | "deposit" | "claim";
   type TRPC = Web3;
   type Anchor = 'top' | 'left' | 'bottom' | 'right';
+  type Status = 0 | 1 | 2 | 3 | 4;
 
   interface ProductProps {
     data: {
@@ -41,11 +43,17 @@ declare global {
   }
 
   interface Farm {
-    id: number;
+    order: number;
+    admin: string;
+    change: number;
+    audit: string;
     name: string;
     chain_id: number;
     investment: string;
-    fees: number;
+    fees: {
+      deposit: number,
+      withdraw: number;
+    };
     tvl: number;
     apr: number;
     shares: number;
@@ -63,10 +71,13 @@ declare global {
     timestamp_withdraw: number;
     time_since_withdraw: string;
     launch_block: number;
+    initialized: boolean;
+    status: Status;
   }
 
   interface FarmJSON {
-    id: number;
+    order: number;
+    audit: string;
     active: boolean;
     name: string;
     chain_id: number;
@@ -78,6 +89,9 @@ declare global {
     token_contract: string;
     whitelist: boolean;
     launch_block: number;
+    status: Status;
+    burn: number;
+    upgrade: boolean;
   }
 
   interface Balance {
@@ -88,7 +102,7 @@ declare global {
     address?: string;
   }
 
-interface BalanceJSON {
+  interface BalanceJSON {
     name: string;
     chain_id: number;
     coin: boolean;
@@ -153,9 +167,20 @@ interface BalanceJSON {
     remaining_blocks: number;
   }
 
+  interface JackpotJSON {
+    audit: string;
+    contract: string;
+    chain_id: number;
+  }
+
   interface JackpotHistory {
     wallet: string;
-    block_number: string;
+    block_number: number;
     prize: number;
+  }
+
+  interface TransactionData {
+    from: string;
+    value?: string | BN;
   }
 }

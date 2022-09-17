@@ -1,4 +1,7 @@
 {
+  "order": 2,
+  "upgrade": false,
+  "audit": "",
   "name": "DAI",
   "chain_id": 56,
   "active": false,
@@ -8,6 +11,7 @@
   "mainnet": true,
   "contract": "0x61DFFF79c52062bA60236FdA04fA8C32DB5e78a1",
   "token_contract": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
-  "whitelist": false,
-  "launch_block": 0
+  "launch_block": 0,
+  "status": 0,
+  "burn": 0
 }

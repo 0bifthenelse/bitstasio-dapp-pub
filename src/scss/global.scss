@@ -18,35 +18,31 @@ body {
 	color: white;
 	font-family: $global-font;
 	margin: 0;
-	padding: 0 !important;
 	overflow: auto;
 	overflow-x: hidden;
 	overflow-y: auto !important;
+	padding-bottom: 20px !important;
 }
 
 body {
 	background: $global-background;
-	background-size: 400% 400%;
-	animation: Gradient 15s ease infinite;
 	min-height: 90vh;
 }
 
 main {
 	margin: 0 auto;
-	overflow: hidden;
-	padding: $global-body-padding;
 }
 
 .container {
-	max-width: $global-container-max-width;
 	padding: $global-container-padding;
 	overflow: hidden;
 }
 
 .container-fluid {
+	max-width: $global-container-max-width;
 	padding: 0;
-	overflow: hidden;
 	min-height: 600px;
+	padding: 0 5px 20px 5px !important;
 }
 
 a {
@@ -77,18 +73,6 @@ body,
 head {
 	display: block;
 	color: transparent;
-}
-
-@keyframes Gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
 }
 
 .MuiButtonBase-root {
@@ -164,8 +148,8 @@ a {
 
 .loading-circular {
 	position: absolute;
-	left: 20px;
-	bottom: 6px;
+	left: 12.5px;
+	bottom: 17.5px;
 }
 
 .button {
@@ -183,6 +167,79 @@ a {
 	&:hover {
 		background: $button-hover-background !important;
 		cursor: pointer;
+	}
+}
+
+.button-external {
+	display: block;
+	width: 100%;
+	position: relative;
+	transition: $global-transition;
+	color: white;
+	background: $button-background;
+	padding: $button-padding;
+	margin: 0 0 20px 0;
+	border-radius: $button-border-radius;
+
+	.text {
+		position: relative;
+		left: 40px;
+	}
+
+	.icon {
+		position: absolute;
+		left: 15px;
+		bottom: 11px;
+	}
+
+	.icon-blank {
+		position: absolute;
+		right: 10px;
+		bottom: 6px;
+	}
+
+	&:hover {
+		color: white !important;
+		background: $button-hover-background;
+	}
+}
+
+.button-external-disabled {
+	opacity: .5;
+
+	&:hover {
+		cursor: default;
+		background: $button-background !important;
+	}
+}
+
+a.button-internal {
+	display: block;
+	width: 170px;
+	position: relative;
+	transition: $global-transition;
+	color: white;
+	background: $button-background;
+	padding: 7.5px 10px;
+	margin: 0;
+	border-radius: $button-border-radius;
+	font-size: 14px;
+
+	.text {
+		position: relative;
+		left: 30px;
+		bottom: 1px;
+	}
+
+	.icon-blank {
+		position: absolute;
+		left: 10px;
+		bottom: 5px;
+	}
+
+	&:hover {
+		color: white !important;
+		background: $button-hover-background;
 	}
 }
 
@@ -287,6 +344,37 @@ a {
 
 	p {
 		text-align: center;
-	margin: 0 auto;
+		margin: 0 auto;
+	}
+}
+
+.title-pretty {
+	color: white;
+	font-size: 28px;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+.row {
+	margin: 0;
+	padding: 0;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.spin {
+	transform: $global-transition;
+
+	animation: spin 4s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }

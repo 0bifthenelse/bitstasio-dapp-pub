@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initial_state = {
+  constant: {
+    audit: "",
+    address: "",
+    chain_id: null
+  },
   admin: false,
   balance: 0,
   active: false,
@@ -8,7 +13,6 @@ const initial_state = {
   last_deposit: "0x0000000000000000000000000000000000000000",
   remaining_block: 0,
   blocks_to_win: 0,
-  to_deposit: '',
   victory: false,
   min: 0,
   max: 0,
@@ -20,17 +24,24 @@ export const slice_jackpot = createSlice({
   initialState: initial_state,
   reducers: {
     reset: (state) => {
+      state.constant = initial_state.constant;
       state.admin = initial_state.admin;
       state.balance = initial_state.balance;
       state.round = initial_state.round;
       state.last_deposit = initial_state.last_deposit;
       state.remaining_block = initial_state.remaining_block;
       state.blocks_to_win = initial_state.blocks_to_win;
-      state.to_deposit = initial_state.to_deposit;
       state.victory = initial_state.victory;
       state.min = initial_state.min;
       state.max = initial_state.max;
       state.history = initial_state.history;
+    },
+    set_constant: (state, action) => {
+      state.constant = {
+        audit: action.payload.audit,
+        address: action.payload.address,
+        chain_id: action.payload.chain_id
+      };
     },
     set_admin: (state, action) => {
       state.admin = action.payload;
@@ -53,17 +64,6 @@ export const slice_jackpot = createSlice({
     set_blocks_to_win: (state, action) => {
       state.blocks_to_win = action.payload;
     },
-    set_to_deposit: (state, action) => {
-      const value = action.payload;
-
-      if (value >= 0) {
-        state.to_deposit = action.payload;
-      }
-
-      else {
-        state.to_deposit = '';
-      }
-    },
     set_victory: (state, action) => {
       state.victory = action.payload;
     },
@@ -83,6 +83,7 @@ export const slice_jackpot = createSlice({
 
 export const {
   reset,
+  set_constant,
   set_admin,
   set_balance,
   set_active,
@@ -90,7 +91,6 @@ export const {
   set_last_deposit,
   set_remaining_block,
   set_blocks_to_win,
-  set_to_deposit,
   set_victory,
   set_history,
   set_min,

@@ -1,6 +1,4 @@
-import {
-  token_abi
-} from 'constant';
+import * as constants from 'constant';
 import abi from 'human-standard-token-abi';
 
 import connection from "../rpc";
@@ -13,7 +11,7 @@ import {
 
 import {
   set_balance
-} from 'slice/currency';
+} from 'slice/factory';
 
 export default async function init() {
   await init_data();

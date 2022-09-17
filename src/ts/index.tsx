@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import ReactDom from 'react-dom';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -13,7 +13,6 @@ import subscribe from './utils/subscribe';
 (() => {
 	subscribe();
 
-	const htmlElementName: string = 'app';
 	const jsxElement: JSX.Element = (
 		<Provider store={store}>
 			<BrowserRouter>
@@ -21,10 +20,12 @@ import subscribe from './utils/subscribe';
 			</BrowserRouter>
 		</Provider>
 	);
-	const htmlElement: HTMLElement | null = document.getElementById(htmlElementName);
+	const htmlElement: HTMLElement | null = document.getElementById('app');
 	if (htmlElement) {
-		ReactDom.render(jsxElement, htmlElement);
+		const root = createRoot(htmlElement);
+
+		root.render(jsxElement);
 	} else {
-		throw new Error(`Can\'t find HTML element: ${htmlElementName}`);
+		throw new Error(`Can\'t find HTML element: app`);
 	}
 })();
