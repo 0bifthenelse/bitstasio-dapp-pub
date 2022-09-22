@@ -182,6 +182,13 @@ $ribbon-width: 70px;
     @include ribbon-colors($background, $darker-background);
   }
 
+ .ribbon-idle {
+    $background: #929292;
+    $darker-background: #707070;
+
+    @include ribbon-colors($background, $darker-background);
+  }
+
   .ribbon-active {
     $background: radial-gradient(circle farthest-corner at 10% 20%, rgba(247, 87, 0, 1) 0%, rgba(249, 0, 0, 1) 90.1%);
     $darker-background: rgba(200, 0, 0, 1);

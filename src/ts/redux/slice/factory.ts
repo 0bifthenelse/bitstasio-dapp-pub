@@ -63,12 +63,11 @@ export const slice_currency: any = createSlice({
           chain_id: chain_id,
           investment: "",
           shares: 0,
+          shares_percent: 0,
           coin: coin,
           apr: apr,
           token_contract: token_contract,
           contract: contract,
-          bits_per_share: 0,
-          shares_value: "0",
           fees: {
             deposit: 0,
             withdraw: 0
@@ -78,11 +77,9 @@ export const slice_currency: any = createSlice({
           withdrawable: 0,
           whitelisted: false,
           allowance: "0",
-          shares_to_receive: 0,
           time_since_withdraw: "---",
           timestamp_withdraw: 0,
           contract_balance: "0",
-          launch_block: 0,
           initialized: false,
           status: status
         };
@@ -117,7 +114,7 @@ export const slice_currency: any = createSlice({
     },
     set_shares: (state, action) => {
       const contract = action.payload.contract;
-      const shares = action.payload.shares;
+      const shares = action.payload.amount;
       const map = state.farms;
       const farm = state.farms.get(contract);
 
@@ -127,14 +124,14 @@ export const slice_currency: any = createSlice({
         state.farms = map.clone();
       }
     },
-    set_shares_to_receive: (state, action) => {
+    set_shares_percent: (state, action) => {
       const contract = action.payload.contract;
-      const to_receive = action.payload.to_receive;
+      const percent = action.payload.percent;
       const map = state.farms;
       const farm = state.farms.get(contract);
 
-      if (farm && farm.shares_to_receive != to_receive) {
-        farm.shares_to_receive = to_receive;
+      if (farm && farm.shares_percent != percent) {
+        farm.shares_percent = percent;
 
         state.farms = map.clone();
       }
@@ -147,42 +144,6 @@ export const slice_currency: any = createSlice({
 
       if (farm && farm.fees != fees) {
         farm.fees = fees;
-
-        state.farms = map.clone();
-      }
-    },
-    set_bits_per_share: (state, action) => {
-      const contract = action.payload.contract;
-      const value = action.payload.value;
-      const map = state.farms;
-      const farm = state.farms.get(contract);
-
-      if (farm && value >= 0 && farm.bits_per_share != value) {
-        farm.bits_per_share = value;
-
-        state.farms = map.clone();
-      }
-    },
-    set_shares_value: (state, action) => {
-      const contract = action.payload.contract;
-      const value = action.payload.value;
-      const map = state.farms;
-      const farm = state.farms.get(contract);
-
-      if (farm && value >= 0 && farm.shares_value != value) {
-        farm.shares_value = value;
-
-        state.farms = map.clone();
-      }
-    },
-    set_tvl: (state, action) => {
-      const contract = action.payload.contract;
-      const tvl = action.payload.tvl;
-      const map = state.farms;
-      const farm = state.farms.get(contract);
-
-      if (farm && tvl >= 0 && farm.tvl != tvl) {
-        farm.tvl = tvl;
 
         state.farms = map.clone();
       }
@@ -294,10 +255,9 @@ export const {
   set_balance,
   set_investment,
   set_shares,
-  set_shares_to_receive,
+  set_shares_percent,
   set_bits_per_share,
   set_shares_value,
-  set_tvl,
   set_fees,
   set_withdrawable,
   set_whitelisted,

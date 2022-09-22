@@ -26,7 +26,7 @@ body {
 
 body {
 	background: $global-background;
-	min-height: 90vh;
+	min-height: 100vh;
 }
 
 main {
@@ -368,6 +368,12 @@ a.button-internal {
 	transform: $global-transition;
 
 	animation: spin 4s infinite linear;
+}
+
+.spin-fast {
+	transform: $global-transition;
+
+	animation: spin 1.5s infinite linear;
 }
 
 @keyframes spin {

@@ -16,6 +16,7 @@ interface Props {
   balance: string;
   launch_block: number;
   status: Status;
+  initialized: boolean;
   burn: number;
 }
 
@@ -32,7 +33,7 @@ export default function Card(props: Props) {
         onMouseLeave={() => setHover(false)}
         onClick={() => navigate(`/farm/${props.contract}`)}
       >
-        <Ribbon status={props.status} />
+        <Ribbon status={props.status} initialized={props.initialized} />
         <div className="card-wrap">
           <Asset name={props.name} />
           <Address address={props.contract} />
@@ -63,7 +64,7 @@ function Address(props: { address: string; }) {
   );
 }
 
-function Details(props: { name: string, apr: string, balance: string, audit: string, burn: number }) {
+function Details(props: { name: string, apr: string, balance: string, audit: string, burn: number; }) {
   function Asset() {
     return (
       <div className="details-row">
@@ -89,7 +90,7 @@ function Details(props: { name: string, apr: string, balance: string, audit: str
 
     return (
       <div className="details-row">
-        <div className="category">Daily ROI</div>
+        <div className="category">Daily interest</div>
         <div className="value">{daily_roi} %</div>
       </div>
     );
@@ -154,7 +155,7 @@ function Arrow(props: { hover: boolean; }) {
   );
 }
 
-function Ribbon(props: { status: Status; }) {
+function Ribbon(props: { status: Status, initialized: boolean; }) {
   let color;
   let text;
 
@@ -166,6 +167,8 @@ function Ribbon(props: { status: Status; }) {
     case 4: { color = "ribbon-dead"; text = "Dead"; break; }
     default: { color = ""; text = ""; break; }
   }
+
+  if (!props.initialized) { color = "ribbon-idle"; text = "Idle"; }
 
   return (
     <div className={`ribbon ${color}`}>

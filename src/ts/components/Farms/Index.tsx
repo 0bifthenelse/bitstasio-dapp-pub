@@ -28,6 +28,7 @@ export default function Index() {
 			const launch_block = farm.launch_block;
 			const status = farm.status;
 			const burn = data_from_json.burn;
+			const initialized = farm.initialized;
 
 			list.push(
 				<Card
@@ -40,6 +41,7 @@ export default function Index() {
 					balance={balance}
 					launch_block={launch_block}
 					status={status}
+					initialized={initialized}
 					burn={burn}
 				/>
 			);

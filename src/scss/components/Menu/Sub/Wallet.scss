@@ -1,11 +1,12 @@
 $icon-size: 25px;
-$padding: 5px 20px;
-$padding-address: 4px 20px 4px 30px;
+$padding: 6px 30px 6px 45px;
+$padding-mywallet: 6px 30px 6px 30px;
 
 .wallet {
   position: relative;
-  margin-left: 20px;
   display: inline-block;
+
+  @import "./Icons";
 
   .name {
     font-size: 14px;
@@ -14,8 +15,8 @@ $padding-address: 4px 20px 4px 30px;
 
   .icon {
     position: absolute;
-    left: 13px;
-    bottom: 3px;
+    left: 10px;
+    bottom: 4px;
 
     img {
       min-width: $icon-size;
@@ -26,36 +27,33 @@ $padding-address: 4px 20px 4px 30px;
   }
 
   .blockchain {
+    position: relative;
     display: inline-block;
     background: $box-background-hover;
     padding: $padding;
-    padding-left: 50px;
-    border-radius: $button-border-radius;
+    text-align: right;
+    border-top-right-radius: $button-border-radius;
   }
 
-  .address {
+  .mywallet {
     position: relative;
-    left: -20px;
+    right: -1px;
     display: inline-block;
     font-weight: normal;
     font-size: 14px;
+    text-align: center;
     border: 1px solid $box-background-hover;
-    padding: $padding-address;
-    border-radius: $button-border-radius;
-  }
-
-  .connect {
-    position: relative;
-    left: -20px;
-    display: inline-block;
-    font-weight: normal;
-    font-size: 14px;
-    border: 1px solid $box-background-hover;
-    padding: $padding-address;
-    border-radius: $button-border-radius;
+    padding: $padding-mywallet;
+    border-top-left-radius: $button-border-radius;
+    border-bottom: 0;
+    background: $box-background;
+    border: 0;
+    transition: $global-transition;
 
     &:hover {
       cursor: pointer;
+      color: white !important;
+      background: $box-background-hover;
     }
   }
 }

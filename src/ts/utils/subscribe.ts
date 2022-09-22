@@ -16,10 +16,11 @@ import subscribe_jackpot from './subscribe/jackpot';
 import subscribe_farms from './subscribe/farms';
 import subscribe_time from './subscribe/time';
 import subscribe_network from './subscribe/network';
+import subscribe_dispatcher from './subscribe/dispatcher';
 
 export default async function subscribe(): Promise<void> {
-  heartbeat_network();
-  heartbeat_time();
+  subscribe_network();
+  subscribe_time();
 
   connection(async (rpc: TRPC) => {
     const blockNumber = await rpc.eth.getBlockNumber();
@@ -42,36 +43,13 @@ export default async function subscribe(): Promise<void> {
 }
 
 async function heartbeat(): Promise<void> {
-  heartbeat_network();
-  heartbeat_balance();
+  subscribe_network();
+  subscribe_balance();
 
   await Promise.all([
-    heartbeat_farms(),
-    heartbeat_transfer(),
-    heartbeat_jackpot()
+    subscribe_farms(),
+    subscribe_transfer(),
+    subscribe_jackpot(),
+    subscribe_dispatcher()
   ]);
-}
-
-async function heartbeat_time(): Promise<void> {
-  await subscribe_time();
-}
-
-async function heartbeat_balance(): Promise<void> {
-  await subscribe_balance();
-}
-
-async function heartbeat_network(): Promise<void> {
-  await subscribe_network();
-}
-
-async function heartbeat_farms(): Promise<void> {
-  await subscribe_farms();
-}
-
-async function heartbeat_transfer(): Promise<void> {
-  await subscribe_transfer();
-}
-
-async function heartbeat_jackpot(): Promise<void> {
-  await subscribe_jackpot();
 }

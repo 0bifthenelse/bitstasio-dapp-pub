@@ -1,0 +1,9 @@
+[
+	{
+		"inputs": [],
+		"name": "dispatch",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]

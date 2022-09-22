@@ -57,12 +57,10 @@ declare global {
     tvl: number;
     apr: number;
     shares: number;
+    shares_percent: number;
     daily: string;
     coin: boolean;
     allowance: string;
-    bits_per_share: number;
-    shares_value: string;
-    shares_to_receive: number;
     token_contract: string;
     contract: string;
     contract_balance: string;
@@ -70,7 +68,6 @@ declare global {
     whitelisted: boolean;
     timestamp_withdraw: number;
     time_since_withdraw: string;
-    launch_block: number;
     initialized: boolean;
     status: Status;
   }

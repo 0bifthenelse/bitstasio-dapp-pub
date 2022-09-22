@@ -441,9 +441,10 @@ function Information(props: { title: string, text: string, addedClasses?: string
 }
 
 function Links() {
-  const address = useSelector((state: any) => state.jackpot.constant.address);
-  const chain_id = useSelector((state: any) => state.jackpot.constant.chain_id);
-  const url_audit = useSelector((state: any) => state.jackpot.constant.audit);
+  const data_from_json = data.get_jackpot();
+  const address = data_from_json.contract;
+  const chain_id = data_from_json.chain_id;
+  const url_audit = data_from_json.audit;
   const url_contract = get_wallet_explorer(chain_id) + address;
 
   return (

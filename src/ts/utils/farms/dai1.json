@@ -1,6 +1,5 @@
 {
-  "order": 2,
-  "upgrade": false,
+  "order": 3,
   "audit": "",
   "name": "DAI",
   "chain_id": 56,

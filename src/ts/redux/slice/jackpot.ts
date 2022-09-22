@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initial_state = {
-  constant: {
-    audit: "",
-    address: "",
-    chain_id: null
-  },
   admin: false,
   balance: 0,
   active: false,
@@ -24,7 +19,6 @@ export const slice_jackpot = createSlice({
   initialState: initial_state,
   reducers: {
     reset: (state) => {
-      state.constant = initial_state.constant;
       state.admin = initial_state.admin;
       state.balance = initial_state.balance;
       state.round = initial_state.round;
@@ -35,13 +29,6 @@ export const slice_jackpot = createSlice({
       state.min = initial_state.min;
       state.max = initial_state.max;
       state.history = initial_state.history;
-    },
-    set_constant: (state, action) => {
-      state.constant = {
-        audit: action.payload.audit,
-        address: action.payload.address,
-        chain_id: action.payload.chain_id
-      };
     },
     set_admin: (state, action) => {
       state.admin = action.payload;
@@ -83,7 +70,6 @@ export const slice_jackpot = createSlice({
 
 export const {
   reset,
-  set_constant,
   set_admin,
   set_balance,
   set_active,

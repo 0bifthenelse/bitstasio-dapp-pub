@@ -1,6 +1,5 @@
 {
   "order": 0,
-  "upgrade": false,
   "audit": "https://georgestamp.xyz/2022/09/bitstasio",
   "name": "BNB",
   "chain_id": 56,

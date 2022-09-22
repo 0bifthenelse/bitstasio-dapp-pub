@@ -32,7 +32,7 @@ export default function Headings(props: { farm: Farm; }) {
 					<div className="amount">{contract_balance} {name}</div>
 				</div>
 				<div className="apr">
-					<div className="heading">Daily ROI <InfoBubble text="Return On Interest: relative to the TVL and your shares." /></div>
+					<div className="heading">Daily interest <InfoBubble text="Return On Interest: relative to the TVL and your shares." /></div>
 					<div className="amount">{daily} %</div>
 				</div>
 			</div>

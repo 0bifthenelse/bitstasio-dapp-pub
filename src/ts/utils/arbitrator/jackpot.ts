@@ -24,7 +24,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.active().call();
+      return contract.methods.active().call();
     } catch (_) {
       return false;
     }
@@ -35,7 +35,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.round().call();
+      return contract.methods.round().call();
     } catch (_) {
       return 0;
     }
@@ -46,7 +46,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.lastDepositWallet().call();
+      return contract.methods.lastDepositWallet().call();
     } catch (_) {
       return "0x0000000000000000000000000000000000000000";
     }
@@ -57,7 +57,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.getRemainingBlocks().call();
+      return contract.methods.getRemainingBlocks().call();
     } catch (_) {
       return 0;
     }
@@ -68,7 +68,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.BLOCKS_TO_WIN().call();
+      return contract.methods.BLOCKS_TO_WIN().call();
     } catch (_) {
       return 0;
     }
@@ -79,7 +79,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.getIsVictory().call();
+      return contract.methods.getIsVictory().call();
     } catch (_) {
       return false;
     }
@@ -90,7 +90,7 @@ export default class Jackpot extends Arbitrator {
       const rpc = get_rpc();
       const contract = new rpc.eth.Contract(data.get_abi(address), address);
 
-      return await contract.methods.admin().call();
+      return contract.methods.admin().call();
     } catch (_) {
       return "0x0000000000000000000000000000000000000000";
     }

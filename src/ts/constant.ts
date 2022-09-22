@@ -33,16 +33,3 @@ export const menu_dimensions = [
 	}
 ];
 export const notification_duration = 20;
-
-export const jackpot_data = [
-	{
-		audit: "",
-		address: "0x5f9666E78D9874f55C8A8dDCA0d75BbBaF2bf238",
-		chain_id: 97
-	},
-	{
-		audit: "",
-		address: "0x09675B1F7e6125C7a558C187F3Fd0c4508949f34",
-		chain_id: 56
-	}
-];

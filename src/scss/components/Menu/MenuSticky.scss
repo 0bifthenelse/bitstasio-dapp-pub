@@ -1,0 +1,33 @@
+.menu-sticky {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  color: white;
+  text-align: left;
+  clear: both;
+  z-index: 9999;
+
+  .wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+  }
+
+  .right {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    right: 20px;
+    text-align: right;
+  }
+
+  @media (max-width: 767px) {
+    .right {
+      right: 0;
+      text-align: center;
+    }
+  }
+}

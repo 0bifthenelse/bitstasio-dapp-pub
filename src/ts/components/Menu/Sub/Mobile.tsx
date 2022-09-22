@@ -11,8 +11,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import menu_data from 'utils/menu/menu.json';
 
-import Wallet from './Wallet';
-
 import Hamburger from './Hamburger';
 
 interface PropsContent {
@@ -63,10 +61,6 @@ export default function Mobile() {
 function Content(props: PropsContent) {
   return (
     <div className="mobile">
-      <div className="title">Wallet</div>
-      <Wallet mobile={true} close={props.close} />
-      <br />
-      <Divider />
       <div className="title">Products</div>
       <Products close={props.close} />
       <Divider />

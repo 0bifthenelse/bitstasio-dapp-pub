@@ -116,27 +116,23 @@ async function internal_data(farm: FarmJSON): Promise<void> {
   const wallet = state.web3.wallet;
 
   const admin = await FarmArbitrator.get_admin(farm.contract);
-  const bit_value = await FarmArbitrator.get_bit_value(farm.contract);
   const bits = await FarmArbitrator.get_bits(farm.contract);
-  const bits_per_share = await FarmArbitrator.get_bits_per_share(farm.contract);
   const allowance = await FarmArbitrator.get_allowance(farm.coin, farm.contract, farm.token_contract);
   const shares = await FarmArbitrator.get_shares(farm.contract);
+  const shares_percent = await FarmArbitrator.get_shares_percent(farm.contract);
   const timestamp_withdraw = await FarmArbitrator.get_timestamp_last_withdraw(farm.contract);
   const [fee_deposit, fee_withdraw] = await FarmArbitrator.get_fees(farm.contract);
 
   store.dispatch(factory.set_admin({ contract: farm.contract, admin: admin }));
   store.dispatch(factory.set_fees({ contract: farm.contract, fees: { deposit: fee_deposit, withdraw: fee_withdraw } }));
-  store.dispatch(factory.set_shares({ contract: farm.contract, shares: shares }));
+  store.dispatch(factory.set_shares({ contract: farm.contract, amount: shares }));
+  store.dispatch(factory.set_shares_percent({ contract: farm.contract, percent: shares_percent }));
   store.dispatch(factory.set_timestamp_withdraw({ contract: farm.contract, timestamp_withdraw: timestamp_withdraw }));
-  store.dispatch(factory.set_bits_per_share({ contract: farm.contract, value: bits_per_share }));
-  store.dispatch(factory.set_shares_value({ contract: farm.contract, value: bit_value }));
 
   if (wallet) {
-    const tvl = await FarmArbitrator.get_tvl(shares, bit_value);
     const bits_withdraw_value = await FarmArbitrator.get_bits_withdraw_value(farm.contract, bits);
     const withdrawable = shares > 0 ? bits_withdraw_value * (1 - (fee_withdraw / 100)) : 0;
 
-    store.dispatch(factory.set_tvl({ contract: farm.contract, tvl: tvl }));
     store.dispatch(factory.set_withdrawable({ contract: farm.contract, withdrawable: withdrawable }));
     store.dispatch(factory.set_allowance({ contract: farm.contract, allowance: allowance }));
   }

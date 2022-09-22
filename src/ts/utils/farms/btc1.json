@@ -1,6 +1,5 @@
 {
-  "order": 1,
-  "upgrade": false,
+  "order": 2,
   "audit": "https://georgestamp.xyz/2022/09/bitstasio-btc-farm/",
   "name": "BTC",
   "chain_id": 56,

@@ -49,6 +49,33 @@ export default class Farms extends Arbitrator {
     }
   }
 
+  static async get_shares_percent(address: string): Promise<number> {
+    try {
+      const state = store.getState();
+      const rpc = get_rpc();
+      const contract = new rpc.eth.Contract(data.get_abi(address), address);
+      const total_bits = async (): Promise<BN> => {
+        switch (true) {
+          case address == "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c": return new BN(await contract.methods.marketEggs().call());
+          default: return new BN(await contract.methods.marketBit().call());
+        }
+      };
+      const shares_to_bits = async (): Promise<BN> => {
+        switch (true) {
+          case address == "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c": return new BN(await contract.methods.EGGS_TO_HATCH_1MINERS().call());
+          case address == "0x61DFFF79c52062bA60236FdA04fA8C32DB5e78a1": return new BN(await contract.methods.BIT_TO_CONVERT_1SHARE().call());
+          default: return new BN(await contract.methods.getBitToShare().call());
+        }
+      };
+      const owned_shares = new BN(((state.currency as unknown as any).farms.get(address) as Farm).shares);
+      const owned_bits = owned_shares.mul(await shares_to_bits());
+
+      return parseFloat(((owned_bits.toNumber() / (await total_bits()).toNumber()) * 100).toFixed(4));
+    } catch (_) {
+      return 0;
+    }
+  }
+
   static async get_allowance(coin: boolean, address: string, token_address: string): Promise<string> {
     try {
       const wallet = store.getState().web3.wallet;
@@ -64,11 +91,9 @@ export default class Farms extends Arbitrator {
     }
   }
 
-  static async get_tvl(shares_balance: number, bit_value: BN): Promise<number> {
+  static async get_tvl(shares_balance: number, bit_value: number): Promise<number> {
     try {
-      const value = parseFloat(fromWei(bit_value.toString(), "ether"));
-
-      return value * shares_balance;
+      return bit_value * shares_balance;
     } catch (_) {
       return 0;
     }
@@ -103,34 +128,6 @@ export default class Farms extends Arbitrator {
     }
   }
 
-  static async get_bits_per_share(address: string): Promise<number> {
-    try {
-      const rpc = get_rpc();
-      const contract = new rpc.eth.Contract(data.get_abi(address), address);
-
-      switch (true) {
-        case address == "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c": return contract.methods.EGGS_TO_HATCH_1MINERS().call();
-        default: return contract.methods.BIT_TO_CONVERT_1SHARE().call();
-      }
-    } catch (_) {
-      return 0;
-    }
-  }
-
-  static async get_bit_value(address: string): Promise<BN> {
-    try {
-      const rpc = get_rpc();
-      const contract = new rpc.eth.Contract(data.get_abi(address), address);
-
-      switch (true) {
-        case address == "0x6aA27eb73eC69BE5189Fb5a56e6a71Bc84A0243c": return contract.methods.calculateEggSell(2592000).call();
-        default: return contract.methods.calculateBitSell(2592000).call();
-      }
-    } catch (_) {
-      return new BN("0");
-    }
-  }
-
   static async get_timestamp_last_withdraw(address: string): Promise<number> {
     try {
       const wallet = store.getState().web3.wallet;
@@ -160,8 +157,8 @@ export default class Farms extends Arbitrator {
           return [fee_deposit, fee_withdraw];
         }
         default: {
-          const fee_deposit = (await contract.methods.FEE_DEPOSIT().call()) / 100;
-          const fee_withdraw = (await contract.methods.FEE_WITHDRAW().call()) / 100;
+          const fee_deposit = (await contract.methods.FEE_DEPOSIT_TOTAL().call()) / 100;
+          const fee_withdraw = (await contract.methods.FEE_WITHDRAW_TOTAL().call()) / 100;
 
           return [fee_deposit, fee_withdraw];
         }

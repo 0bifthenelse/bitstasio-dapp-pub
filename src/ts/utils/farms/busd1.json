@@ -1,13 +1,16 @@
 {
+  "order": 1,
+  "audit": "",
   "name": "BUSD",
   "chain_id": 56,
   "active": false,
-  "apr": "1095",
-  "daily": "3",
+  "apr": "365",
+  "daily": "1",
   "coin": false,
   "mainnet": true,
-  "contract": "0x15ECb90Cb04b719513A7d6771F80Cf5BECdd688D",
+  "contract": "0x2AF661CE6040084b4cd14fc9809BF6B8D658A712",
   "token_contract": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-  "whitelist": true,
-  "launch_block": 20295198
+  "launch_block": 0,
+  "status": 2,
+  "burn": 6
 }

@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import HttpNotFound from './components/NotFound';
 
 import Menu from './components/Menu/Menu';
+import MenuSticky from './components/Menu/MenuSticky';
 
 import Index from './components/Farms/Index';
 import Farm from './components/Farms/Farm';
@@ -15,8 +16,6 @@ import { Web3ContextProvider } from "react-dapp-web3";
 
 export default function () {
 	const urlParams = new URLSearchParams(location.search);
-	const ref = urlParams.get('ref');
-	const path = useLocation();
 	const darkTheme = createTheme({
 		palette: {
 			mode: 'dark',
@@ -28,6 +27,7 @@ export default function () {
 			<ThemeProvider theme={darkTheme}>
 				<main>
 					<Menu />
+					<MenuSticky />
 					<div className="container-fluid">
 						<div className="main">
 							<div className="row">

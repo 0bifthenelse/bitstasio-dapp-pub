@@ -10,7 +10,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import menu_data from 'utils/menu/menu.json';
 import Button from './Button';
 
-import Wallet from './Wallet';
 
 export default function Computer() {
   return (
@@ -18,7 +17,6 @@ export default function Computer() {
       <Category name="Products" component={<Products />} />
       <Category name="Socials" component={<Socials />} />
       <Category name="More" component={<More />} />
-      <Wallet />
     </div>
   );
 }

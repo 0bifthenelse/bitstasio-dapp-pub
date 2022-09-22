@@ -4,9 +4,6 @@ import { AbiItem, toWei, fromWei } from 'web3-utils';
 import {
   get_wallet_explorer
 } from 'utils/rpc';
-import {
-  jackpot_data
-} from 'constant';
 
 function importAll(r: any) {
   return r.keys().map(r);
@@ -20,6 +17,9 @@ const currencies_dir = importAll(require.context('./currencies', true, /\.(json)
 
 // @ts-ignore
 const gambling_dir = importAll(require.context('./gambling', true, /\.(json)$/));
+
+// @ts-ignore
+const dispatcher_dir = importAll(require.context('./dispatcher', true, /\.(json)$/));
 
 export function farms(action: Function) {
   for (const index in farms_dir) {
@@ -45,7 +45,7 @@ export function get_farm(contract: string): FarmJSON {
 }
 
 export function get_abi(contract: string): AbiItem[] {
-// @ts-ignore
+  // @ts-ignore
   return require('./abi/' + contract + '.json');
 }
 
@@ -90,6 +90,19 @@ export function get_jackpot(): JackpotJSON {
     const gambling = gambling_dir[index];
 
     if (gambling.name == "Jackpot" && gambling.chain_id == chain_id) return gambling;
+  }
+
+  return null as unknown as any;
+}
+
+export function get_dispatcher() {
+  const state: any = store.getState();
+  const chain_id = state.web3.network;
+
+  for (const index in dispatcher_dir) {
+    const dispatcher = dispatcher_dir[index];
+
+    if (dispatcher.chain_id == chain_id) return dispatcher;
   }
 
   return null as unknown as any;

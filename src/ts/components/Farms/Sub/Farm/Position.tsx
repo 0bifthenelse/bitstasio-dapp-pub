@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import numberSeparator from 'number-separator';
-import { useSelector, useDispatch } from 'react-redux';
 import InfoBubble from '../../../Utils/InfoBubble';
 
 interface Props {
@@ -24,16 +23,13 @@ export default function Position(props: Props) {
 }
 
 function Shares(props: Props) {
-  const name = props.farm.name;
-  const share_value = props.farm.shares_value;
-  const balance = numberSeparator(props.farm.shares.toFixed(0), ",");
-  const equals = (parseFloat(share_value) * props.farm.shares).toFixed(4); 
+  const percent = props.farm.shares_percent.toFixed(3);
 
 	return (
 		<div className="col-lg-4 col-md-4 col-sm-12 data-wrap left">
 			<div className="data-box">
-				<div className="amount">{balance}</div>
-				<div className="heading">Your {name} shares <InfoBubble text={`Currently valued at ${equals} ${name}.`} /></div>
+				<div className="amount">{percent} %</div>
+				<div className="heading">Your ownership <InfoBubble text={`Percentage of the TVL you possess. It is used along the expected daily return to define your unclaimed rewards.`} /></div>
 			</div>
 		</div>
 	);

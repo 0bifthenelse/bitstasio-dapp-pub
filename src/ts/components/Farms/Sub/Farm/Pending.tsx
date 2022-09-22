@@ -80,9 +80,6 @@ async function initialize_coin(address: string) {
 
     return;
   }
-
-  return console.log("Insufficient coin balance.");
-
 }
 
 async function initialize_token(address: string, token_address: string | undefined) {
@@ -92,7 +89,7 @@ async function initialize_token(address: string, token_address: string | undefin
     const contract = new state.web3.provider.eth.Contract(data.get_abi(address), address);
     const token_contract = new state.web3.provider.eth.Contract(fetch_abi as AbiItem[], token_address);
     const token_balance = await token_contract.methods.balanceOf(wallet).call();
-    const to_seed = toWei("0.000001", "ether"); // TODO: handle smaller tokens
+    const to_seed = toWei("0.000001", "ether");
 
     if (parseFloat(fromWei(to_seed, "ether")) <= parseFloat(fromWei(token_balance, "ether"))) {
       await token_contract.methods.approve(address, to_seed).send({ from: wallet });
@@ -100,7 +97,5 @@ async function initialize_token(address: string, token_address: string | undefin
 
       return;
     }
-
-    return console.log("Insufficient token balance.");
   }
 }

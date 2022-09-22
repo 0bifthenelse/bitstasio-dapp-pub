@@ -1,5 +1,6 @@
 $padding: 10px;
 $borders: rgba(255, 255, 255, 0.1);
+$orb-bottom: 50px;
 
 .headings {
   display: block;
@@ -56,7 +57,7 @@ $borders: rgba(255, 255, 255, 0.1);
 
     .orb {
       position: absolute;
-      bottom: 50px;
+      bottom: $orb-bottom;
       left: 50%;
 
       transform: translateX(-50%);
@@ -67,6 +68,21 @@ $borders: rgba(255, 255, 255, 0.1);
           min-height: $currency-icon-size * 1.5;
           max-width: $currency-icon-size * 1.5;
           max-height: $currency-icon-size * 1.5;
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      .orb {
+        bottom: $orb-bottom + 10;
+
+        .icon {
+          img {
+            min-width: $currency-icon-size;
+            min-height: $currency-icon-size;
+            max-width: $currency-icon-size;
+            max-height: $currency-icon-size;
+          }
         }
       }
     }
