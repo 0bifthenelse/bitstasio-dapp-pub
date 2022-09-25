@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import menu_data from 'utils/menu/menu.json';
 import Button from './Button';
 
+import * as data from 'utils/data';
 
 export default function Computer() {
   return (
     <div className="computer">
-      <Category name="Products" component={<Products />} />
+      <Category name="Finance" component={<Finance />} />
+      <Category name="Games" component={<Games />} />
       <Category name="Socials" component={<Socials />} />
       <Category name="More" component={<More />} />
     </div>
@@ -72,21 +67,51 @@ function Dropdown(props: { active: boolean, width: number, height: number, compo
   );
 }
 
-function Products() {
+function Finance() {
+  function list(): Array<JSX.Element> {
+    let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.finance);
+
+    for (const index in array) {
+      const finance = array[index];
+
+      if (finance.active) list.push(
+        <Button
+          key={finance.order}
+          icon={finance.icon}
+          external={false}
+          url={finance.url}
+          title={finance.name}
+          description={finance.description}
+        />
+      );
+    }
+
+    return list;
+  }
+
+  return (
+    <div className="products">
+      {list()}
+    </div>
+  );
+}
+
+function Games() {
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
 
-    for (const index in menu_data.products) {
-      const product = menu_data.products[index];
+    for (const index in menu_data.games) {
+      const game = menu_data.games[index];
 
-      if (product.active) list.push(
+      if (game.active) list.push(
         <Button
-          key={product.order}
-          icon={product.icon}
+          key={game.order}
+          icon={game.icon}
           external={false}
-          url={product.url}
-          title={product.name}
-          description={product.description}
+          url={game.url}
+          title={game.name}
+          description={game.description}
         />
       );
     }
@@ -104,9 +129,10 @@ function Products() {
 function More() {
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.more);
 
-    for (const index in menu_data.more) {
-      const more = menu_data.more[index];
+    for (const index in array) {
+      const more = array[index];
       const icon = more.svg ? `/img/links/${more.name.toLowerCase()}.svg` : more.icon;
 
       if (more.active) list.push(
@@ -124,6 +150,7 @@ function More() {
 
     return list;
   }
+
   return (
     <div className="more">
       {list()}
@@ -134,9 +161,10 @@ function More() {
 function Socials() {
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.socials);
 
-    for (const index in menu_data.socials) {
-      const social = menu_data.socials[index];
+    for (const index in array) {
+      const social = array[index];
       const icon = `/img/socials/${social.name.toLowerCase()}.svg`;
 
       list.push(

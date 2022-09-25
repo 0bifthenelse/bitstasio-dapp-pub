@@ -11,6 +11,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import menu_data from 'utils/menu/menu.json';
 
+import * as data from 'utils/data';
+
 import Hamburger from './Hamburger';
 
 interface PropsContent {
@@ -18,97 +20,87 @@ interface PropsContent {
 }
 
 export default function Mobile() {
-	const [state, setState] = React.useState({
-		top: false
-	});
+  const [state, setState] = React.useState({
+    top: false
+  });
 
-	const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-			if (
-			event.type === 'keydown' &&
-			((event as React.KeyboardEvent).key === 'Tab' ||
-				(event as React.KeyboardEvent).key === 'Shift')
-		) {
-			return;
-		}
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
 
-		setState({ ...state, ["top"]: open });
-	};
+    setState({ ...state, ["top"]: open });
+  };
 
-	return (
-		<div>
-			<React.Fragment key={'top'}>
-				<Hamburger open={toggleDrawer} />
-				<Drawer
-					sx={{
-						zIndex: 99999999
-					}}
-					anchor={'top'}
-					open={state['top']}
-					onClose={toggleDrawer(false)}
-				>
-					<div className="close-mobile">
-						<IconButton color="primary" aria-label="Close menu" onClick={toggleDrawer(false)}>
-							<CloseIcon sx={{ fontSize: 25, color: "white" }} />
-						</IconButton>
-					</div>
-					<Content close={toggleDrawer} />
-				</Drawer>
-			</React.Fragment>
-		</div>
-	);
+  return (
+    <div>
+      <React.Fragment key={'top'}>
+        <Hamburger open={toggleDrawer} />
+        <Drawer
+          sx={{
+            zIndex: 99999999
+          }}
+          anchor={'top'}
+          open={state['top']}
+          onClose={toggleDrawer(false)}
+        >
+          <div className="close-mobile">
+            <IconButton color="primary" aria-label="Close menu" onClick={toggleDrawer(false)}>
+              <CloseIcon sx={{ fontSize: 25, color: "white" }} />
+            </IconButton>
+          </div>
+          <Content close={toggleDrawer} />
+        </Drawer>
+      </React.Fragment>
+    </div>
+  );
 }
 
 function Content(props: PropsContent) {
   return (
     <div className="mobile">
-      <div className="title">Products</div>
-      <Products close={props.close} />
+      <div className="title">Finance</div>
+      <Finance close={props.close} />
+      <Divider />
+      <div className="title">Games</div>
+      <Games close={props.close} />
       <Divider />
       <div className="title">Socials</div>
       <Socials close={props.close} />
       <Divider />
       <div className="title">More</div>
-      <Tools close={props.close} />
+      <More close={props.close} />
     </div>
   );
 }
 
-function Product(props: ProductProps) {
-  const dispatch = useDispatch();
-  const close = props.data.close ? props.data.close() : null;
-
-  return (
-    <Link
-      to={props.data.url}
-      className={props.data.active ? "" : "disabled"}
-      onClick={() => dispatch(close)}>
-      <ListItem key={0} disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            {props.data.name}
-          </ListItemIcon>
-        </ListItemButton>
-      </ListItem>
-    </Link>
-  );
-}
-
-function Products(props: { close: Function; }) {
+function Finance(props: { close: Function; }) {
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.finance);
+    const dispatch = useDispatch();
 
-    for (const index in menu_data.products) {
-      const product = menu_data.products[index];
-      const data = {
-        name: product.name,
-        url: product.url,
-        active: product.active,
-        description: product.description,
-        icon: product.icon,
-        close: props.close
-      };
+    for (const index in array) {
+      const finance = array[index];
 
-      if (data.active) list.push(<Product key={product.name} data={data} />);
+      if (finance.active) list.push(
+        <Link
+          to={finance.url}
+          key={finance.order}
+          onClick={() => dispatch(props.close())}>
+          <ListItem key={0} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {finance.name}
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      );
     }
 
     return list;
@@ -121,56 +113,29 @@ function Products(props: { close: Function; }) {
   );
 }
 
-function Tool(props: ToolProps) {
-  const dispatch = useDispatch();
-  const close = props.data.close ? props.data.close() : null;
-
-  if (props.data.external) return (
-    <a
-      href={props.data.url}
-      className={props.data.active ? "" : "disabled"}
-      onClick={() => dispatch(close)}>
-      <ListItem key={0} disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            {props.data.name}
-          </ListItemIcon>
-        </ListItemButton>
-      </ListItem>
-    </a>
-  );
-
-  else return (
-    <Link
-      to={props.data.url}
-      className={props.data.active ? "" : "disabled"}
-      onClick={() => dispatch(close)}>
-      <ListItem key={0} disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            {props.data.name}
-          </ListItemIcon>
-        </ListItemButton>
-      </ListItem>
-    </Link>
-  );
-}
-
-function Tools(props: { close: Function; }) {
+function Games(props: { close: Function; }) {
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.games);
+    const dispatch = useDispatch();
 
-    for (const index in menu_data.more) {
-      const tool = menu_data.more[index];
-      const data = {
-        name: tool.name,
-        url: tool.url,
-        active: tool.active,
-        external: tool.external,
-        close: props.close
-      };
+    for (const index in array) {
+      const game = array[index];
 
-      if (data.active) list.push(<Tool key={tool.order} data={data} />);
+      if (game.active) list.push(
+        <Link
+          to={game.url}
+          key={game.order}
+          onClick={() => dispatch(props.close())}>
+          <ListItem key={0} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {game.name}
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      );
     }
 
     return list;
@@ -183,40 +148,85 @@ function Tools(props: { close: Function; }) {
   );
 }
 
-function Social(props: SocialProps) {
+function More(props: { close: Function; }) {
   const dispatch = useDispatch();
-  const close = props.data.close ? props.data.close() : null;
+
+  function list(): Array<JSX.Element> {
+    let list: Array<JSX.Element> = [];
+    const array = data.get_array_sorted_by_order(menu_data.more);
+
+    for (const index in array) {
+      const more = array[index];
+
+      if (more.active) {
+        if (more.external) list.push(
+          <a
+            href={more.url}
+            key={more.order}
+            target="_blank"
+            onClick={() => dispatch(props.close())}>
+            <ListItem key={0} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {more.name}
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+          </a>
+        );
+        else list.push(
+          <Link
+            to={more.url}
+            key={more.order}
+            onClick={() => dispatch(props.close())}>
+            <ListItem key={0} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {more.name}
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        );
+      }
+
+    }
+
+    return list;
+  }
 
   return (
-    <a
-      href={props.data.url}
-      target="_blank"
-      onClick={() => dispatch(close)}>
-      <ListItem key={0} disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            {props.data.name}
-          </ListItemIcon>
-        </ListItemButton>
-      </ListItem>
-    </a>
+    <List>
+      {list()}
+    </List>
   );
 }
 
 function Socials(props: { close: Function; }) {
+  const dispatch = useDispatch();
   function list(): Array<JSX.Element> {
     let list: Array<JSX.Element> = [];
 
-    for (const index in menu_data.socials) {
-      const social = menu_data.socials[index];
-      const data = {
-        name: social.name,
-        description: social.description,
-        url: social.url,
-        close: props.close
-      };
+    const array = data.get_array_sorted_by_order(menu_data.socials);
 
-      list.push(<Social key={social.name} data={data} />);
+    for (const index in array) {
+      const social = array[index];
+
+      list.push(
+        <a
+          href={social.url}
+          key={social.order}
+          target="_blank"
+          onClick={() => dispatch(props.close())}>
+          <ListItem key={0} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {social.name}
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        </a>
+      );
     }
 
     return list;

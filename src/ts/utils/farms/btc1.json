@@ -10,7 +10,6 @@
   "mainnet": true,
   "contract": "0x61DFFF79c52062bA60236FdA04fA8C32DB5e78a1",
   "token_contract": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
-  "launch_block": 0,
   "status": 2,
   "burn": 2
 }

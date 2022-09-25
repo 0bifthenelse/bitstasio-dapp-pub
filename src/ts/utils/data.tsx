@@ -107,3 +107,7 @@ export function get_dispatcher() {
 
   return null as unknown as any;
 }
+
+export function get_array_sorted_by_order(array: Array<any>): Array<any> {
+  return array.length > 1 ? array.slice().sort((a, b) => a.order - b.order) : array;
+}

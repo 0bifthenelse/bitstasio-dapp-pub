@@ -1,0 +1,15 @@
+{
+  "order": 0,
+  "audit": "",
+  "name": "MATIC",
+  "chain_id": 137,
+  "active": true,
+  "apr": "365",
+  "daily": "1",
+  "coin": true,
+  "mainnet": true,
+  "contract": "0xd9930d35Ee60F15189cDF81983F85898Ff7042cc",
+  "token_contract": "",
+  "status": 2,
+  "burn": 6
+}

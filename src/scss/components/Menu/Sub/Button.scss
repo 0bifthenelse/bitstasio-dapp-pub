@@ -2,6 +2,7 @@
 $icon-size: 28px;
 $icon-dist-size: 35px;
 $width: 350px;
+$width-no-description: 250px;
 $icon-position-top: 50%;
 $icon-position-left: 30px;
 
@@ -49,11 +50,15 @@ $icon-position-left: 30px;
   .title {
     font-size: 16px;
     color: white;
-    margin-bottom: 5px;
   }
 
   .description {
     font-size: 12px;
+    margin-top: 5px;
     color: $global-text-quiet-less;
   }
+}
+
+.menu-button-no-description {
+  width: $width-no-description;
 }

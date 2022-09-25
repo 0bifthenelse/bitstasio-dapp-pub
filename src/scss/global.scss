@@ -21,7 +21,6 @@ body {
 	overflow: auto;
 	overflow-x: hidden;
 	overflow-y: auto !important;
-	padding-bottom: 20px !important;
 }
 
 body {
@@ -33,16 +32,10 @@ main {
 	margin: 0 auto;
 }
 
-.container {
-	padding: $global-container-padding;
-	overflow: hidden;
-}
-
 .container-fluid {
 	max-width: $global-container-max-width;
-	padding: 0;
 	min-height: 600px;
-	padding: 0 5px 20px 5px !important;
+	padding: $global-container-padding;
 }
 
 a {

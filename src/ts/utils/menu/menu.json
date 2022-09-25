@@ -4,7 +4,7 @@
       "name": "Wallet"
     }
   ],
-  "products": [
+  "finance": [
     {
       "order": 0,
       "name": "Token transfer",
@@ -18,13 +18,15 @@
       "order": 1,
       "name": "Yield farms",
       "url": "/farms",
-      "icon": "bi-minecart",
+      "icon": "bi-postcard-fill",
       "svg": false,
       "active": true,
       "description": "Earn day-to-day interest in a gambling product that rewards the earliest depositors the most."
-    },
+    }
+  ],
+  "games": [
     {
-      "order": 2,
+      "order": 0,
       "name": "Jackpot",
       "url": "/jackpot",
       "icon": "bi-suit-diamond-fill",
@@ -39,19 +41,39 @@
       "name": "Whitepaper",
       "icon": "bi-filetype-pdf",
       "svg": false,
-      "description": "Learn the fundamentals of Bitstasio: its vision & long term goals.",
       "url": "https://gateway.pinata.cloud/ipfs/Qmdz5qqJpoL2UpMaPZkvivaUzqiL7FqoKrLQJFgjmhkZrs",
       "external": true,
+      "description": "Learn more on what Bitstasio aims to become.",
+      "active": true
+    },
+    {
+      "order": 2,
+      "name": "Pancakeswap",
+      "icon": "bi-suit-diamond-fill",
+      "svg": true,
+      "url": "https://pancakeswap.finance/swap",
+      "external": true,
+      "description": "Swap currencies on BNB Smart Chain.",
+      "active": true
+    },
+ {
+      "order": 3,
+      "name": "Uniswap",
+      "icon": "bi-suit-diamond-fill",
+      "svg": true,
+      "url": "https://app.uniswap.org/#/swap",
+      "external": true,
+      "description": "Swap currencies on Ethereum & Polygon.",
       "active": true
     },
     {
       "order": 1,
-      "name": "PancakeSwap",
-      "icon": "bi-suit-diamond-fill",
-      "svg": true,
-      "description": "The biggest BNB Smart Chain decentralized exchange.",
-      "url": "https://pancakeswap.finance/swap",
+      "name": "George Stamp",
+      "icon": "bi-shield-fill-check",
+      "svg": false,
+      "url": "https://georgestamp.xyz",
       "external": true,
+      "description": "The most reliable smart contract audit platform for decentralized finance.",
       "active": true
     }
   ],

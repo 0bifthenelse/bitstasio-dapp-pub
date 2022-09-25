@@ -15,7 +15,6 @@ export default function Links(props: Props) {
   const url_contract = `https://bscscan.com/address/${contract_address}`;
   const url_audit = props.farm.audit;
   const url_token = `https://pancakeswap.finance/swap?chainId=56&outputFarm=${props.farm.token_contract}&inputFarm=BNB&outputCurrency=${props.farm.token_contract}`;
-  const url_guide = "https://medium.com/@bitstasio/how-to-make-profits-with-yield-farms-f840a0d0ea2";
 
   return (
     <div className="links col-xxl-3 col-xl-5 col-lg-5 col-md-6 col-xs-12">
